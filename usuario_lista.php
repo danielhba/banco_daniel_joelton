@@ -10,6 +10,8 @@
 <table border="0" align="center" width="60%">
 <?php
 include("config.php");
+$con = mysql_connect($host, $log, $senha);
+mysql_select_db($bd, $con);
 $sql = "SELECT login, tipo_usuario, nome FROM usuario ORDER BY nome";
 $tabela = mysql_query($sql);
 if(mysql_num_rows($tabela)==0){

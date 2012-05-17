@@ -50,7 +50,7 @@ if(isset($_POST["validar"]))
 	if(empty($login))
 	{
 		$error = true;
-		$error_login = '<br><font color = "red">Informe o login.</font>';
+		$error_login = '<font color = "red">Informe o login.</font>';
 	}
 	else
 	{
@@ -64,14 +64,13 @@ if(isset($_POST["validar"]))
 				if(trim($_POST["codigo"]) != $login)
 				{
 					$error = true;
-					$error_login = '<br><font color = "red">Este login já está cadastrado. Digite outro.</font>';
-
+					$error_login = '<font color = "red">Este login já está cadastrado. Digite outro.</font>';
 				}
 			}
 			else
 			{
 				$error = true;
-				$error_login = '<br><font color = "red">Este login já está cadastrado. Digite outro.</font>';
+				$error_login = '<font color = "red">Este login já está cadastrado. Digite outro.</font>';
 			}
 		}
 		mysql_close($con);
@@ -81,30 +80,68 @@ if(isset($_POST["validar"]))
 	if(empty($senha1))
 	{
 		$error = true;
-		$error_senha = '<br><font color = "red">Informe a senha.</font>';
+		$error_senha = '<font color = "red">Informe a senha.</font>';
 	}
 	else if(empty($senha2))
 	{
 		$error = true;
-		$error_senha = '<br><font color = "red">Confirme a senha.</font>';
+		$error_senha = '<font color = "red">Confirme a senha.</font>';
 	}
 	else if($senha1 != $senha2){
 		$error = true;
-		$error_senha = '<br><font color = "red">As senhas são diferentes. Confirme novamente</font>';
+		$error_senha = '<font color = "red">As senhas são diferentes. Confirme novamente</font>';
 	}
 
 	//Validação de Nome
 	if(empty($nome))
 	{
 		$error = true;
-		$error_nome = '<br><font color = "red">Informe o nome.</font>';
+		$error_nome = '<font color = "red">Informe o nome.</font>';
+	}
+
+	if(empty($data_dia))
+	{
+		$error = true;
+		$error_data = '<font color = "red">Informe o dia.</font>';
+	}
+	if(empty($data_mes))
+	{
+		$error = true;
+		if(isset($error_data))
+		{
+			$error_data .= '<br><font color = "red">Informe o mês.</font>';
+		}
+		else
+		{
+			$error_data = '<font color = "red">Informe o mês.</font>';
+		}
+	}
+	if(empty($data_ano))
+	{
+		$error = true;
+		if(isset($error_data))
+		{
+			$error_data .= '<br><font color = "red">Informe o ano.</font>';
+		}
+		else
+		{
+			$error_data = '<font color = "red">Informe o ano.</font>';
+		}
+	}
+	if(!empty($data_ano) && !empty($data_mes) && !empty($data_ano))
+	{
+		if(!checkdate($data_mes, $data_dia, $data_ano))
+		{
+			$error = true;
+			$error_data = '<font color = "red">Informe uma data de nascimento válida.</font>';
+		}
 	}
 
 	//Valida email
 	if(empty($email))
 	{
 		$error = true;
-		$error_email = '<br><font color = "red">Informe o email.</font>';
+		$error_email = '<font color = "red">Informe o email.</font>';
 	}
 	else
 	{
@@ -112,7 +149,7 @@ if(isset($_POST["validar"]))
 	 if(!preg_match($pattern, $email))
 	 {
 	 	$error = true;
-	 	$error_email = '<br><font color = "red">Digite um email válido.</font>';
+	 	$error_email = '<font color = "red">Digite um email válido.</font>';
 		}
 	}
 
@@ -120,12 +157,12 @@ if(isset($_POST["validar"]))
 	if(empty($telefone_ddd))
 	{
 		$error = true;
-		$error_telefone = '<br><font color = "red">Informe o DDD.</font>';
+		$error_telefone = '<font color = "red">Informe o DDD.</font>';
 	}
 	else if(($telefone_ddd >= 100) || ($telefone_ddd <= 9))
 	{
 		$error = true;
-		$error_telefone = '<br><font color = "red">Informe um número de DDD válido.</font>';
+		$error_telefone = '<font color = "red">Informe um número de DDD válido.</font>';
 	}
 	if(empty($telefone))
 	{
@@ -136,7 +173,7 @@ if(isset($_POST["validar"]))
 		}
 		else
 		{
-			$error_telefone = '<br><font color = "red">Informe o telefone.</font>';
+			$error_telefone = '<font color = "red">Informe o telefone.</font>';
 		}
 	}
 	else if($telefone <= 10000000)
@@ -148,7 +185,7 @@ if(isset($_POST["validar"]))
 		}
 		else
 		{
-			$error_telefone = '<br><font color = "red">Informe um número de telefone válido.</font>';
+			$error_telefone = '<font color = "red">Informe um número de telefone válido.</font>';
 		}
 	}
 
@@ -168,11 +205,11 @@ if(isset($_POST["validar"]))
 		$error = true;
 		if(isset($error_celular_1))
 		{
-			$error_celular_1 .= '<br><font color = "red">Informe o telefone.</font>';
+			$error_celular_1 .= '<font color = "red">Informe o telefone.</font>';
 		}
 		else
 		{
-			$error_celular_1 = '<br><font color = "red">Informe o telefone.</font>';
+			$error_celular_1 = '<font color = "red">Informe o telefone.</font>';
 		}
 	}
 	else if($celular_1 <= 10000000)
@@ -184,7 +221,7 @@ if(isset($_POST["validar"]))
 		}
 		else
 		{
-			$error_celular_1 = '<br><font color = "red">Informe um número de telefone válido.</font>';
+			$error_celular_1 = '<font color = "red">Informe um número de telefone válido.</font>';
 		}
 	}
 
@@ -193,7 +230,7 @@ if(isset($_POST["validar"]))
 	if(($celular_2_ddd >= 100) || ($celular_2_ddd <= 9))
 	{
 		$error = true;
-		$error_celular_2 = '<br><font color = "red">Informe um número de DDD válido.</font>';
+		$error_celular_2 = '<font color = "red">Informe um número de DDD válido.</font>';
 	}
 	if(!empty($celular_2))
 	if($celular_2 <= 10000000)
@@ -205,7 +242,7 @@ if(isset($_POST["validar"]))
 		}
 		else
 		{
-			$error_celular_2 = '<br><font color = "red">Informe um número de telefone válido.</font>';
+			$error_celular_2 = '<font color = "red">Informe um número de telefone válido.</font>';
 		}
 	}
 	if(empty($celular_2) xor empty($celular_2_ddd))
@@ -217,41 +254,114 @@ if(isset($_POST["validar"]))
 		}
 		else
 		{
-			$error_celular_2 = '<br><font color = "red">Ao informa o número do celular, deve ser informado o ddd e o número do celular.</font>';
+			$error_celular_2 = '<font color = "red">Ao informa o número do celular, deve ser informado o ddd e o número do celular.</font>';
 		}
 	}
+
+	//Validação de Endereço
+	if(empty($rua))
+	{
+		$error = true;
+		$error_rua = '<font color = "red">Informe o endereço.</font>';
+	}
+	if(empty($bairro))
+	{
+		$error = true;
+		$error_bairro = '<font color = "red">Informe o bairro.</font>';
+	}
+	if(empty($cep))
+	{
+		$error = true;
+		$error_cep = '<font color = "red">Informe o CEP.</font>';
+	}
+	else if($cep < 10000000)
+	{
+		$error = true;
+		$error_cep = '<font color = "red">Informe um número de CEP válido.</font>';
+	}
+	if(empty($cidade))
+	{
+		$error = true;
+		$error_cidade = '<font color = "red">Informe a cidade.</font>';
+	}
+
+	if($estado == 'none')
+	{
+		$error = true;
+		$error_estado = '<font color = "red">Informe o Estado.</font>';
+	}
+
 
 	//Verifica se houve erros de vaalidação
 	if ($error == false)
 	{
+		$data_nascimento = $data_ano ."-".$data_mes."-".$data_dia;
+		$data_sistema = 20 . date("y-m-d");
+		$hora_sistema = date("H:i:s");
+
 		include("./config.php");
-		$con = mysql_connect($host, $login, $senha);
-		mysql_select_db("agenda", $con);
+		$con = mysql_connect($host, $log, $senha);
+		mysql_select_db($bd, $con);
 
 		if (isset($_POST["codigo"]))
 		{
-			$sql = "SELECT codigo FROM dados_pessoais WHERE codigo =" . $_POST["codigo"];
+			$sql = "SELECT login FROM usuario WHERE login ='".$_POST["codigo"]."'";
 			$result = mysql_query($sql, $con);
 			if(mysql_num_rows($result) != 0)
-			$sql = "UPDATE dados_pessoais SET nome = '".$nome."',
-		ddd = ".$ddd.",
-		telefone = ".$telefone." WHERE codigo = ".$_POST["codigo"];
-
-		}
-		else{
-			$sql = "INSERT INTO dados_pessoais VALUES(
-				'',
-				'".$nome."',
-				'".$ddd."',
-				'".$telefone."')";
+			echo "entrou";
+			$sql = "UPDATE usuario SET
+					login = '".$login."',
+					senha = '".$senha1."',
+					nome  = '".$nome."',
+					data_nascimento = '".$data_nascimento."', 
+					email = '".$email."',
+					telefone_ddd = '".$telefone_ddd."',
+					telefone = '".$telefone."',
+					celular_1_ddd = '".$celular_1_ddd."',
+					celular_1 = '".$celular_1."',
+					celular_2_ddd = '".$celular_2_ddd."',
+					end_rua  = '".$rua."',
+					end_numero = '".$numero."', 
+					end_cep = '".$cep."',
+					end_bairro = '".$bairro."',
+					end_cidade = '".$cidade."',
+					end_estado = '".$estado."',
+					end_complemento = '".$complemento."',
+					data_cadastro = '".$data_sistema."',
+					hora_cadastro = '".$hora_sistema."' WHERE login ='".$_POST["codigo"]."'";
 			mysql_query($sql, $con);
 			mysql_close($con);
 		}
-
-		mysql_query($sql, $con);
-		mysql_close($con);
+		else{
+			$sql = "INSERT INTO usuario VALUES(
+				'".$login."',
+				'danielhba',
+				'3',
+				'".$senha1."',
+				'".$nome."',
+				'".$data_nascimento."',
+				'".$email."',
+				'".$telefone_ddd."',
+				'".$telefone."',
+				'".$celular_1_ddd."',
+				'".$celular_1."',
+				'".$celular_2_ddd."',
+				'".$celular_2."',
+				'".$rua."',
+				'".$numero."',
+				'".$cep."',
+				'".$bairro."',
+				'".$cidade."',
+				'".$estado."',
+				'".$complemento."',
+				'".$data_sistema."',
+				'".$hora_sistema."')";
+			echo $sql;
+			mysql_query($sql, $con);
+			mysql_close($con);
+		}
 		unset($error);
-		header("location: ./agenda_index.php");
+		header("location: ./usuario_lista.php");
 	}
 	else
 	{
@@ -282,17 +392,19 @@ if(isset($_POST["validar"]))
 	}
 	unset($_POST["validar"]);
 }
-?>
-<?php
+
 if(isset($_GET["codigo"])){
 	if (!isset($error)){
 		include("./config.php");
+		$con = mysql_connect($host, $log, $senha);
+		mysql_select_db($bd, $con);
 		$sql = "SELECT * FROM usuario WHERE login = '".$_GET["codigo"]."'";
 		$result = mysql_query($sql);
 		$vetor = mysql_fetch_array($result,MYSQL_ASSOC);
 		mysql_close($con);
 	}
 }
+
 if (!isset($vetor['login'])) $vetor['login']  = '';
 if (!isset($vetor['tipo_usuario'])) $vetor['tipo_usuario'] = '';
 if (!isset($vetor['senha'])) $vetor['senha'] = '';
@@ -327,7 +439,7 @@ else echo "Cadastrar Usuário";
 ?></h3>
 </center>
 <form name="form1" method="POST" action="usuario_editar.php"><?php
-if(isset($_GET["codigo"])){?><input type="hidden" name="codigo"
+if(isset($_GET["codigo"])){?> <input type="hidden" name="codigo"
 	value="<?php echo $_GET["codigo"]?>"> <?php 
 }?> <input type="hidden" name="validar" value="ok">
 <table border="0" align="center" width="60%">
