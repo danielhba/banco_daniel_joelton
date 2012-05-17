@@ -386,8 +386,7 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Opção 1:</td>
-		<td colspan="2" width="60%"><textarea onmouseover="this.focus()"
-			name="resposta_1" rows="3" cols="50"><?php echo $vetor['resposta_1']?></textarea></td>
+		<td colspan="2" width="60%"><textarea name="resposta_1" rows="3" cols="50"><?php echo $vetor['resposta_1']?></textarea></td>
 	</tr>
 
 
@@ -404,8 +403,7 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Opção 2:</td>
-		<td colspan="2" width="60%"><textarea onmouseover="this.focus()"
-			name="resposta_2" rows="3" cols="50"><?php echo $vetor['resposta_2']?></textarea></td>
+		<td colspan="2" width="60%"><textarea name="resposta_2" rows="3" cols="50"><?php echo $vetor['resposta_2']?></textarea></td>
 	</tr>
 
 
@@ -422,8 +420,7 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Opção 3:</td>
-		<td colspan="2" width="60%"><textarea onmouseover="this.focus()"
-			name="resposta_3" rows="3" cols="50"><?php echo $vetor['resposta_3']?></textarea></td>
+		<td colspan="2" width="60%"><textarea name="resposta_3" rows="3" cols="50"><?php echo $vetor['resposta_3']?></textarea></td>
 	</tr>
 
 
@@ -440,8 +437,7 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Opção 4:</td>
-		<td colspan="2" width="60%"><textarea onmouseover="this.focus()"
-			name="resposta_4" rows="3" cols="50"><?php echo $vetor['resposta_4']?></textarea></td>
+		<td colspan="2" width="60%"><textarea name="resposta_4" rows="3" cols="50"><?php echo $vetor['resposta_4']?></textarea></td>
 	</tr>
 
 
@@ -458,8 +454,7 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Opção 5:</td>
-		<td colspan="2" width="60%"><textarea onmouseover="this.focus()"
-			name="resposta_5" rows="3" cols="50"><?php echo $vetor['resposta_5']?></textarea></td>
+		<td colspan="2" width="60%"><textarea name="resposta_5" rows="3" cols="50"><?php echo $vetor['resposta_5']?></textarea></td>
 	</tr>
 
 	<?php
