@@ -51,12 +51,6 @@ if(isset($_POST["validar"]))
 		$error = true;
 		$error_login = '<font color = "red">Informe o login.</font>';
 	}
-
-	if($tipo_usuario == 'none')
-	{
-		$error = true;
-		$error_tipo_usuario = '<font color = "red">Informe o Tipo de usuário.</font>';
-	}
 	else
 	{
 		include("./config.php");
@@ -75,14 +69,20 @@ if(isset($_POST["validar"]))
 			}
 			else
 			{
-				echo "error";
 				$error = true;
 				$error_login = '<font color = "red">Este login já está cadastrado. Digite outro.</font>';
 			}
 		}
 		mysql_close($con);
 	}
+	
 
+	if($tipo_usuario == 'none')
+	{
+		$error = true;
+		$error_tipo_usuario = '<font color = "red">Informe o Tipo de usuário.</font>';
+	}
+	
 	//Validação de Nome
 	if(empty($nome))
 	{
@@ -764,9 +764,9 @@ if(isset($error_login)){
 	
 	</tr>
 	<tr>
-		<td colspan="3" align="center"><input type="button" value="Cancelar"
-			onclick="location.href='usuario_lista.php'"> <input type="submit"
-			value="Gravar"></td>
+		<td colspan="3" align="center"><input type="submit" value="Gravar"> <input
+			type="button" value="Cancelar"
+			onclick="location.href='usuario_lista.php'"></td>
 	</tr>
 </table>
 </form>

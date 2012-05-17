@@ -1,11 +1,11 @@
 <html>
 <head>
-<title>Excluir Contato</title>
+<title>Excluir Questão</title>
 </head>
 <body>
 
 <center>
-<h2>Exclusão de usuário</h2>
+<h2>Exclusão de questão</h2>
 </center>
 
 <center>
@@ -18,8 +18,8 @@
 	<tr>
 
 		<td>
-		<center><input type="button" value="Voltar para a lista de usuários"
-			onclick="location.href = 'usuario_lista.php'"></center>
+		<center><input type="button" value="Voltar para a lista de questões"
+			onclick="location.href = 'questao_lista.php'"></center>
 		</td>
 	</tr>
 </table>

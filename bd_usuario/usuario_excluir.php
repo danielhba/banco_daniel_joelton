@@ -16,7 +16,7 @@ if(isset($_POST["excluir"])){
 </head>
 <body>
 <center>
-<h3>Excluir Contato</h3>
+<h3>Excluir Usuário</h3>
 </center>
 <form name="form1" method="POST" action="usuario_excluir.php">
 <table border="0" align="center" width="35%">

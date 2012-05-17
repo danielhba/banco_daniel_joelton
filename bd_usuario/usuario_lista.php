@@ -6,9 +6,8 @@
 <center>
 <h3>Lista de usuários</h3>
 </center>
-<center>
-Para realizar a edição ou exclusão de administradores do sistema, contacte o administrador do Banco de Dados.
-</center>
+<center>Para realizar a edição ou exclusão de administradores do
+sistema, contacte o administrador do Banco de Dados.</center>
 <form name="form1" method="POST" action="usuario_editar.php">
 <table border="0" align="center" width="60%">
 <?php
@@ -58,10 +57,10 @@ if(mysql_num_rows($tabela)==0){
 		<td align="left"><?php echo $nome?></td>
 		<td align="center"><?php echo $login?></td>
 		<td align="center"><?php echo $tipo?></td>
-		<td align="center"><input type="button" value="Excluir"
-			onclick="location.href = 'usuario_excluir.php?codigo=<?php echo $login?>'">
-		<input type="button" value="Editar"
+		<td align="center"><input type="button" value="Editar"
 			onclick="location.href = 'usuario_editar.php?codigo=<?php echo $login?>'">
+		<input type="button" value="Excluir"
+			onclick="location.href = 'usuario_excluir.php?codigo=<?php echo $login?>'">
 		</td>
 	</tr>
 	<?php
