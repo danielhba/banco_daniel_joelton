@@ -1,10 +1,13 @@
 <html>
 <head>
-<title>Lista de usuários</title>
+<title>Lista de Usuários</title>
 </head>
 <body>
 <center>
 <h3>Lista de usuários</h3>
+</center>
+<center>
+Para realizar a edição ou exclusão de administradores do sistema, contacte o administrador do Banco de Dados.
 </center>
 <form name="form1" method="POST" action="usuario_editar.php">
 <table border="0" align="center" width="60%">
@@ -12,7 +15,7 @@
 include("config.php");
 $con = mysql_connect($host, $log, $senha);
 mysql_select_db($bd, $con);
-$sql = "SELECT login, tipo_usuario, nome FROM usuario ORDER BY nome";
+$sql = "SELECT login, tipo_usuario, nome FROM usuario WHERE tipo_usuario <> '1' ORDER BY nome";
 $tabela = mysql_query($sql);
 if(mysql_num_rows($tabela)==0){
 	?>

@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Incluir/Editar Contato</title>
+<title><?php echo (isset($_GET["codigo"]) || isset($_POST["codigo"])) ? "Editar Usuário": "Cadastrar Usuário";?></title>
 </head>
 <body>
 
@@ -10,7 +10,7 @@ if(isset($_POST["validar"]))
 
 	$error = false;
 	if(isset($error_login)) unset($error_login);
-	if(isset($error_senha)) unset($error_senha);
+	if(isset($error_tipo_usuario)) unset($error_tipo_usuario);
 	if(isset($error_nome)) unset($error_nome);
 	if(isset($error_data)) unset($error_data);
 	if(isset($error_email)) unset($error_email);
@@ -24,9 +24,8 @@ if(isset($_POST["validar"]))
 	if(isset($error_cidade)) unset($error_cidade);
 	if(isset($error_estado)) unset($error_estado);
 
-	$login 			= trim($_POST['login']);
-	$senha1			= trim($_POST['senha1']);
-	$senha2			= trim($_POST['senha2']);
+	$login 			= strtolower(trim($_POST['login']));
+	$tipo_usuario   = trim($_POST['tipo_usuario']);
 	$nome 			= trim($_POST['nome']);
 	$data_dia		= trim($_POST['data_dia']);
 	$data_mes		= trim($_POST['data_mes']);
@@ -52,6 +51,12 @@ if(isset($_POST["validar"]))
 		$error = true;
 		$error_login = '<font color = "red">Informe o login.</font>';
 	}
+
+	if($tipo_usuario == 'none')
+	{
+		$error = true;
+		$error_tipo_usuario = '<font color = "red">Informe o Tipo de usuário.</font>';
+	}
 	else
 	{
 		include("./config.php");
@@ -63,33 +68,19 @@ if(isset($_POST["validar"]))
 			{
 				if(trim($_POST["codigo"]) != $login)
 				{
+					echo "já existe";
 					$error = true;
 					$error_login = '<font color = "red">Este login já está cadastrado. Digite outro.</font>';
 				}
 			}
 			else
 			{
+				echo "error";
 				$error = true;
 				$error_login = '<font color = "red">Este login já está cadastrado. Digite outro.</font>';
 			}
 		}
 		mysql_close($con);
-	}
-
-	//Validação de Senha
-	if(empty($senha1))
-	{
-		$error = true;
-		$error_senha = '<font color = "red">Informe a senha.</font>';
-	}
-	else if(empty($senha2))
-	{
-		$error = true;
-		$error_senha = '<font color = "red">Confirme a senha.</font>';
-	}
-	else if($senha1 != $senha2){
-		$error = true;
-		$error_senha = '<font color = "red">As senhas são diferentes. Confirme novamente</font>';
 	}
 
 	//Validação de Nome
@@ -308,10 +299,10 @@ if(isset($_POST["validar"]))
 			$sql = "SELECT login FROM usuario WHERE login ='".$_POST["codigo"]."'";
 			$result = mysql_query($sql, $con);
 			if(mysql_num_rows($result) != 0)
-			echo "entrou";
+
 			$sql = "UPDATE usuario SET
 					login = '".$login."',
-					senha = '".$senha1."',
+					tipo_usuario = '".$tipo_usuario."',
 					nome  = '".$nome."',
 					data_nascimento = '".$data_nascimento."', 
 					email = '".$email."',
@@ -336,8 +327,8 @@ if(isset($_POST["validar"]))
 			$sql = "INSERT INTO usuario VALUES(
 				'".$login."',
 				'danielhba',
-				'3',
-				'".$senha1."',
+				'".$tipo_usuario."',
+				'".$login."',
 				'".$nome."',
 				'".$data_nascimento."',
 				'".$email."',
@@ -356,21 +347,42 @@ if(isset($_POST["validar"]))
 				'".$complemento."',
 				'".$data_sistema."',
 				'".$hora_sistema."')";
-			echo $sql;
 			mysql_query($sql, $con);
 			mysql_close($con);
 		}
 		unset($error);
-		header("location: ./usuario_lista.php");
+		?>
+
+<center>
+<h2><?php echo isset($_POST['codigo']) ?  "Edição de usuário" : "Cadastro de usuário";?></h2>
+</center>
+
+<center>
+<h3><?php echo isset($_POST['codigo']) ?  "Confirmação de edição" : "Confirmação de cadastro";?></h3>
+</center>
+
+<center><?php echo isset($_POST['codigo']) ?  "Edição realizada com sucesso!" : "Cadastro realizado com sucesso!";?></center>
+
+<table border="0" align="center" width="35%">
+	<tr>
+
+		<td>
+		<center><input type="button" value="Voltar para a lista de usuários"
+			onclick="location.href = 'usuario_lista.php'"></center>
+		</td>
+	</tr>
+</table>
+		<?php
+		exit;
 	}
 	else
 	{
-		if (isset($_POST["codigo"]))
+		if(isset($_POST['codigo']))
 		{
 			$_GET['codigo'] = $_POST['codigo'];
 		}
 		$vetor['login'] 			= $login;
-		$vetor['senha']				= $senha1;
+		$vetor['tipo_usuario']		= $tipo_usuario;
 		$vetor['nome'] 				= $nome;
 		$vetor['data_dia']			= $data_dia;
 		$vetor['data_mes']			= $data_mes;
@@ -407,7 +419,6 @@ if(isset($_GET["codigo"])){
 
 if (!isset($vetor['login'])) $vetor['login']  = '';
 if (!isset($vetor['tipo_usuario'])) $vetor['tipo_usuario'] = '';
-if (!isset($vetor['senha'])) $vetor['senha'] = '';
 if (!isset($vetor['nome'])) $vetor['nome'] = '';
 
 if (!isset($vetor['data_nascimento'])) $vetor['data_nascimento'] = '';
@@ -432,11 +443,8 @@ if (!isset($vetor['end_estado'])) $vetor['end_estado'] = '';
 if (!isset($vetor['end_complemento'])) $vetor['end_complemento'] = '';
 ?>
 <center>
-<h3><?php
-if(isset($_GET["codigo"]))
-echo "Editar Usuário";
-else echo "Cadastrar Usuário";
-?></h3>
+<h3><?php echo isset($_GET["codigo"]) ? "Editar Usuário": "Cadastrar Usuário";?>
+</h3>
 </center>
 <form name="form1" method="POST" action="usuario_editar.php"><?php
 if(isset($_GET["codigo"])){?> <input type="hidden" name="codigo"
@@ -455,31 +463,41 @@ if(isset($error_login)){
 }
 ?>
 	<tr>
+		<td width="40%" align="right"></td>
+		<td colspan="2" width="30%"><font size="2">Conteudo do login será
+		cadastrado em letras minúsculas.</font></td>
+	</tr>
+	<tr>
 		<td width="40%" align="right">* Login:</td>
 		<td colspan="2" width="30%"><input type="text" name="login"
 			value="<?php echo $vetor['login']?>" maxlength="25" size="25"></td>
 	</tr>
 	<?php
-	//SENHA
-	if(isset($error_senha)){
+	//ESTADO
+	if(isset($error_tipo_usuario)){
 		?>
 	<tr>
 		<td width="40%" align="right"></td>
-		<td width="60%"><?php echo $error_senha ?></td>
+		<td width="60%"><?php echo $error_tipo_usuario ?></td>
 	</tr>
 	<?php
 	}
 	?>
 	<tr>
-		<td width="40%" align="right">* Senha:</td>
-		<td colspan="2" width="60%"><input type="password" " name="senha1"
-			value="<?php echo $vetor['senha']?>" maxlength=25 " size="25"></td>
+		<td width="40%" align="right">* Tipo de usuário:</td>
+		<td colspan="2" width="60%"><select Name="tipo_usuario">
+			<option value="none"
+			<?php if ($vetor["tipo_usuario"] == "") echo 'selected="selected"' ?>></option>
+			<option value="1"
+			<?php if ($vetor["tipo_usuario"] == "1") echo 'selected="selected"' ?>>Administrador</option>
+			<option value="2"
+			<?php if ($vetor["tipo_usuario"] == "2") echo 'selected="selected"' ?>>Professor</option>
+			<option value="3"
+			<?php if ($vetor["tipo_usuario"] == "3") echo 'selected="selected"' ?>>Aluno</option>
+		</select>
+	
 	</tr>
-	<tr>
-		<td width="40%" align="right">* Confirmação de Senha:</td>
-		<td colspan="2" width="60%"><input type="password" " name="senha2"
-			maxlength="25" size="25"></td>
-	</tr>
+
 	<?php
 	//NOME
 	if(isset($error_nome)){
