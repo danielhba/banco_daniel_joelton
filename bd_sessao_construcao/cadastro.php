@@ -10,7 +10,7 @@ session_start();
 include("config.php");
 
 
-if($_SESSION['logado'] == 1)
+if(isset($_SESSION['logado']) && $_SESSION['logado'] == 1)
 {
 	$sql = "SELECT * FROM usuario WHERE login ='".$_SESSION['login_user']."'";
 	$consulta  =  mysql_query($sql) or die (mysql_error());
@@ -58,7 +58,7 @@ else
 {
 	echo "DESCULPE, MAS VOCÊ NAO ESTÁ LOGADO.";
 	echo "<BR> TUDO OCULTO PARA VOCÊ";
-	echo "<BR><a href = './formulario_login.php'>Retornar para Logar</a>";
+	echo "<BR><a href = './formulario_login.php'>Retornar para Login</a>";
 }
 ?>
 
