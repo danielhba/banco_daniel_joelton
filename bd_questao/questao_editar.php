@@ -71,22 +71,22 @@ if(isset($_POST["validar"]))
 	if(empty($resposta_2))
 	{
 		$error = true;
-		$error_resposta_2 = '<font color = "red">Informe o enunciado da opção 1.</font>';
+		$error_resposta_2 = '<font color = "red">Informe o enunciado da opção 2.</font>';
 	}
 	if(empty($resposta_3))
 	{
 		$error = true;
-		$error_resposta_3 = '<font color = "red">Informe o enunciado da opção 1.</font>';
+		$error_resposta_3 = '<font color = "red">Informe o enunciado da opção 3.</font>';
 	}
 	if(empty($resposta_4))
 	{
 		$error = true;
-		$error_resposta_4 = '<font color = "red">Informe o enunciado da opção 1.</font>';
+		$error_resposta_4 = '<font color = "red">Informe o enunciado da opção 4.</font>';
 	}
 	if(empty($resposta_5))
 	{
 		$error = true;
-		$error_resposta_5 = '<font color = "red">Informe o enunciado da opção 1.</font>';
+		$error_resposta_5 = '<font color = "red">Informe o enunciado da opção 5.</font>';
 	}
 
 	//Verifica se houve erros de vaalidação
