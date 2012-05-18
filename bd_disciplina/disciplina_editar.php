@@ -18,6 +18,30 @@ echo (isset($_GET["codigo"]) || isset($_POST["codigo"])) ? "Editar Disciplina": 
 			$error_nome = '<font color = "red">Informe o nome da disciplina.</font>';
 			
 		}
+		else
+	{
+		include("./config.php");
+		$sql = "SELECT codigo FROM disciplina WHERE nome ='".$nome."'";
+		$result = mysql_query($sql);
+		$codigo_pesquisado = mysql_fetch_row($result);
+		if(mysql_num_rows($result) == 1)
+		{
+			if(isset($_POST["codigo"]))
+			{
+				if(trim($_POST["codigo"]) != $codigo_pesquisado[0])
+				{
+					$error = true;
+					$error_nome = '<font color = "red">Este nome de disciplina já está cadastrado. Digite outro.</font>';
+				}
+			}
+			else
+			{
+				$error = true;
+				$error_nome = '<font color = "red">Este nome de disciplina já está cadastrado. Digite outro.</font>';
+			}
+		}
+		mysql_close($con);
+	}
 		
 		//verifica se houve erros de validacao		
 		if($error == false)

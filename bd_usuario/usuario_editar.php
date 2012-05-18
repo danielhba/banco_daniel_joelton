@@ -54,6 +54,8 @@ if(isset($_POST["validar"]))
 	else
 	{
 		include("./config.php");
+		$con = mysql_connect($host, $log, $senha);
+		mysql_select_db($bd, $con);
 		$sql = "SELECT login FROM usuario WHERE login ='".$login."'";
 		$result = mysql_query($sql);
 		if(mysql_num_rows($result) == 1)

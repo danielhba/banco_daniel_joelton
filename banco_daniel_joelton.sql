@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 02/05/2012 às 15h09min
+-- Tempo de Geração: 03/05/2012 às 01h26min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -35,22 +35,22 @@ CREATE TABLE IF NOT EXISTS `area` (
   `data` date NOT NULL,
   `hora` time NOT NULL,
   PRIMARY KEY (`codigo`),
+  UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Extraindo dados da tabela `area`
 --
 
 INSERT INTO `area` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
-(0, 'danielhba', 'Tecnologia da Informação', '2012-04-26', '20:31:38'),
+(0, 'danielhba', 'Sistema de Informação', '2012-05-02', '15:14:35'),
 (1, 'danielhba', 'Eng. Computação', '2012-04-09', '18:38:10'),
-(2, 'danielhba', 'Ciência da Computação', '2012-04-09', '18:38:10'),
-(3, 'danielhba', 'Eng. Elétrica', '2012-04-09', '18:41:28'),
+(2, 'danielhba', 'Física', '2012-05-03', '01:09:13'),
+(3, 'danielhba', 'Eng. Elétrica', '2012-05-02', '15:19:30'),
 (4, 'danielhba', 'Eng. Controle e Automação', '2012-04-09', '18:41:28'),
 (5, 'danielhba', 'Eng. Eletronica', '2012-04-11', '08:08:16'),
-(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-04-11', '08:08:28'),
-(8, 'danielhba', 'Sistema de Informacao', '2012-04-11', '08:09:50');
+(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-04-11', '08:08:28');
 
 -- --------------------------------------------------------
 
@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `assunto` (
   `data` date NOT NULL,
   `hora` time NOT NULL,
   PRIMARY KEY (`codigo`),
+  UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
@@ -85,7 +86,7 @@ INSERT INTO `assunto` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) 
 (10, 'danielhba', 'Projeto de Compensadores', '2012-04-11', '08:17:56'),
 (11, 'danielhba', 'Camada Fisica', '2012-04-11', '08:17:56'),
 (12, 'danielhba', 'Analise Nodal', '2012-04-11', '08:17:56'),
-(13, 'danielhba', 'Análise de Malha', '2012-04-11', '08:17:56'),
+(13, 'danielhba', 'Análise de Malha IV', '2012-05-02', '15:20:49'),
 (14, 'danielhba', 'Energia e Trabalho', '2012-04-11', '08:17:56');
 
 -- --------------------------------------------------------
@@ -134,8 +135,9 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   `data` date NOT NULL,
   `hora` time NOT NULL,
   PRIMARY KEY (`codigo`),
+  UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `disciplina`
@@ -144,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
 INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
 (0, 'danielhba', 'Fisica 1', '2012-04-26', '20:34:48'),
 (1, 'danielhba', 'Física 2', '2012-04-09', '18:43:55'),
-(2, 'danielhba', 'Banco de Dados 2', '2012-04-09', '18:43:55'),
+(2, 'danielhba', 'Banco de Dados 2', '2012-05-02', '15:20:32'),
 (3, 'danielhba', 'Engenharia de Software 1', '2012-04-09', '18:45:16'),
 (4, 'danielhba', 'Sistemas Microprocessados', '2012-04-09', '18:45:16'),
 (5, 'danielhba', 'Redes de Computadores I', '2012-04-11', '08:21:13'),
@@ -152,7 +154,8 @@ INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora
 (7, 'danielhba', 'Circuitos Eletricos I', '2012-04-11', '08:21:13'),
 (8, 'danielhba', 'Redes de Computadores II', '2012-04-11', '08:21:13'),
 (10, 'danielhba', 'Sistema de Controle I', '2012-04-11', '08:21:43'),
-(12, 'danielhba', 'Física 3', '2012-04-26', '20:34:40');
+(12, 'danielhba', 'Física 3', '2012-04-26', '20:34:40'),
+(15, 'danielhba', 'Banco de Dados 1', '2012-05-03', '01:20:11');
 
 -- --------------------------------------------------------
 
@@ -214,11 +217,7 @@ INSERT INTO `disciplina_refere_area` (`cod_disciplina`, `cod_area`) VALUES
 (0, 6),
 (5, 6),
 (6, 6),
-(8, 6),
-(0, 8),
-(5, 8),
-(6, 8),
-(8, 8);
+(8, 6);
 
 -- --------------------------------------------------------
 
@@ -258,7 +257,7 @@ INSERT INTO `questao` (`id`, `login_administrador`, `cod_area`, `cod_disciplina`
 (2, 'danielhba', 3, 1, 1, '2', 'Ao aplicar um resistência de 2 ohms a tensão de 10V, há uma corrente de:', '1A', '2A', '3A', '4A', '5A', '5', '2012-04-28', '00:23:35'),
 (3, 'danielhba', 1, 2, 2, '3', 'O que é a terceira foma normal?', 'A existência de atributos multivalorados.', 'A inexistência de atributos multivalorados.', 'A existência de atributos compostos.', 'A inexistência de atributos compostos.', 'A questão b e d estão corretas.', '5', '2012-04-09', '23:19:25'),
 (4, 'danielhba', 6, 2, 7, '2', 'O que descreve um modelo Conceitual?', 'Descreve o nível de Abstracao, nesta etapa sao escolhidas as estruturas lógicas.', 'representa o nivel o nivel mais baixo de abstração e descreve como os dados sao armazenados .', 'É o nivel mais alto de abstracao, fala dos objetos do mundo real e suas respectivas operações.', 'Todas as alternativas estao corretas.', 'Todas as alternativas estao incorretas', '3', '2012-04-27', '02:41:02'),
-(5, 'danielhba', 0, 2, 9, '2', 'Em sql quando utilizamos a palavra chave DISTINCT na cláusula Select o que acontece?', 'As linhas retornadas da pesquisa são triplicadas', 'As linhas retornadas da pesquisa sao exibidas de forma inversa', 'As linhas retornadas da pesquisa sao concatenadas', 'As linhas retornadas da pesquisa mudam de cor', 'As linhas retornadas  da pesquisa nao apresentam duplicação', '5', '2012-04-11', '08:49:22'),
+(5, 'danielhba', NULL, 2, 9, '2', 'Em sql quando utilizamos a palavra chave DISTINCT na cláusula Select o que acontece?', 'As linhas retornadas da pesquisa são triplicadas', 'As linhas retornadas da pesquisa sao exibidas de forma inversa', 'As linhas retornadas da pesquisa sao concatenadas', 'As linhas retornadas da pesquisa mudam de cor', 'As linhas retornadas  da pesquisa nao apresentam duplicação', '5', '2012-04-11', '08:49:22'),
 (6, 'danielhba', 1, 5, 11, '1', 'Quais caracteristicas das Fibras Monomodo estão corretas?', 'Permite propagação em linha reta, é mais cara, mas seu alcance  é muito maior que  as fibras multimodo', 'Permite propagação em angulos diferentes, é barata e possui curto alcance', 'Permite propagacao em linha reta, é barata e detém de um grande alcance', 'Todas as alternativas estão incorretas.', 'Todas as alternativas estão corretas', '1', '2012-04-27', '02:41:56'),
 (7, 'danielhba', 2, 8, 5, '2', 'Caracteristicas do Protocolo UDP.', 'É um protocolo complexo  orientado à conexão. Seu cabeçalho é constituido  3 campos.', 'É um protocolo complexo não orientado à conexao, Seu cabeçalho é constituído de 4 campos', 'É um simples protocolo orientado à conexão. Seu cabeçalho é constituído de 3 campos', 'É um simples protocolo não orientado à conexão . Seu cabeçalho é constituido de 4 campos', 'Todas as alternativas estão incorretas', '2', '2012-04-27', '05:53:04');
 
