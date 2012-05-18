@@ -1,0 +1,60 @@
+## MANUAL DE INSTALAÇAo
+
+
+    * Nesta parte do Projeto está incluido:
+
+      # Banco de dados atualizado. Houve a necessidade de acrescentar novos campos para o melhoramento do Sistema. É necessario importa-lo novamente para o phpmyadmim
+      # Oito(8) módulos que representam o nosso Sistema Web.
+
+
+     O sistema web consiste em oito(8) módulos, porém nesta primeira parte do projeto  eles nao estao integrados, isto é, 
+estão operando de maneira isolada. Para a Execuçao dos arquivos é necessário que eles estejam na pasta pública do servidor do Apache. 
+Estando neste local basta acessar  o "localhost" em um navegador web, com o servidor ativo.
+
+    * Descriçao dos Módulos
+
+
+    # Area
+
+	Módulo que lista todas as áreas cadastradas em nosso banco de dados. Neste módulo é possível: Editar Área, Excluir Área 
+	e Incluir nova Área.
+
+
+    # Assunto
+
+	Módulo que lista todas os assuntos cadastrados em nosso banco de dados. Neste módulo é possível: Editar Assunto, Excluir Assunto 
+	e Incluir novo Assunto.
+
+    # Disciplina
+
+	Módulo que lista todas as disciplinas cadastradas em nosso banco de dados. Neste módulo é possível realizar: Editar Disciplina, Excluir Disciplina 
+	e Incluir nova Disciplina.
+
+    # Usuário
+
+	Módulo que lista todos os usuários cadastrados em nosso banco de dados, exceto Administradores. Pode-se visualizar neste módulo  o nome, login, tipo
+	do usuário (professor ou aluno)  e realizar: Exclusao, Edicao  e Inclusao  de novos usuários, estas operaçoes deverao ser realizadas pelo Administrador.
+
+    # Questao
+
+	Módulo onde se pode visualizar o enunciado da questão, bem como o nível de dificuldade e que Área ela pertence. É possivel: Editar Questao, Excluir Questao
+	e Inserir uma nova questão.
+
+    # Banco de Dados Teste 
+
+	Módulo responsavel por exibir um teste para o  Aluno, é exibida uma questao de forma aleatória por vez. O aluno pode responder a questao  e então avançar para
+	outra ou pular Questao  e responder a seguinte.
+
+    # Banco de Dados Sessao 
+
+	Módulo responsavel por restringir que um usuário entre em uma sessao que nao está autorizado. Para entrar em sua área restrita é necessario digitar login  e
+	senha corretamente.
+
+	Para teste de login, use login de administrador.
+	Login: danielhba
+	Senha: 	qwedsaqwe
+
+    # Banco de Dados Prova
+
+	Módulo responsável por elaborar  uma prova pra o aluno. 
+	Atualmente em noso sistema é exibido um total de cinco questoes para o usuário. Ao final  da Prova é informado quantas respostas forma acertadas.

@@ -35,7 +35,6 @@ echo (isset($_GET["codigo"]) || isset($_POST["codigo"])) ? "Editar Disciplina": 
 			
 				if(mysql_num_rows($result)!= 0)
 				$sql = "UPDATE disciplina SET
-				 				codigo = '',
 				 				login_administrador = '".$usuario."',
 								nome = '".$nome."',
 								data = '".$data_sistema."',

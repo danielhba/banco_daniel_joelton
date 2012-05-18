@@ -19,10 +19,10 @@ if(mysql_num_rows($tabela)== 0)
 		<td align="center">Nao existe nenhuma área cadastrada</td>
 	</tr>
 	<tr>
-		<td align="center">Para cadastrar área clique em Incluir Área.</td>
+		<td align="center">Para cadastrar área clique em Cadastrar Área.</td>
 	</tr>
 	<tr>
-		<td align="center"><input type="submit" value="Incluir Área"></td>
+		<td align="center"><input type="submit" value="Cadastrar Área"></td>
 	</tr>
 
 	<?php
