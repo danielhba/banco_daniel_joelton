@@ -1,7 +1,9 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 3)){
 	?>
 <html>
 <head>
@@ -13,6 +15,36 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 <!--[if IE ]>
 <link href="css/ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("select[name=area]").change(function(){
+		$("select[name=disciplina]").html('<option value="-1" disabled="disabled">Selecione a área primeiro</option>');
+		$.post("listar_disciplina.php",
+			{nome_area:$(this).val()},
+			function(valor)
+			{
+				$("select[name=disciplina]").html(valor);
+			}
+		);
+		$("select[name=assunto]").html('<option value="-1" disabled="disabled">Selecione a disciplina primeiro</option>');
+		$.post("listar_assunto.php",
+			{nome_disciplina:$(this).val()}
+		);
+	});
+
+	$("select[name=disciplina]").change(function(){
+		$("select[name=assunto]").html('<option value="-1" disabled="disabled">Selecione a disciplina primeiro</option>');
+		$.post("listar_assunto.php",
+			{nome_disciplina:$(this).val()},
+			function(valor)
+			{
+				$("select[name=assunto]").html(valor);
+			}
+		);
+	});
+});
+</script>
 </head>
 <body>
 <div id="leftMain"><a href="home.php"><img src="images/logo.png"
@@ -89,9 +121,9 @@ if($_SESSION['logado'] == 1)
 			if(isset($error_resposta_5)) unset($error_resposta_5);
 			if(isset($error_alternativa_correta)) unset($error_alternativa_correta);
 
-			$cod_area				= strtolower(trim($_POST['cod_area']));
-			$cod_disciplina			= trim($_POST['cod_disciplina']);
-			$cod_assunto			= trim($_POST['cod_assunto']);
+			if(isset($_POST['area']))		$cod_area				= strtolower(trim($_POST['area']));
+			if(isset($_POST['disciplina']))	$cod_disciplina			= trim($_POST['disciplina']);
+			if(isset($_POST['assunto']))	$cod_assunto			= trim($_POST['assunto']);
 			$dificuldade			= trim($_POST['dificuldade']);
 			$enunciado				= trim($_POST['enunciado']);
 			$resposta_1				= trim($_POST['resposta_1']);
@@ -101,20 +133,29 @@ if($_SESSION['logado'] == 1)
 			$resposta_5 			= trim($_POST['resposta_5']);
 			$alternativa_correta	= trim($_POST['alternativa_correta']);
 
-			if($cod_area == 'none')
+			if(isset($_POST['area']))
 			{
-				$error = true;
-				$error_cod_area = '<font size=2 color = "red">Informe a área.</font>';
+				if($cod_area == '-1')
+				{
+					$error = true;
+					$error_cod_area = '<font size=2 color = "red">Informe a área.</font>';
+				}
 			}
-			if($cod_disciplina == 'none')
+			if(isset($_POST['disciplina']))
 			{
-				$error = true;
-				$error_cod_disciplina = '<font size=2 color = "red">Informe a disciplina.</font>';
+				if($cod_disciplina == '-1')
+				{
+					$error = true;
+					$error_cod_disciplina = '<font size=2 color = "red">Informe a disciplina.</font>';
+				}
 			}
-			if($cod_assunto == 'none')
+			if(isset($_POST['assunto']))
 			{
-				$error = true;
-				$error_cod_assunto = '<font size=2 color = "red">Informe o assunto.</font>';
+				if($cod_assunto == '-1')
+				{
+					$error = true;
+					$error_cod_assunto = '<font size=2 color = "red">Informe o assunto.</font>';
+				}
 			}
 			if($dificuldade == 'none')
 			{
@@ -222,7 +263,8 @@ if($_SESSION['logado'] == 1)
 </center>
 
 <center><?php echo isset($_POST['codigo']) ?  "Edição realizada com sucesso!" : "Cadastro realizado com sucesso!";?></center>
-<br><br>
+<br>
+<br>
 <table border="0" align="center" width="900px">
 	<tr>
 
@@ -241,9 +283,9 @@ if($_SESSION['logado'] == 1)
 				{
 					$_GET['codigo'] = $_POST['codigo'];
 				}
-				$vetor['cod_area'] 				= $cod_area;
-				$vetor['cod_disciplina'] 		= $cod_disciplina;
-				$vetor['cod_assunto'] 			= $cod_assunto;
+				if(isset($cod_area))		$vetor['cod_area']			= $cod_area;
+				if(isset($cod_disciplina))	$vetor['cod_disciplina']	= $cod_disciplina;
+				if(isset($cod_assunto))		$vetor['cod_assunto'] 		= $cod_assunto;
 				$vetor['dificuldade'] 			= $dificuldade;
 				$vetor['enunciado'] 			= $enunciado;
 				$vetor['resposta_1'] 			= $resposta_1;
@@ -268,9 +310,9 @@ if($_SESSION['logado'] == 1)
 			}
 		}
 
-		if (!isset($vetor['cod_area'])) $vetor['cod_area'] = '';
-		if (!isset($vetor['cod_disciplina'])) $vetor['cod_disciplina'] = '';
-		if (!isset($vetor['cod_assunto'])) $vetor['cod_assunto'] = '';
+		if (!isset($vetor['cod_area'])) $vetor['cod_area'] = '-1';
+		if (!isset($vetor['cod_disciplina'])) $vetor['cod_disciplina'] = '-1';
+		if (!isset($vetor['cod_assunto'])) $vetor['cod_assunto'] = '-1';
 		if (!isset($vetor['dificuldade'])) $vetor['dificuldade'] = '';
 		if (!isset($vetor['enunciado'])) $vetor['enunciado'] = '';
 		if (!isset($vetor['resposta_1'])) $vetor['resposta_1'] = '';
@@ -302,27 +344,31 @@ if(isset($error_cod_area)){
 ?>
 	<tr>
 		<td width="40%" align="right">* Área:</td>
-		<td colspan="2" width="60%"><select Name="cod_area">
-			<option value="none"
-			<?php if ($vetor["cod_area"] == "") echo 'selected="selected"' ?>></option>
+		<td colspan="2" width="60%"><select name="area">
+			<option value="-1"
+			<?php if ($vetor["cod_area"] == "-1") echo 'selected="selected"' ?>>Selecione a Área</option>
 			<?php
-			include("./config.php");
-			$con = mysql_connect($host, $log, $senha);
-			mysql_select_db($bd, $con);
-			$tabela = mysql_query("SELECT codigo, nome FROM area ORDER BY nome");
-			while($dados = mysql_fetch_row($tabela)){
-				$codigo	= $dados[0];
-				$nome	= $dados[1];
-				?>
-			<option value="<?php echo $codigo?>"
-			<?php if ($vetor["cod_area"] == $codigo) echo 'selected="selected"' ?>><?php echo $nome?></option>
-			<?php
+			include("config.php");
+			$result = "SELECT * FROM area ORDER BY nome";
+			$ql = mysql_query($result);
+			if(!$ql)
+			{
+				echo "Nao foi possivel executar a query ($sql):	".mysql_error();
 			}
-			mysql_close($con);
+			if(mysql_num_rows($ql) == 0)
+			{
+				echo "Não há áreas cadastradas";
+				exit;
+			}
+			while($ln = mysql_fetch_assoc($ql))
+			{
+				if ($vetor["cod_area"] == $ln['codigo'])
+				echo '<option selected="selected" value = "'.$ln['codigo'].'">'.$ln['nome'].'</option>';
+				else echo '<option value = "'.$ln['codigo'].'">'.$ln['nome'].'</option>';
+			}
 			?>
 		</select></td>
 	</tr>
-
 	<?php
 	//DISCIPLINA
 	if(isset($error_cod_disciplina)){
@@ -336,14 +382,15 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Disciplina:</td>
-		<td colspan="2" width="60%"><select Name="cod_disciplina">
-			<option value="none"
-			<?php if ($vetor["cod_disciplina"] == "") echo 'selected="selected"' ?>></option>
+		<td colspan="2" width="60%"><select Name="disciplina">
+			<option value="-1"
+			<?php if ($vetor["cod_disciplina"] == "") echo 'selected="selected"' ?>>Selecione a Disciplina</option>
 			<?php
 			include("./config.php");
 			$con = mysql_connect($host, $log, $senha);
 			mysql_select_db($bd, $con);
-			$tabela = mysql_query("SELECT codigo, nome FROM disciplina ORDER BY nome");
+			$sql = "SELECT disciplina.codigo, disciplina.nome FROM disciplina, disciplina_refere_area WHERE disciplina_refere_area.cod_area = ".$vetor["cod_area"]." AND disciplina.codigo = disciplina_refere_area.cod_disciplina ORDER BY disciplina.nome";
+			$tabela = mysql_query($sql);
 			while($dados = mysql_fetch_row($tabela)){
 				$codigo	= $dados[0];
 				$nome	= $dados[1];
@@ -370,14 +417,15 @@ if(isset($error_cod_area)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Assunto:</td>
-		<td colspan="2" width="60%"><select Name="cod_assunto">
-			<option value="none"
-			<?php if ($vetor["cod_assunto"] == "") echo 'selected="selected"' ?>></option>
+		<td colspan="2" width="60%"><select Name="assunto">
+			<option value="-1"
+			<?php if ($vetor["cod_assunto"] == "") echo 'selected="selected"' ?>>Selecione o Assunto</option>
 			<?php
 			include("./config.php");
 			$con = mysql_connect($host, $log, $senha);
 			mysql_select_db($bd, $con);
-			$tabela = mysql_query("SELECT codigo, nome FROM assunto ORDER BY nome");
+			$sql = "SELECT assunto.codigo, assunto.nome FROM assunto, assunto_refere_disciplina WHERE assunto_refere_disciplina.cod_disciplina = ".$vetor["cod_disciplina"]." AND assunto.codigo = assunto_refere_disciplina.cod_assunto ORDER BY assunto.nome";
+			$tabela = mysql_query($sql);
 			while($dados = mysql_fetch_row($tabela)){
 				$codigo	= $dados[0];
 				$nome	= $dados[1];
@@ -390,8 +438,6 @@ if(isset($error_cod_area)){
 			?>
 		</select></td>
 	</tr>
-
-
 	<?php
 	//DIFICULDADE
 	if(isset($error_dificuldade)){

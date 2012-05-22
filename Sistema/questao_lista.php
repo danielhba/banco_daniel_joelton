@@ -1,7 +1,9 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 3)){
 	?>
 <html>
 <head>
@@ -119,7 +121,8 @@ if(mysql_num_rows($tabela)==0){
 		$enunciado		= $dados[1];
 		$dificuldade	= $dados[2];
 		$sql = mysql_query("SELECT nome FROM area WHERE codigo = '".$dados[3]."'");
-		$area = mysql_result($sql, 0, 0);
+		if(mysql_num_rows($sql) > 0) $area = mysql_result($sql, 0, 0);
+		else $area="<b>Sem categoria</b>";
 		?>
 	<tr align="center">
 		<td width="2%"></td>

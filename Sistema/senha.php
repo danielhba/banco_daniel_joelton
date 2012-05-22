@@ -1,8 +1,9 @@
 <?php
 session_start();
 include("config.php");
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
 if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
-
 	?>
 <html>
 <head>
@@ -125,13 +126,15 @@ if($_SESSION['logado'] == 1)
 				mysql_query($sql,$con);
 				mysql_close($con);
 				?>
+<br>
+<br>
 <center>
 <h3>Alterar Senha</h3>
 </center>
 <center>
 <h3>Confirmação de alterarção</h3>
 </center>
-<center>Alteração realizada com sucesso</center>
+<center>Alteração realizada com sucesso!</center>
 <br>
 <table border="0" align="center" width="35%">
 	<tr>

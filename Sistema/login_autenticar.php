@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("config.php");
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
 if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
 	header("Location: home.php");
 	exit;
@@ -56,7 +58,7 @@ else {
 		else
 		{
 			echo "<center><br><b>Usuário ou senha inválido. Tente novamente.</b></center>";
-			echo "<center><a href = './login.php'>Voltar</a></center>";
+			echo "<br><center><a href = './login.php'>Voltar</a></center>";
 		}
 	}
 	else

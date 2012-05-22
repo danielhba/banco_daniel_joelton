@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("config.php");
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
 if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 	?>
 <html>
@@ -320,18 +322,20 @@ if(isset($error_disciplina))
 		$bd = mysql_select_db($bd, $con);
 		$sql = "SELECT codigo, nome FROM disciplina";
 		$result = mysql_query($sql, $con);
-		$check = $_POST['disciplina'];
+		if(isset($_POST['disciplina'])) $check = $_POST['disciplina'];
 		while($dados = mysql_fetch_array($result,MYSQL_ASSOC)){
 			?>
 	<tr>
 		<td width="40%" align="right"></td>
 		<td width="60%"><input type="checkbox" name="disciplina[]"
 		<?php
-		for($i = 0; $i<sizeof($check); $i++){
-			if ($check[$i] == $dados['codigo'])
-			{
-				echo 'checked="checked"';
-				break;
+		if(isset($_POST['disciplina'])){
+			for($i = 0; $i<sizeof($check); $i++){
+				if ($check[$i] == $dados['codigo'])
+				{
+					echo 'checked="checked"';
+					break;
+				}
 			}
 		}
 		?>

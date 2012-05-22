@@ -1,7 +1,9 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 3)){
 
 	?>
 <html>

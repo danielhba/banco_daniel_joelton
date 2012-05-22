@@ -1,6 +1,8 @@
 <?php
 session_start();
 include("config.php");
+$con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer conexão com o Servidor");
+$banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
 if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 	?>
 <html>
@@ -513,7 +515,8 @@ if($_SESSION['logado'] == 1)
 		if (!isset($vetor['nome'])) $vetor['nome'] = '';
 
 		if (!isset($vetor['data_nascimento'])) $vetor['data_nascimento'] = '';
-		else list($vetor['data_ano'], $vetor['data_mes'], $vetor['data_dia']) = explode('-', $vetor['data_nascimento']);
+		else 
+		list($vetor['data_ano'], $vetor['data_mes'], $vetor['data_dia']) = explode('-', $vetor['data_nascimento']);
 		if (!isset($vetor['data_dia'])) $vetor['data_dia'] = '';
 		if (!isset($vetor['data_mes'])) $vetor['data_mes'] = '';
 		if (!isset($vetor['data_ano'])) $vetor['data_ano'] = '';
