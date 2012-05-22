@@ -35,9 +35,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>
@@ -125,8 +124,7 @@ if($_SESSION['logado'] == 1)
 						WHERE login = '".$_SESSION["login_user"]."'";
 				mysql_query($sql,$con);
 				mysql_close($con);
-				?>
-<br>
+				?> <br>
 <br>
 <center>
 <h3>Alterar Senha</h3>

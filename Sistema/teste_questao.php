@@ -36,9 +36,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>
@@ -52,13 +51,12 @@ if($_SESSION['logado'] == 1)
 </ul>
 </div>
 </div>
-<div id="mainphotos"><center>
-<img src="images/picture1.jpg" alt="Photo 1"
-	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
-	width="119" height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos">
+<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
+	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
+	height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
-</center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
 <table align="left" width="900px">
 	<tr align="left">
@@ -75,7 +73,9 @@ if($_SESSION['logado'] == 1)
 	</tr>
 </table>
 <br>
-<center><h3>Teste</h3></center>
+<center>
+<h3>Teste</h3>
+</center>
 		<?php
 		include("config.php");
 		$con = mysql_connect($host, $log, $senha);

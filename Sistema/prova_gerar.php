@@ -36,9 +36,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>
@@ -107,22 +106,23 @@ if($_SESSION['logado'] == 1)
 		});
 	});
 </script>
-<form action="prova_questao.php" method="post">
-<br>
+<form action="prova_questao.php" method="post"><br>
 <table align="center" width="900px">
-<tr>
-<td width="15%"></td>
-<td width="85%">
-<font size=2><b>- A seleção de área, disciplina e assunto não é obrigatória; é um filtro de geração de questões.</b></font>
-</td>
-<tr>
-<td width="15%"></td>
-<td width="85%">
-<font size=2><b>- Não marcar nível de dificuldade, indicará a geração de prova com todos os níveis de dificuldade.</b></font>
-</td>
-</tr>
+	<tr>
+		<td width="15%"></td>
+		<td width="85%"><font size=2><b>- A seleção de área, disciplina e
+		assunto não é obrigatória; é um filtro de geração de questões.</b></font>
+		</td>
+		<tr>
+			<td width="15%"></td>
+			<td width="85%"><font size=2><b>- Não marcar nível de dificuldade,
+			indicará a geração de prova com todos os níveis de dificuldade.</b></font>
+			</td>
+		</tr>
+
 </table>
-<br><br>
+<br>
+<br>
 <table align="center" width="900px">
 	<tr>
 		<td align="right" width="40%">Área:</td>

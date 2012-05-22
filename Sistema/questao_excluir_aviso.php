@@ -25,7 +25,6 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 3)){
 <?php
 echo '<li><a href="teste_questao.php">Realizar Teste</a></li>';
 echo '<li><a href="prova_gerar.php">Realizar Prova</a></li>';
-
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="usuario_lista.php">Usuários</a></li>';
@@ -37,9 +36,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>

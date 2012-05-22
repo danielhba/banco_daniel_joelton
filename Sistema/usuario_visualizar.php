@@ -36,9 +36,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>
@@ -189,7 +188,7 @@ if(isset($_GET["codigo"]))
 		<td width="50%" align="right">Cidade:</td>
 		<td colspan="2" width="50%"><?php  echo $vetor['end_cidade']?></td>
 	</tr>
-		<tr>
+	<tr>
 
 	</tr>
 	<tr>
@@ -215,7 +214,7 @@ if(isset($_GET["codigo"]))
 </div>
 </body>
 </html>
-		<?php
+<?php
 }
 else{
 	header("Location: login.php");

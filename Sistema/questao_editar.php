@@ -65,9 +65,8 @@ if($_SESSION['logado'] != 3)
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
-	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
+	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
 </ul>
@@ -269,7 +268,7 @@ if($_SESSION['logado'] == 1)
 	<tr>
 
 		<td>
-		<center><input type="button" value="Voltar para a lista de usuários"
+		<center><input type="button" value="Voltar para a lista de questões"
 			onclick="location.href = 'questao_lista.php'"></center>
 		</td>
 	</tr>
@@ -346,7 +345,8 @@ if(isset($error_cod_area)){
 		<td width="40%" align="right">* Área:</td>
 		<td colspan="2" width="60%"><select name="area">
 			<option value="-1"
-			<?php if ($vetor["cod_area"] == "-1") echo 'selected="selected"' ?>>Selecione a Área</option>
+			<?php if ($vetor["cod_area"] == "-1") echo 'selected="selected"' ?>>Selecione
+			a Área</option>
 			<?php
 			include("config.php");
 			$result = "SELECT * FROM area ORDER BY nome";
@@ -384,7 +384,8 @@ if(isset($error_cod_area)){
 		<td width="40%" align="right">* Disciplina:</td>
 		<td colspan="2" width="60%"><select Name="disciplina">
 			<option value="-1"
-			<?php if ($vetor["cod_disciplina"] == "") echo 'selected="selected"' ?>>Selecione a Disciplina</option>
+			<?php if ($vetor["cod_disciplina"] == "") echo 'selected="selected"' ?>>Selecione
+			a Disciplina</option>
 			<?php
 			include("./config.php");
 			$con = mysql_connect($host, $log, $senha);
@@ -419,7 +420,8 @@ if(isset($error_cod_area)){
 		<td width="40%" align="right">* Assunto:</td>
 		<td colspan="2" width="60%"><select Name="assunto">
 			<option value="-1"
-			<?php if ($vetor["cod_assunto"] == "") echo 'selected="selected"' ?>>Selecione o Assunto</option>
+			<?php if ($vetor["cod_assunto"] == "") echo 'selected="selected"' ?>>Selecione
+			o Assunto</option>
 			<?php
 			include("./config.php");
 			$con = mysql_connect($host, $log, $senha);
