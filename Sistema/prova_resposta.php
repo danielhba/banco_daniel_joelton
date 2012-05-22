@@ -24,7 +24,7 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
 <ul>
 <?php
 echo '<li><a href="teste_questao.php">Realizar Teste</a></li>';
-echo '<li><a href="prova_questao.php">Realizar Prova</a></li>';
+echo '<li><a href="prova_gerar.php">Realizar Prova</a></li>';
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="usuario_lista.php">Usuários</a></li>';
@@ -168,7 +168,7 @@ if($_SESSION['logado'] == 1)
 			<?php
 		}
 		?> <br>
-<form name="form1" method="post" action="prova_questao.php">
+<form name="form1" method="post" action="prova_gerar.php">
 <table align="center" width="900px">
 	<tr>
 		<td align="center"><input type="submit" value="Realizar outra prova"></td>

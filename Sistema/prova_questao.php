@@ -9,7 +9,7 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Avaliação</title>
+<title>Prova</title>
 <meta name="keywords" content="keyword1, keyword2, keyword3, etc..." />
 <meta name="description" content="Description of website here..." />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -24,7 +24,7 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
 <ul>
 <?php
 echo '<li><a href="teste_questao.php">Realizar Teste</a></li>';
-echo '<li><a href="prova_questao.php">Realizar Prova</a></li>';
+echo '<li><a href="prova_gerar.php">Realizar Prova</a></li>';
 if($_SESSION['logado'] == 1)
 {
 	echo '<li><a href="usuario_lista.php">Usuários</a></li>';
@@ -76,17 +76,68 @@ if($_SESSION['logado'] == 1)
 <br>
 <br>
 <center>
-<h3>Avaliação</h3>
+<h3>Prova</h3>
 </center>
-<form name="form1" method="POST" action="prova_resposta.php">
-		<?php
-		$questao_quantidade = 20;?> <input type="hidden" name="quantidade"
-	value="<?php echo $questao_quantidade?>">	 
-		<?php
-		include("config.php");
-		for($i = 1; $i <= $questao_quantidade; $i++){
-			$con = mysql_connect($host, $log, $senha);
-			$tabela = mysql_query("SELECT * FROM questao");
+<form name="form1" method="POST" action="prova_resposta.php"><?php
+if(isset($_POST['area'])){
+	$questao_quantidade = $_POST['quantidade'];?> <input type="hidden"
+	name="quantidade" value="<?php echo $questao_quantidade?>"> <?php
+	include("config.php");
+
+	if($_POST['area'] == '-1')
+	{
+		$sql_area = " ";
+		$sql_disciplina = " ";
+		$sql_assunto = " ";
+	}
+	else
+	{
+		$sql_area = ' AND cod_area = "'.$_POST['area'].'"';
+		if($_POST['disciplina'] == -1)
+		{
+			$sql_disciplina = " ";
+			$sql_assunto = " ";
+		}
+		else
+		{
+			$sql_disciplina = ' AND cod_disciplina = "'.$_POST['disciplina'].'"';
+			if($_POST['assunto'] == -1)
+			{
+				$sql_assunto = " ";
+			}
+			else
+			{
+				$sql_assunto = ' AND cod_assunto = "'.$_POST['assunto'].'"';
+			}
+		}
+	}
+	if(isset($_POST['dificuldade']))
+	{
+		$dificuldade = $_POST['dificuldade'];
+	}
+	else
+	{
+		$dificuldade = array('1','2','3','4','5');
+	}
+
+	$sql_dificuldade = "dificuldade IN(";
+	for($i = 0; $i< sizeof($dificuldade); $i++){
+		if($i == sizeof($dificuldade)-1)
+		{
+			$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].')';
+		}
+		else
+		{
+			$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].',';
+		}
+	}
+
+	for($i = 1; $i <= $questao_quantidade; $i++){
+		$con = mysql_connect($host, $log, $senha);
+		$sql = "SELECT * FROM questao WHERE ".$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
+		$tabela = mysql_query($sql);
+		if(mysql_num_rows($tabela) > 0)
+		{
 			$linha = rand(1, mysql_num_rows($tabela)) - 1;
 			$contador = -1;
 			while(($vetor = mysql_fetch_row($tabela, MYSQL_ASSOC)))
@@ -96,7 +147,8 @@ if($_SESSION['logado'] == 1)
 				break;
 			}
 			?> <input type="hidden" name="id<?php echo $i?>"
-	value="<?php echo $vetor['id']?>"> <br><br>
+	value="<?php echo $vetor['id']?>"> <br>
+<br>
 <table border="0" align="center" width="900px">
 	<tr>
 		<td width="80%"><b><font size="2"><?php echo $i. "º) ". $vetor['enunciado']?></font></b></td>
@@ -105,40 +157,87 @@ if($_SESSION['logado'] == 1)
 <br>
 <table border="0" align="center" width="900px">
 	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="1"><font size="2"><b>a)</b> <?php echo $vetor['resposta_1']?></font></td>
+		<td><input type="radio" name="resposta<?php echo $i?>" value="1"><font
+			size="2"><b>a)</b> <?php echo $vetor['resposta_1']?></font></td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="2"><font size="2"><b>b)</b> <?php echo $vetor['resposta_2']?></font></td>
+		<td><input type="radio" name="resposta<?php echo $i?>" value="2"><font
+			size="2"><b>b)</b> <?php echo $vetor['resposta_2']?></font></td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="3"><font size="2"><b>c)</b> <?php echo $vetor['resposta_3']?></font></td>
+		<td><input type="radio" name="resposta<?php echo $i?>" value="3"><font
+			size="2"><b>c)</b> <?php echo $vetor['resposta_3']?></font></td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="4"><font size="2"><b>d)</b> <?php echo $vetor['resposta_4']?></font></td>
+		<td><input type="radio" name="resposta<?php echo $i?>" value="4"><font
+			size="2"><b>d)</b> <?php echo $vetor['resposta_4']?></font></td>
 	</tr>
 	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="5"><font size="2"><b>e)</b> <?php echo $vetor['resposta_5']?></font></td>
+		<td><input type="radio" name="resposta<?php echo $i?>" value="5"><font
+			size="2"><b>e)</b> <?php echo $vetor['resposta_5']?></font></td>
 	</tr>
 	<tr>
 	</tr>
 </table>
 			<?php
 		}
-		mysql_close();
-		?> <br>
+		else
+		{
+			$not_question = true;
+			break;
+		}
+	}
+	if(isset($not_question)){
+		?>
+<table align="center" width="900px">
+	<tr align="center">
+		<td><font size=2>Não foram encontradas questões segundo os critérios
+		de pesquisa.</font></td>
+	</tr>
+	<tr align="center">
+		<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar outra
+		prova</a></b> para gerar outra prova, usando outros critérios de
+		filtro.</font></td>
+	</tr>
+</table>
+		<?php
+	}
+	mysql_close();
+	?> <br>
 <br>
+	<?php
+	if(!isset($not_question)){
+		?>
 <table border="0" align="center" width="900px">
 	<tr>
 		<td align="center"><input type="submit" value="Finalizar Prova"> <input
 			type="button" value="Gerar outra prova"
-			onclick="location.href = 'prova_questao.php'"></td>
+			onclick="location.href = 'prova_gerar.php'"></td>
 	</tr>
 </table>
-</form>
+		<?php
+	}
+}
+else
+{ ?>
+<table align="center" width="900px">
+	<tr align="center">
+		<td><font size=2>Não foram encontradas questões segundo os critérios
+		de pesquisa.</font></td>
+	</tr>
+	<tr align="center">
+		<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar outra
+		prova</a></b> para gerar outra prova, usando outros critérios de
+		filtro.</font></td>
+	</tr>
+</table>
+<?php
+}
+?></form>
 </div>
 </body>
 </html>
-		<?php
+<?php
 }
 else{
 	header("Location: login.php");
