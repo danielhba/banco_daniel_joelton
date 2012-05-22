@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 21/05/2012 às 23h59min
+-- Tempo de Geração: 22/05/2012 às 01h33min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `questao` (
 --
 
 INSERT INTO `questao` (`id`, `login_administrador`, `cod_area`, `cod_disciplina`, `cod_assunto`, `dificuldade`, `enunciado`, `resposta_1`, `resposta_2`, `resposta_3`, `resposta_4`, `resposta_5`, `alternativa_correta`, `data_cadastro`, `hora_cadastro`) VALUES
-(2, 'danielhba', 3, 7, 11, '2', 'Ao aplicar um resistência de 2 ohms a tensão de 10V, há uma corrente de:', '1A', '2A', '3A', '4A', '5A', '5', '2012-05-21', '23:20:03'),
+(2, 'danielhba', 3, 0, 8, '2', 'Ao aplicar um resistência de 2 ohms a tensão de 10V, há uma corrente de:', '1A', '2A', '3A', '4A', '5A', '5', '2012-05-22', '00:35:42'),
 (3, 'danielhba', 1, 2, 9, '3', 'O que é a terceira foma normal?', 'A existência de atributos multivalorados.', 'A inexistência de atributos multivalorados.', 'A existência de atributos compostos.', 'A inexistência de atributos compostos.', 'A questão b e d estão corretas.', '5', '2012-05-21', '23:39:36'),
 (4, 'danielhba', 6, 3, 2, '2', 'O que descreve um modelo Conceitual?', 'Descreve o nível de Abstracao, nesta etapa sao escolhidas as estruturas lógicas.', 'representa o nivel o nivel mais baixo de abstração e descreve como os dados sao armazenados .', 'É o nivel mais alto de abstracao, fala dos objetos do mundo real e suas respectivas operações.', 'Todas as alternativas estao corretas.', 'Todas as alternativas estao incorretas', '3', '2012-05-21', '23:18:38'),
 (5, 'danielhba', 1, 2, 9, '2', 'Em sql quando utilizamos a palavra chave DISTINCT na cláusula Select o que acontece?', 'As linhas retornadas da pesquisa são triplicadas', 'As linhas retornadas da pesquisa sao exibidas de forma inversa', 'As linhas retornadas da pesquisa sao concatenadas', 'As linhas retornadas da pesquisa mudam de cor', 'As linhas retornadas  da pesquisa nao apresentam duplicação', '5', '2012-05-21', '23:18:46'),
@@ -297,8 +297,8 @@ CREATE TABLE IF NOT EXISTS `tb_cidades` (
   `estado` int(2) unsigned zerofill NOT NULL DEFAULT '00',
   `uf` varchar(4) NOT NULL DEFAULT '',
   `nome` varchar(50) NOT NULL DEFAULT '',
-  UNIQUE KEY `id` (`id`),
-  KEY `id_2` (`id`)
+  PRIMARY KEY (`id`),
+  KEY `estado` (`estado`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9715 ;
 
 --
@@ -10037,7 +10037,9 @@ CREATE TABLE IF NOT EXISTS `tb_estados` (
   `id` int(2) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `uf` varchar(10) NOT NULL DEFAULT '',
   `nome` varchar(20) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uf` (`uf`),
+  UNIQUE KEY `nome` (`nome`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
@@ -10117,7 +10119,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `end_numero` int(5) DEFAULT NULL,
   `end_cep` int(8) NOT NULL,
   `end_bairro` varchar(50) NOT NULL,
-  `end_cidade` varchar(50) NOT NULL,
+  `end_cidade` varchar(100) NOT NULL,
   `end_estado` varchar(2) NOT NULL,
   `end_complemento` varchar(50) DEFAULT NULL,
   `data_cadastro` date NOT NULL,
@@ -10125,7 +10127,8 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   PRIMARY KEY (`login`),
   UNIQUE KEY `email` (`email`),
   KEY `login_administrador` (`login_administrador`),
-  KEY `tipo_usuario` (`tipo_usuario`)
+  KEY `tipo_usuario` (`tipo_usuario`),
+  KEY `end_cidade` (`end_cidade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -10133,14 +10136,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`login`, `login_administrador`, `tipo_usuario`, `senha`, `nome`, `data_nascimento`, `email`, `telefone_ddd`, `telefone`, `celular_1_ddd`, `celular_1`, `celular_2_ddd`, `celular_2`, `end_rua`, `end_numero`, `end_cep`, `end_bairro`, `end_cidade`, `end_estado`, `end_complemento`, `data_cadastro`, `hora_cadastro`) VALUES
-('danielhba', NULL, 1, '4bfb6f45599f0ce781950959fde85e8b', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-05-21', '20:47:36'),
-('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-05-10', '01:31:27'),
-('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:13:17'),
-('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-05-16', '23:55:32'),
-('jdsm.eng', 'danielhba', 2, '157904a4317f8454845ababbe4b91c97', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, 0, 'Claude Debussy', 92, 69000000, 'Parque 10', 'Manaus', 'AM', 'Número 4', '2012-05-16', '23:54:57'),
-('lucila', 'danielhba', 3, '1d8d7866bb67da8cd6fd50e9c9d59241', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:20:56'),
-('marciovitor.enga', 'danielhba', 3, '33ea6f999ba65f322620c7b44299bed6', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, NULL, 'Beto Freitas', 92, 69000000, 'Zumbi II', 'Manaus', 'AM', '', '2012-04-20', '16:13:42'),
-('mateuscarlos.to', 'danielhba', 3, '442cb777bec707f68803544c0d4b56ec', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, NULL, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', 'Manaus', 'AM', '', '2012-04-20', '16:14:04');
+('danielhba', NULL, 1, '4bfb6f45599f0ce781950959fde85e8b', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', '0', 'RO', 'Número 153-A', '2012-05-22', '00:40:06'),
+('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', '', '', '2012-05-22', '01:04:34'),
+('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', '0', 'AM', '', '2012-04-20', '16:13:17'),
+('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', '0', 'AM', 'Núcleo 15', '2012-05-16', '23:55:32'),
+('jdsm.eng', 'danielhba', 2, '157904a4317f8454845ababbe4b91c97', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, 0, 'Claude Debussy', 92, 69000000, 'Parque 10', '0', 'AM', 'Número 4', '2012-05-16', '23:54:57'),
+('lucila', 'danielhba', 3, '1d8d7866bb67da8cd6fd50e9c9d59241', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', '0', 'AM', '', '2012-04-20', '16:20:56'),
+('marciovitor.enga', 'danielhba', 3, '33ea6f999ba65f322620c7b44299bed6', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, NULL, 'Beto Freitas', 92, 69000000, 'Zumbi II', '0', 'AM', '', '2012-04-20', '16:13:42'),
+('mateuscarlos.to', 'danielhba', 3, '442cb777bec707f68803544c0d4b56ec', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, NULL, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', '0', 'AM', '', '2012-04-20', '16:14:04');
 
 --
 -- Restrições para as tabelas dumpadas

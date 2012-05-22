@@ -15,6 +15,19 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 <!--[if IE ]>
 <link href="css/ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+         $("select[name=end_estado]").change(function(){
+            $("select[name=end_cidade]").html('<option value="0">Carregando...</option>');
+            $.post("listar_cidade.php", 
+                  {estado:$(this).val()},
+                  function(valor){
+                     $("select[name=end_cidade]").html(valor);
+                  });
+        });
+      });
+</script>
 </head>
 <body>
 <div id="leftMain"><a href="home.php"><img src="images/logo.png"
@@ -362,19 +375,17 @@ if($_SESSION['logado'] == 1)
 				$error = true;
 				$error_cep = '<font size=2 color = "red">Informe um número de CEP válido.</font>';
 			}
-			if(empty($cidade))
+			if($cidade == '-1')
 			{
 				$error = true;
 				$error_cidade = '<font size=2 color = "red">Informe a cidade.</font>';
 			}
 
-			if($estado == 'none')
+			if($estado == '-1')
 			{
 				$error = true;
 				$error_estado = '<font size=2 color = "red">Informe o Estado.</font>';
 			}
-
-
 			//Verifica se houve erros de vaalidação
 			if ($error == false)
 			{
@@ -515,7 +526,7 @@ if($_SESSION['logado'] == 1)
 		if (!isset($vetor['nome'])) $vetor['nome'] = '';
 
 		if (!isset($vetor['data_nascimento'])) $vetor['data_nascimento'] = '';
-		else 
+		else
 		list($vetor['data_ano'], $vetor['data_mes'], $vetor['data_dia']) = explode('-', $vetor['data_nascimento']);
 		if (!isset($vetor['data_dia'])) $vetor['data_dia'] = '';
 		if (!isset($vetor['data_mes'])) $vetor['data_mes'] = '';
@@ -771,22 +782,6 @@ if(isset($error_login)){
 			value="<?php echo $vetor['end_bairro']?>" maxlength="50" size="50"></td>
 	</tr>
 	<?php
-	//CIDADE
-	if(isset($error_cidade)){
-		?>
-	<tr>
-		<td width="40%" align="right"></td>
-		<td width="60%"><?php echo $error_cidade ?></td>
-	</tr>
-	<?php
-	}
-	?>
-	<tr>
-		<td width="40%" align="right">* Cidade:</td>
-		<td colspan="2" width="60%"><input type="text" name="end_cidade"
-			value="<?php echo $vetor['end_cidade']?>" maxlength="50" size="50"></td>
-	</tr>
-	<?php
 	//ESTADO
 	if(isset($error_estado)){
 		?>
@@ -799,64 +794,58 @@ if(isset($error_login)){
 	?>
 	<tr>
 		<td width="40%" align="right">* Estado:</td>
-		<td colspan="2" width="60%"><select Name="end_estado">
-			<option value="none"
-			<?php if ($vetor["end_estado"] == "") echo 'selected="selected"' ?>></option>
-			<option value="AL"
-			<?php if ($vetor["end_estado"] == "AL") echo 'selected="selected"' ?>>AL</option>
-			<option value="AM"
-			<?php if ($vetor["end_estado"] == "AM") echo 'selected="selected"' ?>>AM</option>
-			<option value="AP"
-			<?php if ($vetor["end_estado"] == "AP") echo 'selected="selected"' ?>>AP</option>
-			<option value="BA"
-			<?php if ($vetor["end_estado"] == "BA") echo 'selected="selected"' ?>>BA</option>
-			<option value="CE"
-			<?php if ($vetor["end_estado"] == "CE") echo 'selected="selected"' ?>>CE</option>
-			<option value="DF"
-			<?php if ($vetor["end_estado"] == "DF") echo 'selected="selected"' ?>>DF</option>
-			<option value="ES"
-			<?php if ($vetor["end_estado"] == "ES") echo 'selected="selected"' ?>>ES</option>
-			<option value="GO"
-			<?php if ($vetor["end_estado"] == "GO") echo 'selected="selected"' ?>>GO</option>
-			<option value="MA"
-			<?php if ($vetor["end_estado"] == "MA") echo 'selected="selected"' ?>>MA</option>
-			<option value="MG"
-			<?php if ($vetor["end_estado"] == "MG") echo 'selected="selected"' ?>>MG</option>
-			<option value="MS"
-			<?php if ($vetor["end_estado"] == "MS") echo 'selected="selected"' ?>>MS</option>
-			<option value="MT"
-			<?php if ($vetor["end_estado"] == "MT") echo 'selected="selected"' ?>>MT</option>
-			<option value="PA"
-			<?php if ($vetor["end_estado"] == "PA") echo 'selected="selected"' ?>>PA</option>
-			<option value="PB"
-			<?php if ($vetor["end_estado"] == "PB") echo 'selected="selected"' ?>>PB</option>
-			<option value="PE"
-			<?php if ($vetor["end_estado"] == "PE") echo 'selected="selected"' ?>>PE</option>
-			<option value="PI"
-			<?php if ($vetor["end_estado"] == "PI") echo 'selected="selected"' ?>>PI</option>
-			<option value="PR"
-			<?php if ($vetor["end_estado"] == "PR") echo 'selected="selected"' ?>>PR</option>
-			<option value="RJ"
-			<?php if ($vetor["end_estado"] == "RJ") echo 'selected="selected"' ?>>RJ</option>
-			<option value="RO"
-			<?php if ($vetor["end_estado"] == "RO") echo 'selected="selected"' ?>>RO</option>
-			<option value="RR"
-			<?php if ($vetor["end_estado"] == "RR") echo 'selected="selected"' ?>>RR</option>
-			<option value="RN"
-			<?php if ($vetor["end_estado"] == "RN") echo 'selected="selected"' ?>>RN</option>
-			<option value="RS"
-			<?php if ($vetor["end_estado"] == "RS") echo 'selected="selected"' ?>>RS</option>
-			<option value="SC"
-			<?php if ($vetor["end_estado"] == "SC") echo 'selected="selected"' ?>>SC</option>
-			<option value="SE"
-			<?php if ($vetor["end_estado"] == "SE") echo 'selected="selected"' ?>>SE</option>
-			<option value="SP"
-			<?php if ($vetor["end_estado"] == "SP") echo 'selected="selected"' ?>>SP</option>
-			<option value="TO"
-			<?php if ($vetor["end_estado"] == "TO") echo 'selected="selected"' ?>>TO</option>
-		</select>
-	
+		<td colspan="2" width="60%"><select name="end_estado">
+			<option value="-1"></option>
+			<?php
+			mysql_select_db("estado", mysql_connect("localhost", "root", ""));
+			$sql= "SELECT * FROM tb_estados ORDER BY nome ASC";
+			$qr = mysql_query($sql) or die(mysql_error());
+			while($ln = mysql_fetch_assoc($qr)){
+				if($vetor['end_estado'] == $ln['uf']){
+					echo '<option selected="selected" value="'.$ln['uf'].'">'.$ln['uf'].'</option>';
+
+				}
+				else
+				{
+					echo '<option value="'.$ln['uf'].'">'.$ln['uf'].'</option>';
+				}
+			}
+			?>
+		</select></td>
 	</tr>
+	<?php
+	//CIDADE
+	if(isset($error_cidade)){
+		?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><?php echo $error_cidade ?></td>
+	</tr>
+	<?php
+	}
+	?>
+	<tr>
+		<td width="40%" align="right">* Cidade:</td>
+		<td colspan="2" width="60%"><select name="end_cidade">
+			<option value="-1"></option>
+			<?php
+			mysql_select_db("estado", mysql_connect("localhost", "root", ""));
+			$sql= "SELECT * FROM tb_cidades WHERE uf = '".$vetor['end_estado']."' ORDER BY nome ASC";
+			$qr = mysql_query($sql) or die(mysql_error());
+			while($ln = mysql_fetch_assoc($qr)){
+				if($vetor['end_cidade'] == $ln['nome']){
+					echo '<option selected="selected" value="'.$ln['nome'].'">'.$ln['nome'].'</option>';
+
+				}
+				else
+				{
+					echo '<option value="'.$ln['nome'].'">'.$ln['nome'].'</option>';
+				}
+			}
+			?>
+		</select></td>
+	</tr>
+
 	<tr>
 		<td colspan="3" align="center"><input type="submit" value="Gravar"> <input
 			type="button" value="Cancelar"
