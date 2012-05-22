@@ -51,13 +51,12 @@ if($_SESSION['logado'] == 1)
 </ul>
 </div>
 </div>
-<div id="mainphotos"><center>
-<img src="images/picture1.jpg" alt="Photo 1"
-	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
-	width="119" height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos">
+<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
+	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
+	height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
-</center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
 <table width="900px">
 	<tr align="left">
@@ -101,19 +100,31 @@ if(mysql_num_rows($tabela)== 0)
 ?>
 	<tr>
 		<td width="5%"></td>
-		<td width="50%"><center><b>Nome</b></center></td>
-		<td width="30%">
+		<td width="50%">
+		<center><b>Nome</b></center>
+		</td>
+		<td width="10%">
 		<center><b>Opções</b></center>
 		</td>
 	</tr>
 	<?php
-
+	$color = '#FFFFF';
+	$count = 0;
 	while($dados = mysql_fetch_row($tabela)){
 		$codigo = $dados[1];
 		$nome = $dados[0];
+		$count++;
+		if (strcmp($color,'#FFFFF') != 0)
+		{
+			$color = '#FFFFF';
+		}
+		else
+		{
+			$color = '#FFFAA';
+		}
 		?>
-	<tr>
-		<td width="5%"></td>
+	<tr bgcolor="<?php echo $color?>">
+		<td width="5%" align="center"><?php echo $count?></td>
 		<td align="left"><?php echo $nome?></td>
 		<td align="center"><input type="button" value="Editar"
 			onclick=" location.href = 'disciplina_editar.php?codigo=<?php echo $codigo?>'">

@@ -116,6 +116,8 @@ if(mysql_num_rows($tabela)==0){
 		</td>
 	</tr>
 	<?php
+	$color = '#FFFFF';
+	$count = 0;
 	while($dados = mysql_fetch_row($tabela)){
 		$id				= $dados[0];
 		$enunciado		= $dados[1];
@@ -123,9 +125,18 @@ if(mysql_num_rows($tabela)==0){
 		$sql = mysql_query("SELECT nome FROM area WHERE codigo = '".$dados[3]."'");
 		if(mysql_num_rows($sql) > 0) $area = mysql_result($sql, 0, 0);
 		else $area="<b>Sem categoria</b>";
+		$count++;
+		if (strcmp($color,'#FFFFF') != 0)
+		{
+			$color = '#FFFFF';
+		}
+		else
+		{
+			$color = '#FFFAA';
+		}
 		?>
-	<tr align="center">
-		<td width="2%"></td>
+	<tr bgcolor="<?php echo $color?>">
+		<td width="5%" align="center"><?php echo $count?></td>
 		<td align="left"><font size=2><?php echo $enunciado?></font></td>
 		<td align="center"><font size=2><?php echo $dificuldade?></font></td>
 		<td align="center"><font size=2><?php echo $area?></font></td>

@@ -80,8 +80,7 @@ if($_SESSION['logado'] == 1)
 </center>
 <center>Para realizar a edição ou exclusão de administradores do
 sistema, contacte o administrador do Banco de Dados.</center>
-<form name="form1" method="POST" action="usuario_editar.php">
-<br>
+<form name="form1" method="POST" action="usuario_editar.php"><br>
 <table border="0" align="center" width="900px">
 <?php
 include("config.php");
@@ -120,15 +119,26 @@ if(mysql_num_rows($tabela)==0){
 		</td>
 	</tr>
 	<?php
+	$color = '#FFFFF';
+	$count = 0;
 	while($dados = mysql_fetch_row($tabela)){
 		$nome = $dados[2];
 		$login = $dados[0];
 		if($dados[1] == 1) $tipo = "Administrador";
 		if($dados[1] == 2) $tipo = "Professor";
 		if($dados[1] == 3) $tipo = "Aluno";
+		$count++;
+		if (strcmp($color,'#FFFFF') != 0)
+		{
+			$color = '#FFFFF';
+		}
+		else
+		{
+			$color = '#FFFAA';
+		}
 		?>
-	<tr>
-		<td width="5%"></td>
+	<tr bgcolor="<?php echo $color?>">
+		<td width="5%" align="center"><?php echo $count?></td>
 		<td align="left"><?php echo $nome?></td>
 		<td align="center"><?php echo $login?></td>
 		<td align="center"><?php echo $tipo?></td>

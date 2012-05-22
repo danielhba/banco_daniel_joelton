@@ -103,18 +103,28 @@ if(mysql_num_rows($tabela)== 0)
 		<td width="50%">
 		<center><b>Nome</b></center>
 		</td>
-		<td width="30%">
+		<td width="10%">
 		<center><b>Opções</b></center>
 		</td>
 	</tr>
 	<?php
-
+	$color = '#FFFFF';
+	$count = 0;
 	while($dados = mysql_fetch_row($tabela)){
 		$codigo = $dados[1];
 		$nome = $dados[0];
+		$count++;
+		if (strcmp($color,'#FFFFF') != 0)
+		{
+			$color = '#FFFFF';
+		}
+		else
+		{
+			$color = '#FFFAA';
+		}
 		?>
-	<tr>
-		<td width="5%"></td>
+	<tr bgcolor="<?php echo $color?>">
+		<td width="5%" align="center"><?php echo $count?></td>
 		<td align="left"><?php echo $nome?></td>
 
 		<td align="center"><input type="button" value="Editar"
