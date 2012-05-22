@@ -165,7 +165,7 @@ if($_SESSION['logado'] == 1)
 </center>
 
 <center>
-<h3><?php  echo isset($_POST[' codigo']) ? " Confirmação de edição":"Confirmação de cadastro de disciplina";?></h3>
+<h3><?php  echo isset($_POST['codigo']) ? " Confirmação de edição":"Confirmação de cadastro de disciplina";?></h3>
 </center>
 
 <center><?php echo isset($_POST['codigo'])? " Edição realizada com sucesso!":"Cadastro realizado com sucesso!"?></center>

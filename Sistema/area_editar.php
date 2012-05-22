@@ -152,7 +152,7 @@ if(isset($_POST["validar"])){
 </center>
 
 <center>
-<h3><?php  echo isset($_POST[' codigo']) ? " Confirmação de edição":"Confirmação de cadastro de área";?></h3>
+<h3><?php  echo isset($_POST['codigo']) ? " Confirmação de edição":"Confirmação de cadastro de área";?></h3>
 </center>
 
 <center><?php echo isset($_POST['codigo'])? " Edição realizada com sucesso!":"Cadastro realizado com sucesso!"?></center>
