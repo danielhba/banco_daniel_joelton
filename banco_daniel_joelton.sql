@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 03/05/2012 às 01h26min
+-- Tempo de Geração: 16/05/2012 às 19h44min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `area` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `area`
@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS `area` (
 
 INSERT INTO `area` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
 (0, 'danielhba', 'Sistema de Informação', '2012-05-02', '15:14:35'),
-(1, 'danielhba', 'Eng. Computação', '2012-04-09', '18:38:10'),
-(2, 'danielhba', 'Física', '2012-05-03', '01:09:13'),
+(1, 'danielhba', 'Eng. Computação', '2012-05-15', '00:01:42'),
+(2, 'danielhba', 'Física', '2012-05-16', '18:53:52'),
 (3, 'danielhba', 'Eng. Elétrica', '2012-05-02', '15:19:30'),
 (4, 'danielhba', 'Eng. Controle e Automação', '2012-04-09', '18:41:28'),
 (5, 'danielhba', 'Eng. Eletronica', '2012-04-11', '08:08:16'),
-(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-04-11', '08:08:28');
+(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-05-16', '00:22:12');
 
 -- --------------------------------------------------------
 
@@ -67,27 +67,24 @@ CREATE TABLE IF NOT EXISTS `assunto` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Extraindo dados da tabela `assunto`
 --
 
 INSERT INTO `assunto` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
-(0, 'danielhba', 'UML 1.0', '2012-04-26', '20:33:10'),
-(1, 'danielhba', 'Termodinâmica', '2012-04-09', '18:50:51'),
-(2, 'danielhba', 'Formas Normais', '2012-04-09', '18:51:32'),
-(3, 'danielhba', 'Instruções de 2 Bytes', '2012-04-09', '18:53:54'),
-(5, 'danielhba', 'Camada de Transporte', '2012-04-11', '08:15:12'),
-(6, 'danielhba', 'Vetores e Matrizes em C', '2012-04-11', '08:15:12'),
-(7, 'danielhba', 'Modelo Conceitual', '2012-04-11', '08:15:12'),
-(8, 'danielhba', 'Modelo Logico', '2012-04-11', '08:15:12'),
-(9, 'danielhba', 'Comandos SQL', '2012-04-11', '08:15:12'),
-(10, 'danielhba', 'Projeto de Compensadores', '2012-04-11', '08:17:56'),
-(11, 'danielhba', 'Camada Fisica', '2012-04-11', '08:17:56'),
-(12, 'danielhba', 'Analise Nodal', '2012-04-11', '08:17:56'),
-(13, 'danielhba', 'Análise de Malha IV', '2012-05-02', '15:20:49'),
-(14, 'danielhba', 'Energia e Trabalho', '2012-04-11', '08:17:56');
+(0, 'danielhba', 'UML 1.0', '2012-05-16', '19:29:19'),
+(1, 'danielhba', 'Termodinâmica', '2012-05-16', '19:13:27'),
+(2, 'danielhba', 'Formas Normais', '2012-05-16', '19:12:47'),
+(3, 'danielhba', 'Instruções de 2 Bytes', '2012-05-16', '19:12:53'),
+(6, 'danielhba', 'Vetores e Matrizes em C', '2012-05-16', '19:13:06'),
+(7, 'danielhba', 'Modelo Conceitual', '2012-05-16', '19:12:58'),
+(8, 'danielhba', 'Modelo Logico', '2012-05-16', '19:13:37'),
+(9, 'danielhba', 'Comandos SQL', '2012-05-16', '19:12:38'),
+(10, 'danielhba', 'Projeto de Compensadores', '2012-05-16', '19:13:31'),
+(11, 'danielhba', 'Camada Fisica', '2012-05-16', '19:11:59'),
+(14, 'danielhba', 'Energia e Trabalho', '2012-05-16', '19:12:42');
 
 -- --------------------------------------------------------
 
@@ -98,8 +95,7 @@ INSERT INTO `assunto` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) 
 CREATE TABLE IF NOT EXISTS `assunto_refere_disciplina` (
   `cod_assunto` int(11) NOT NULL,
   `cod_disciplina` int(11) NOT NULL,
-  PRIMARY KEY (`cod_assunto`,`cod_disciplina`),
-  KEY `cod_disciplina` (`cod_disciplina`)
+  PRIMARY KEY (`cod_assunto`,`cod_disciplina`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -107,20 +103,58 @@ CREATE TABLE IF NOT EXISTS `assunto_refere_disciplina` (
 --
 
 INSERT INTO `assunto_refere_disciplina` (`cod_assunto`, `cod_disciplina`) VALUES
-(14, 0),
+(0, 2),
+(0, 6),
+(0, 7),
+(0, 15),
+(1, 0),
 (1, 1),
-(2, 2),
-(7, 2),
-(8, 2),
+(1, 12),
+(1, 15),
+(2, 1),
+(2, 3),
+(2, 7),
+(3, 5),
+(3, 6),
+(3, 8),
+(6, 4),
+(7, 4),
+(7, 10),
+(8, 0),
+(8, 1),
+(8, 12),
+(9, 1),
 (9, 2),
-(0, 3),
-(3, 4),
-(11, 5),
-(6, 6),
-(12, 7),
-(13, 7),
-(5, 8),
-(10, 10);
+(9, 3),
+(9, 5),
+(9, 6),
+(9, 7),
+(9, 12),
+(9, 15),
+(10, 0),
+(10, 6),
+(10, 12),
+(11, 2),
+(11, 3),
+(11, 7),
+(11, 15),
+(14, 1),
+(15, 0),
+(15, 1),
+(15, 2),
+(15, 3),
+(15, 7),
+(15, 12),
+(15, 15),
+(16, 2),
+(16, 3),
+(16, 7),
+(16, 15),
+(17, 0),
+(17, 2),
+(17, 3),
+(17, 7),
+(17, 15);
 
 -- --------------------------------------------------------
 
@@ -137,25 +171,24 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Extraindo dados da tabela `disciplina`
 --
 
 INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
-(0, 'danielhba', 'Fisica 1', '2012-04-26', '20:34:48'),
-(1, 'danielhba', 'Física 2', '2012-04-09', '18:43:55'),
-(2, 'danielhba', 'Banco de Dados 2', '2012-05-02', '15:20:32'),
-(3, 'danielhba', 'Engenharia de Software 1', '2012-04-09', '18:45:16'),
-(4, 'danielhba', 'Sistemas Microprocessados', '2012-04-09', '18:45:16'),
-(5, 'danielhba', 'Redes de Computadores I', '2012-04-11', '08:21:13'),
-(6, 'danielhba', 'Linguagem de Programacao C', '2012-04-11', '08:21:13'),
-(7, 'danielhba', 'Circuitos Eletricos I', '2012-04-11', '08:21:13'),
-(8, 'danielhba', 'Redes de Computadores II', '2012-04-11', '08:21:13'),
-(10, 'danielhba', 'Sistema de Controle I', '2012-04-11', '08:21:43'),
-(12, 'danielhba', 'Física 3', '2012-04-26', '20:34:40'),
-(15, 'danielhba', 'Banco de Dados 1', '2012-05-03', '01:20:11');
+(0, 'danielhba', 'Fisica 1', '2012-05-16', '18:06:13'),
+(2, 'danielhba', 'Banco de Dados 2', '2012-05-16', '18:53:06'),
+(3, 'danielhba', 'Engenharia de Software 1', '2012-05-16', '19:15:25'),
+(4, 'danielhba', 'Sistemas Microprocessados', '2012-05-16', '19:16:01'),
+(5, 'danielhba', 'Redes de Computadores I', '2012-05-16', '19:15:44'),
+(6, 'danielhba', 'Linguagem de Programacao C', '2012-05-16', '19:15:41'),
+(7, 'danielhba', 'Circuitos Eletricos I', '2012-05-16', '19:15:21'),
+(8, 'danielhba', 'Redes de Computadores II', '2012-05-16', '19:37:17'),
+(10, 'danielhba', 'Sistema de Controle I', '2012-05-16', '19:15:56'),
+(12, 'danielhba', 'Física 3', '2012-05-16', '19:11:10'),
+(15, 'danielhba', 'Banco de Dados 1', '2012-05-16', '19:15:15');
 
 -- --------------------------------------------------------
 
@@ -166,8 +199,7 @@ INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora
 CREATE TABLE IF NOT EXISTS `disciplina_refere_area` (
   `cod_disciplina` int(11) NOT NULL,
   `cod_area` int(11) NOT NULL,
-  PRIMARY KEY (`cod_disciplina`,`cod_area`),
-  KEY `cod_area` (`cod_area`)
+  PRIMARY KEY (`cod_disciplina`,`cod_area`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -175,49 +207,46 @@ CREATE TABLE IF NOT EXISTS `disciplina_refere_area` (
 --
 
 INSERT INTO `disciplina_refere_area` (`cod_disciplina`, `cod_area`) VALUES
-(0, 0),
-(5, 0),
-(6, 0),
-(8, 0),
 (0, 1),
-(2, 1),
-(3, 1),
-(5, 1),
-(6, 1),
-(7, 1),
-(8, 1),
-(10, 1),
-(0, 2),
-(1, 2),
-(4, 2),
-(5, 2),
-(6, 2),
-(0, 3),
-(1, 3),
-(2, 3),
-(4, 3),
-(5, 3),
-(6, 3),
-(7, 3),
-(8, 3),
-(10, 3),
-(0, 4),
-(1, 4),
-(2, 4),
-(4, 4),
-(5, 4),
-(6, 4),
-(7, 4),
-(8, 4),
-(10, 4),
-(0, 5),
-(6, 5),
-(7, 5),
-(10, 5),
 (0, 6),
+(1, 0),
+(1, 2),
+(1, 3),
+(1, 5),
+(1, 6),
+(2, 3),
+(2, 5),
+(3, 0),
+(3, 2),
+(4, 0),
+(4, 2),
+(5, 1),
+(5, 3),
+(5, 4),
 (5, 6),
-(6, 6),
-(8, 6);
+(6, 0),
+(6, 2),
+(7, 0),
+(7, 2),
+(8, 0),
+(8, 2),
+(10, 3),
+(10, 4),
+(12, 0),
+(12, 1),
+(12, 2),
+(12, 3),
+(12, 4),
+(12, 5),
+(12, 6),
+(15, 1),
+(15, 3),
+(15, 4),
+(15, 6),
+(25, 1),
+(25, 6),
+(26, 1),
+(26, 6);
 
 -- --------------------------------------------------------
 
@@ -254,12 +283,12 @@ CREATE TABLE IF NOT EXISTS `questao` (
 --
 
 INSERT INTO `questao` (`id`, `login_administrador`, `cod_area`, `cod_disciplina`, `cod_assunto`, `dificuldade`, `enunciado`, `resposta_1`, `resposta_2`, `resposta_3`, `resposta_4`, `resposta_5`, `alternativa_correta`, `data_cadastro`, `hora_cadastro`) VALUES
-(2, 'danielhba', 3, 1, 1, '2', 'Ao aplicar um resistência de 2 ohms a tensão de 10V, há uma corrente de:', '1A', '2A', '3A', '4A', '5A', '5', '2012-04-28', '00:23:35'),
-(3, 'danielhba', 1, 2, 2, '3', 'O que é a terceira foma normal?', 'A existência de atributos multivalorados.', 'A inexistência de atributos multivalorados.', 'A existência de atributos compostos.', 'A inexistência de atributos compostos.', 'A questão b e d estão corretas.', '5', '2012-04-09', '23:19:25'),
+(2, 'danielhba', 3, NULL, 1, '2', 'Ao aplicar um resistência de 2 ohms a tensão de 10V, há uma corrente de:', '1A', '2A', '3A', '4A', '5A', '5', '2012-04-28', '00:23:35'),
+(3, 'danielhba', 1, 2, 2, '3', 'O que é a terceira foma normal?', 'A existência de atributos multivalorados.', 'A inexistência de atributos multivalorados.', 'A existência de atributos compostos.', 'A inexistência de atributos compostos.', 'A questão b e d estão corretas.', '5', '2012-05-10', '05:52:40'),
 (4, 'danielhba', 6, 2, 7, '2', 'O que descreve um modelo Conceitual?', 'Descreve o nível de Abstracao, nesta etapa sao escolhidas as estruturas lógicas.', 'representa o nivel o nivel mais baixo de abstração e descreve como os dados sao armazenados .', 'É o nivel mais alto de abstracao, fala dos objetos do mundo real e suas respectivas operações.', 'Todas as alternativas estao corretas.', 'Todas as alternativas estao incorretas', '3', '2012-04-27', '02:41:02'),
 (5, 'danielhba', NULL, 2, 9, '2', 'Em sql quando utilizamos a palavra chave DISTINCT na cláusula Select o que acontece?', 'As linhas retornadas da pesquisa são triplicadas', 'As linhas retornadas da pesquisa sao exibidas de forma inversa', 'As linhas retornadas da pesquisa sao concatenadas', 'As linhas retornadas da pesquisa mudam de cor', 'As linhas retornadas  da pesquisa nao apresentam duplicação', '5', '2012-04-11', '08:49:22'),
 (6, 'danielhba', 1, 5, 11, '1', 'Quais caracteristicas das Fibras Monomodo estão corretas?', 'Permite propagação em linha reta, é mais cara, mas seu alcance  é muito maior que  as fibras multimodo', 'Permite propagação em angulos diferentes, é barata e possui curto alcance', 'Permite propagacao em linha reta, é barata e detém de um grande alcance', 'Todas as alternativas estão incorretas.', 'Todas as alternativas estão corretas', '1', '2012-04-27', '02:41:56'),
-(7, 'danielhba', 2, 8, 5, '2', 'Caracteristicas do Protocolo UDP.', 'É um protocolo complexo  orientado à conexão. Seu cabeçalho é constituido  3 campos.', 'É um protocolo complexo não orientado à conexao, Seu cabeçalho é constituído de 4 campos', 'É um simples protocolo orientado à conexão. Seu cabeçalho é constituído de 3 campos', 'É um simples protocolo não orientado à conexão . Seu cabeçalho é constituido de 4 campos', 'Todas as alternativas estão incorretas', '2', '2012-04-27', '05:53:04');
+(7, 'danielhba', 2, 8, NULL, '2', 'Caracteristicas do Protocolo UDP.', 'É um protocolo complexo  orientado à conexão. Seu cabeçalho é constituido  3 campos.', 'É um protocolo complexo não orientado à conexao, Seu cabeçalho é constituído de 4 campos', 'É um simples protocolo orientado à conexão. Seu cabeçalho é constituído de 3 campos', 'É um simples protocolo não orientado à conexão . Seu cabeçalho é constituido de 4 campos', 'Todas as alternativas estão incorretas', '2', '2012-04-27', '05:53:04');
 
 -- --------------------------------------------------------
 
@@ -321,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 
 INSERT INTO `usuario` (`login`, `login_administrador`, `tipo_usuario`, `senha`, `nome`, `data_nascimento`, `email`, `telefone_ddd`, `telefone`, `celular_1_ddd`, `celular_1`, `celular_2_ddd`, `celular_2`, `end_rua`, `end_numero`, `end_cep`, `end_bairro`, `end_cidade`, `end_estado`, `end_complemento`, `data_cadastro`, `hora_cadastro`) VALUES
 ('danielhba', NULL, 1, 'qwedsaqwe', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-04-20', '12:46:25'),
-('helo', 'danielhba', 3, '123', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 0, 0, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-04-26', '22:02:10'),
+('helo', 'danielhba', 3, '123', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-05-10', '01:31:27'),
 ('heylera', 'danielhba', 3, 'Heyler', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:13:17'),
 ('hfmn.eng', 'danielhba', 3, '123qaz123', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 0, 92301845, NULL, NULL, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-04-09', '18:33:43'),
 ('jdsm.eng', 'danielhba', 2, 'casadonacasa', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, NULL, 'Claude Debussy', 92, 69000000, 'Parque 10', 'Manaus', 'AM', 'Número 4', '2012-04-20', '16:42:31'),
@@ -346,24 +375,10 @@ ALTER TABLE `assunto`
   ADD CONSTRAINT `assunto_ibfk_1` FOREIGN KEY (`login_administrador`) REFERENCES `usuario` (`login`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Restrições para a tabela `assunto_refere_disciplina`
---
-ALTER TABLE `assunto_refere_disciplina`
-  ADD CONSTRAINT `assunto_refere_disciplina_ibfk_1` FOREIGN KEY (`cod_assunto`) REFERENCES `assunto` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `assunto_refere_disciplina_ibfk_2` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Restrições para a tabela `disciplina`
 --
 ALTER TABLE `disciplina`
   ADD CONSTRAINT `disciplina_ibfk_1` FOREIGN KEY (`login_administrador`) REFERENCES `usuario` (`login`) ON DELETE SET NULL ON UPDATE CASCADE;
-
---
--- Restrições para a tabela `disciplina_refere_area`
---
-ALTER TABLE `disciplina_refere_area`
-  ADD CONSTRAINT `disciplina_refere_area_ibfk_1` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `disciplina_refere_area_ibfk_2` FOREIGN KEY (`cod_area`) REFERENCES `area` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Restrições para a tabela `questao`

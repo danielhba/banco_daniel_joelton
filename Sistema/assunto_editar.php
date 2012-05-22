@@ -47,13 +47,12 @@ if($_SESSION['logado'] == 1)
 </ul>
 </div>
 </div>
-<div id="mainphotos"><center>
-<img src="images/picture1.jpg" alt="Photo 1"
-	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
-	width="119" height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos">
+<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
+	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
+	height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
-</center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
 <table width="900px">
 	<tr align="left">
@@ -106,14 +105,20 @@ if($_SESSION['logado'] == 1)
 				}
 				mysql_close($con);
 			}
-
-
+			if(!isset($_POST['disciplina'])){
+				$error = true;
+				$error_disciplina = '<font size=2 color = "red">Indique pelo menos uma disciplina associada ao assunto.</font>';
+			}
+			else
+			{
+				$check = $_POST['disciplina'];
+			}
 			//verifica se houve erros de validacao
 			if($error == false)
 			{
 				$data_sistema = 20 . date("y-m-d");
 				$hora_sistema = date("H:i:s");
-				$usuario = 'danielhba';
+				$usuario = $_SESSION["login_user"];
 					
 				include("./config.php");
 
@@ -128,9 +133,18 @@ if($_SESSION['logado'] == 1)
 								nome = '".$nome."',
 								data = '".$data_sistema."',
 								hora = '".$hora_sistema."'
-				WHERE codigo = '".$_POST["codigo"]."'";
-
+					WHERE codigo = '".$_POST["codigo"]."'";
 					mysql_query($sql,$con);
+
+					$sql = "DELETE from assunto_refere_disciplina WHERE cod_assunto = '". $_POST['codigo']."'";
+					mysql_query($sql,$con);
+
+					for($i = 0; $i < sizeof($check); $i++){
+						$sql = "INSERT INTO assunto_refere_disciplina VALUES(
+						'".$_POST['codigo']."',
+						'".$check[$i]."')";
+						mysql_query($sql,$con);
+					}
 					mysql_close($con);
 				}
 				else
@@ -141,12 +155,19 @@ if($_SESSION['logado'] == 1)
 					'".$nome."',
 					'".$data_sistema."',
 					'".$hora_sistema."')"; 
-
 					mysql_query($sql,$con);
-					mysql_close($con);
 
+					$sql = "SELECT codigo FROM assunto WHERE nome = '".$nome."'";
+					$dado = mysql_fetch_array(mysql_query($sql, $con), MYSQL_ASSOC);
+
+					for($i = 0; $i < sizeof($check); $i++){
+						$sql = "INSERT INTO assunto_refere_disciplina VALUES(
+						'".$dado['codigo']."',
+						'".$check[$i]."')";
+						mysql_query($sql,$con);
+					}
+					mysql_close($con);
 				}
-				unset($error);
 				?>
 <center>
 <h2><?php  echo isset($_POST['codigo'])? "Edição de assunto" : "Cadastro de assunto";?></h2>
@@ -224,6 +245,102 @@ if(isset($error_nome))
 		<td width="60%" align="left"><input type="text" name="nome"
 			value="<?php  echo $vetor['nome']?>" maxlength="50" size="50"></td>
 	</tr>
+</table>
+<br>
+<table border="0" align="center" width="900px">
+<?php
+if(isset($error_disciplina))
+{
+	?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><?php  echo $error_disciplina ?></td>
+	</tr>
+	<?php
+}
+?>
+
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%" align="left">Disciplinas relacionadas</td>
+	</tr>
+	<tr>
+	</tr>
+	<?php
+	if(!isset($error))
+	{
+		include("./config.php");
+		$sql = "SELECT codigo, nome FROM disciplina";
+		$con = mysql_connect($host,$log,$senha);
+		$bd = mysql_select_db($bd, $con);
+		$result = mysql_query($sql, $con);
+		while($dados = mysql_fetch_array($result,MYSQL_ASSOC)){
+			if(isset($_GET["codigo"])){
+				include("./config.php");
+				$sql = "SELECT * FROM assunto_refere_disciplina WHERE cod_assunto = ".$_GET["codigo"]." AND cod_disciplina = ". $dados["codigo"];
+				$con = mysql_connect($host,$log,$senha);
+				if (mysql_num_rows(mysql_query($sql, $con))!=0){
+					?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><input type="checkbox" name="disciplina[]"
+			checked="checked" value="<?php echo $dados['codigo']?>" /><?php echo $dados['nome']?></td>
+	</tr>
+	<?php
+				}
+				else
+				{?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><input type="checkbox" name="disciplina[]"
+			value="<?php echo $dados['codigo']?>" /><?php echo $dados['nome']?></td>
+	</tr>
+	<?php
+				}
+			}
+			else
+			{
+				?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><input type="checkbox" name="disciplina[]"
+			value="<?php echo $dados['codigo']?>" /><?php echo $dados['nome']?></td>
+	</tr>
+	<?php
+			}
+		}
+	}
+	else
+	{
+		include("./config.php");
+		$con = mysql_connect($host,$log,$senha);
+		$bd = mysql_select_db($bd, $con);
+		$sql = "SELECT codigo, nome FROM disciplina";
+		$result = mysql_query($sql, $con);
+		$check = $_POST['disciplina'];
+		while($dados = mysql_fetch_array($result,MYSQL_ASSOC)){
+			?>
+	<tr>
+		<td width="40%" align="right"></td>
+		<td width="60%"><input type="checkbox" name="disciplina[]"
+		<?php
+		for($i = 0; $i<sizeof($check); $i++){
+			if ($check[$i] == $dados['codigo'])
+			{
+				echo 'checked="checked"';
+				break;
+			}
+		}
+		?>
+			value="<?php echo $dados['codigo']?>" /><?php echo $dados['nome']?></td>
+	</tr>
+	<?php
+		}
+	}
+	?>
+</table>
+<br>
+<table border="0" align="center" width="900px">
 	<tr>
 		<td width="40%"></td>
 		<td width="60%"><input type="submit" value="gravar"><input
@@ -235,7 +352,7 @@ if(isset($error_nome))
 </div>
 </body>
 </html>
-<?php
+	<?php
 }
 else{
 	header("Location: home.php");

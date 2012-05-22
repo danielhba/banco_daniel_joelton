@@ -112,7 +112,7 @@ if(isset($_POST["validar"])){
 	{
 		$data_sistema = 20 . date("y-m-d");
 		$hora_sistema = date("H:i:s");
-		$usuario = 'danielhba';
+		$usuario = $_SESSION["login_user"];
 			
 		include("./config.php");
 
