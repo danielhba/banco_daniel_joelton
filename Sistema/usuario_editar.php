@@ -130,7 +130,6 @@ if($_SESSION['logado'] == 1)
 					{
 						if(trim($_POST["codigo"]) != $login)
 						{
-							echo "já existe";
 							$error = true;
 							$error_login = '<font size=2 color = "red">Este login já está cadastrado. Digite outro.</font>';
 						}
@@ -197,20 +196,43 @@ if($_SESSION['logado'] == 1)
 			}
 
 			//Valida email
+			$pattern = "/^[-_a-z0-9\'+*$^&%=~!?{}]++(?:\.[-_a-z0-9\'+*$^&%=~!?{}]+)*+@(?:(?![-.])[-a-z0-9.]+(?<![-.])\.[a-z]{2,6}|\d{1,3}(?:\.\d{1,3}){3})(?::\d++)?$/iD";
 			if(empty($email))
 			{
 				$error = true;
 				$error_email = '<font size=2 color = "red">Informe o email.</font>';
 			}
-			else
+			else if(!preg_match($pattern, $email))
 			{
-				$pattern = "/^[-_a-z0-9\'+*$^&%=~!?{}]++(?:\.[-_a-z0-9\'+*$^&%=~!?{}]+)*+@(?:(?![-.])[-a-z0-9.]+(?<![-.])\.[a-z]{2,6}|\d{1,3}(?:\.\d{1,3}){3})(?::\d++)?$/iD";
-				if(!preg_match($pattern, $email))
-				{
-					$error = true;
-					$error_email = '<font size=2 color = "red">Digite um email válido.</font>';
-				}
+				$error = true;
+				$error_email = '<font size=2 color = "red">Digite um email válido.</font>';
 			}
+			else{
+				include("./config.php");
+				$con = mysql_connect($host, $log, $senha);
+				mysql_select_db($bd, $con);
+				$sql = "SELECT login FROM usuario WHERE email ='".$email."'";
+				$result = mysql_query($sql);
+				$dado = mysql_fetch_row($result);
+				if(mysql_num_rows($result) == 1)
+				{
+					if(isset($_POST["codigo"]))
+					{
+						if(trim($_POST["codigo"]) != $dado[0])
+						{
+							$error = true;
+							$error_email = '<font size=2 color = "red">Este email já está cadastrado. Digite outro.</font>';
+						}
+					}
+					else
+					{
+						$error = true;
+						$error_email = '<font size=2 color = "red">Este email já está cadastrado. Digite outro.</font>';
+					}
+				}
+				mysql_close($con);
+			}
+
 
 			//Validação de Telefone
 			if(empty($telefone_ddd))
@@ -510,8 +532,7 @@ if($_SESSION['logado'] == 1)
 		if (!isset($vetor['end_cidade'])) $vetor['end_cidade'] = '';
 		if (!isset($vetor['end_estado'])) $vetor['end_estado'] = '';
 		if (!isset($vetor['end_complemento'])) $vetor['end_complemento'] = '';
-		?>
-<br>
+		?> <br>
 <center>
 <h3><?php echo isset($_GET["codigo"]) ? "Editar Usuário": "Cadastrar Usuário";?>
 </h3>
@@ -596,7 +617,7 @@ if(isset($error_login)){
 	}
 	?>
 	<tr>
-		<td width="40%" align="right">* Data de Nasccimento:</td>
+		<td width="40%" align="right">* Data de Nascimento:</td>
 		<td width="60%"><input type="text" name="data_dia"
 			value="<?php echo $vetor['data_dia']?>" maxlength="2" size="2"> / <input
 			type="text" name="data_mes" value="<?php echo $vetor['data_mes']?>"
@@ -843,7 +864,7 @@ if(isset($error_login)){
 </div>
 </body>
 </html>
-<?php
+			<?php
 }
 else{
 	header("Location: login.php");

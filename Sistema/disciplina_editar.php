@@ -339,7 +339,7 @@ if(isset($error_area))
 <table border="0" align="center" width="900px">
 	<tr>
 		<td width="40%"></td>
-		<td width="60%"><input type="submit" value="gravar"> <input
+		<td width="60%"><input type="submit" value="Gravar"> <input
 			type="button" value="Cancelar"
 			onclick="location.href = 'disciplina_lista.php'"></td>
 	</tr>

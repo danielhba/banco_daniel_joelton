@@ -236,7 +236,7 @@ if(isset($error_nome))
 
 	<tr>
 		<td></td>
-		<td align="left"><input type="submit" value="gravar"> <input
+		<td align="left"><input type="submit" value="Gravar"> <input
 			type="button" value="Cancelar"
 			onclick="location.href = 'area_lista.php'"></td>
 	</tr>

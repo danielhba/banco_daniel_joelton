@@ -346,7 +346,7 @@ if(isset($error_disciplina))
 <table border="0" align="center" width="900px">
 	<tr>
 		<td width="40%"></td>
-		<td width="60%"><input type="submit" value="gravar"><input
+		<td width="60%"><input type="submit" value="Gravar"><input
 			type="button" value="Cancelar"
 			onclick="location.href = 'assunto_lista.php'"></td>
 	</tr>

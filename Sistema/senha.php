@@ -132,6 +132,7 @@ if($_SESSION['logado'] == 1)
 <h3>Confirmação de alterarção</h3>
 </center>
 <center>Alteração realizada com sucesso</center>
+<br>
 <table border="0" align="center" width="35%">
 	<tr>
 		<td>
@@ -193,7 +194,7 @@ if(isset($error_senha))
 	</tr>
 	<tr>
 		<td></td>
-		<td align="left"><input type="submit" value="gravar"> <input
+		<td align="left"><input type="submit" value="Gravar"> <input
 			type="button" value="Cancelar" onclick="location.href = 'home.php'"></td>
 	</tr>
 </table>

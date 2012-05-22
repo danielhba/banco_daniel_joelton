@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 18/05/2012 às 00h59min
+-- Tempo de Geração: 18/05/2012 às 14h50min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -339,6 +339,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `data_cadastro` date NOT NULL,
   `hora_cadastro` time NOT NULL,
   PRIMARY KEY (`login`),
+  UNIQUE KEY `email` (`email`),
   KEY `login_administrador` (`login_administrador`),
   KEY `tipo_usuario` (`tipo_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -348,7 +349,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`login`, `login_administrador`, `tipo_usuario`, `senha`, `nome`, `data_nascimento`, `email`, `telefone_ddd`, `telefone`, `celular_1_ddd`, `celular_1`, `celular_2_ddd`, `celular_2`, `end_rua`, `end_numero`, `end_cep`, `end_bairro`, `end_cidade`, `end_estado`, `end_complemento`, `data_cadastro`, `hora_cadastro`) VALUES
-('danielhba', NULL, 1, '63dfcda7649d4790def22071920806ba', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-05-18', '00:57:24'),
+('danielhba', NULL, 1, '4bfb6f45599f0ce781950959fde85e8b', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-05-18', '04:02:51'),
 ('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-05-10', '01:31:27'),
 ('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:13:17'),
 ('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-05-16', '23:55:32'),
