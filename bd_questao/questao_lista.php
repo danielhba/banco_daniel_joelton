@@ -6,7 +6,7 @@
 <center>
 <h3>Lista de Questões</h3>
 <form name="form1" method="POST" action="questao_editar.php">
-<table border="0" align="center" width="60%">
+<table border="0" align="center" width="80%">
 <?php
 include("config.php");
 $con = mysql_connect($host, $log, $senha);
@@ -35,10 +35,10 @@ if(mysql_num_rows($tabela)==0){
 		<td width="10%">
 		<center>Dificuldade</center>
 		</td>
-		<td width="30%">
+		<td width="20%">
 		<center>Área</center>
 		</td>
-		<td width="20%">
+		<td width="40%">
 		<center>Opções</center>
 		</td>
 	</tr>
@@ -48,13 +48,15 @@ if(mysql_num_rows($tabela)==0){
 		$enunciado		= $dados[1];
 		$dificuldade	= $dados[2];
 		$sql = mysql_query("SELECT nome FROM area WHERE codigo = '".$dados[3]."'");
-		$area = mysql_result($sql, 0, 0);		
+		$area = mysql_result($sql, 0, 0);
 		?>
-	<tr>
+	<tr align="center">
 		<td align="left"><?php echo $enunciado?></td>
 		<td align="center"><?php echo $dificuldade?></td>
 		<td align="center"><?php echo $area?></td>
-		<td align="center"><input type="button" value="Editar"
+		<td align="center"><input type="button" value="Visualizar"
+			onclick="location.href ='questao_visualizar.php?codigo=<?php echo $id?>'"><input
+			type="button" value="Editar"
 			onclick="location.href = 'questao_editar.php?codigo=<?php echo $id?>'">
 		<input type="button" value="Excluir"
 			onclick="location.href = 'questao_excluir.php?codigo=<?php echo $id?>'">
@@ -75,5 +77,6 @@ if(mysql_num_rows($tabela)==0){
 	</tr>
 </table>
 </form>
+
 </body>
 </html>

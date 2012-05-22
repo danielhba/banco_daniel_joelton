@@ -313,6 +313,7 @@ if(isset($_POST["validar"]))
 					celular_1_ddd = '".$celular_1_ddd."',
 					celular_1 = '".$celular_1."',
 					celular_2_ddd = '".$celular_2_ddd."',
+					celular_2 = '".$celular_2."',
 					end_rua  = '".$rua."',
 					end_numero = '".$numero."', 
 					end_cep = '".$cep."',

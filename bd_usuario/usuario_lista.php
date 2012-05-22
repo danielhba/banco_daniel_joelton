@@ -9,7 +9,7 @@
 <center>Para realizar a edição ou exclusão de administradores do
 sistema, contacte o administrador do Banco de Dados.</center>
 <form name="form1" method="POST" action="usuario_editar.php">
-<table border="0" align="center" width="60%">
+<table border="0" align="center" width="80%">
 <?php
 include("config.php");
 $con = mysql_connect($host, $log, $senha);
@@ -32,7 +32,7 @@ if(mysql_num_rows($tabela)==0){
 }
 ?>
 	<tr bgcolor="0x52AA">
-		<td width="40%">
+		<td width="20%">
 		<center>Nome</center>
 		</td>
 		<td width="20%">
@@ -41,7 +41,7 @@ if(mysql_num_rows($tabela)==0){
 		<td width="20%">
 		<center>Tipo</center>
 		</td>
-		<td width="40%">
+		<td width="60%">
 		<center>Opções</center>
 		</td>
 	</tr>
@@ -57,7 +57,9 @@ if(mysql_num_rows($tabela)==0){
 		<td align="left"><?php echo $nome?></td>
 		<td align="center"><?php echo $login?></td>
 		<td align="center"><?php echo $tipo?></td>
-		<td align="center"><input type="button" value="Editar"
+		<td align="center"><input type="button" value="Visualizar"
+			onclick="location.href = 'usuario_visualizar.php?codigo=<?php echo $login?>'">
+		<input type="button" value="Editar"
 			onclick="location.href = 'usuario_editar.php?codigo=<?php echo $login?>'">
 		<input type="button" value="Excluir"
 			onclick="location.href = 'usuario_excluir.php?codigo=<?php echo $login?>'">

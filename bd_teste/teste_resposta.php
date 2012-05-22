@@ -98,7 +98,8 @@ if(isset($_POST["resposta"])){
 	}
 }
 else {
-	?>
+	if(isset($_POST["id"])){
+		?>
 <form name="form1" method="POST" action="teste_questao.php"><input
 	type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
 <table border="0" align="center" width="100%">
@@ -110,7 +111,24 @@ else {
 	</tr>
 </table>
 </form>
-	<?php
+		<?php
+	}
+	else{
+		?>
+<form name="form1" method="POST" action="teste_questao.php">
+<table border="0" align="center" width="100%">
+	<tr>
+		<td align="center">Por favor, responda a questão.</td>
+	</tr>
+	<tr>
+		<td align="center"><input type="submit" value="Responder questão"></td>
+	</tr>
+</table>
+</form>
+		<?php
+
+
+	}
 }
 ?>
 </body>

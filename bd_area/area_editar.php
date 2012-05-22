@@ -174,7 +174,6 @@ if(isset($error_nome))
 			type="button" value="Cancelar"
 			onclick="location.href = 'area_lista.php'"></td>
 	</tr>
-
 </table>
 </form>
 </body>

@@ -43,7 +43,9 @@ if(mysql_num_rows($tabela)== 0)
 	<tr>
 
 		<td align="left"><?php echo $nome?></td>
-		<td align="center"><input type="button" value="Editar"
+
+		<td align="center">
+		<input type="button" value="Editar"
 			onclick="location.href ='area_editar.php?codigo=<?php echo $codigo?>'">
 		<input type="button" value="Excluir"
 			onclick="location.href ='area_excluir.php?codigo=<?php echo $codigo?>'">
@@ -52,7 +54,7 @@ if(mysql_num_rows($tabela)== 0)
 	<?php
 	}
 	?>
-	<tr bgcolor="grey">
+	<tr bgcolor="0x52AA">
 		<td colspan="3" height="5"></td>
 	</tr>
 	<?php
@@ -61,6 +63,7 @@ if(mysql_num_rows($tabela)== 0)
 	<tr>
 		<td colspan="3" align="center"><input type="submit"
 			value="Cadastrar Área"></td>
+
 </table>
 </form>
 </body>
