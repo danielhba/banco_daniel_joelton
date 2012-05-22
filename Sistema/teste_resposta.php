@@ -172,11 +172,14 @@ if($_SESSION['logado'] == 1)
 			if(isset($_POST["id"])){
 				?>
 <form name="form1" method="POST" action="teste_questao.php"><input
-	type="hidden" name="id" value="<?php echo $_POST["id"] ?>">
+	type="hidden" name="id" value="<?php echo $_POST["id"] ?>"> <br>
 <table border="0" align="center" width="900px">
 	<tr>
 		<td align="center">Por favor, responda a questão.</td>
 	</tr>
+</table>
+<br>
+<table border="0" align="center" width="900px">
 	<tr>
 		<td align="center"><input type="submit" value="Responder questão"></td>
 	</tr>
@@ -186,11 +189,14 @@ if($_SESSION['logado'] == 1)
 			}
 			else{
 				?>
-<form name="form1" method="POST" action="teste_questao.php">
+<form name="form1" method="POST" action="teste_questao.php"><br>
 <table border="0" align="center" width="900px">
 	<tr>
 		<td align="center">Por favor, responda a questão.</td>
 	</tr>
+</table>
+<br>
+<table border="0" align="center" width="900px">
 	<tr>
 		<td align="center"><input type="submit" value="Responder questão"></td>
 	</tr>

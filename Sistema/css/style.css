@@ -1,5 +1,5 @@
 html, body {
-	height:100%;
+	height:250%;
 }
 body {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -16,7 +16,7 @@ body {
 	width:251px;
 	height:100%;
 	background:#0c6500;
-	padding:39px 0;
+	padding:50px 0;
 }
 #main {
 	display:block;
