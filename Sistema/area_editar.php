@@ -43,17 +43,19 @@ if($_SESSION['logado'] == 1)
 </div>
 <div id="navbarAlt">
 <ul>
-	<li><a href="logout.php">SAIR</a></li>
+	<li><a href="senha.php">Alterar Senha</a></li>
+</ul>
+<ul>
+	<li><a href="logout.php">Sair</a></li>
 </ul>
 </div>
 </div>
-<div id="mainphotos"><center>
-<img src="images/picture1.jpg" alt="Photo 1"
-	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
-	width="119" height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos">
+<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
+	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
+	height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
-</center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
 <table width="900px">
 	<tr align="left">
@@ -69,84 +71,84 @@ if($_SESSION['logado'] == 1)
 		?></font></td>
 	</tr>
 </table>
-<?php
-if(isset($_POST["validar"])){
-	$error = false;
+		<?php
+		if(isset($_POST["validar"])){
+			$error = false;
 
-	if(isset($error_nome)) unset($error_nome);
+			if(isset($error_nome)) unset($error_nome);
 
-	$nome = trim($_POST['nome']);
+			$nome = trim($_POST['nome']);
 
 
-	if(empty($nome)){		//comeca a validacao do nome
-		$error = true;
-		$error_nome = '<font size=2 color = "red">Informe o nome da área.</font>';
-	}
-	else
-	{
-		include("./config.php");
-		$sql = "SELECT codigo FROM area WHERE nome ='".$nome."'";
-		$result = mysql_query($sql);
-		$codigo_pesquisado = mysql_fetch_row($result);
-		if(mysql_num_rows($result) == 1)
-		{
-			if(isset($_POST["codigo"]))
-			{
-				if(trim($_POST["codigo"]) != $codigo_pesquisado[0])
-				{
-					$error = true;
-					$error_nome = '<font size=2 color = "red">Este nome de área já está cadastrado. Digite outro.</font>';
-				}
+			if(empty($nome)){		//comeca a validacao do nome
+				$error = true;
+				$error_nome = '<font size=2 color = "red">Informe o nome da área.</font>';
 			}
 			else
 			{
-				$error = true;
-				$error_nome = '<font size=2 color = "red">Este nome de área já está cadastrado. Digite outro.</font>';
+				include("./config.php");
+				$sql = "SELECT codigo FROM area WHERE nome ='".$nome."'";
+				$result = mysql_query($sql);
+				$codigo_pesquisado = mysql_fetch_row($result);
+				if(mysql_num_rows($result) == 1)
+				{
+					if(isset($_POST["codigo"]))
+					{
+						if(trim($_POST["codigo"]) != $codigo_pesquisado[0])
+						{
+							$error = true;
+							$error_nome = '<font size=2 color = "red">Este nome de área já está cadastrado. Digite outro.</font>';
+						}
+					}
+					else
+					{
+						$error = true;
+						$error_nome = '<font size=2 color = "red">Este nome de área já está cadastrado. Digite outro.</font>';
+					}
+				}
+				mysql_close($con);
 			}
-		}
-		mysql_close($con);
-	}
 
-	//verifica se houve erros de validacao
-	if($error == false)
-	{
-		$data_sistema = 20 . date("y-m-d");
-		$hora_sistema = date("H:i:s");
-		$usuario = $_SESSION["login_user"];
-			
-		include("./config.php");
+			//verifica se houve erros de validacao
+			if($error == false)
+			{
+				$data_sistema = 20 . date("y-m-d");
+				$hora_sistema = date("H:i:s");
+				$usuario = $_SESSION["login_user"];
+					
+				include("./config.php");
 
-		if(isset($_POST["codigo"]))
-		{
-			$sql = "SELECT codigo FROM area WHERE codigo ='".$_POST["codigo"]."'";
-			$result = mysql_query($sql, $con);
+				if(isset($_POST["codigo"]))
+				{
+					$sql = "SELECT codigo FROM area WHERE codigo ='".$_POST["codigo"]."'";
+					$result = mysql_query($sql, $con);
 
-			if(mysql_num_rows($result)!= 0)
-			$sql = "UPDATE area SET
+					if(mysql_num_rows($result)!= 0)
+					$sql = "UPDATE area SET
 				 				login_administrador = '".$usuario."',
 								nome = '".$nome."',
 								data = '".$data_sistema."',
 								hora = '".$hora_sistema."'
 				WHERE codigo = '".$_POST["codigo"]."'";
 
-			mysql_query($sql,$con);
-			mysql_close($con);
-		}
-		else
-		{
-			$sql = "INSERT INTO area VALUES(
+					mysql_query($sql,$con);
+					mysql_close($con);
+				}
+				else
+				{
+					$sql = "INSERT INTO area VALUES(
 					'',
 					'".$usuario."',
 					'".$nome."',
 					'".$data_sistema."',
 					'".$hora_sistema."')"; 
 
-			mysql_query($sql,$con);
-			mysql_close($con);
+					mysql_query($sql,$con);
+					mysql_close($con);
 
-		}
-		unset($error);
-		?>
+				}
+				unset($error);
+				?>
 <center>
 <h3><?php  echo isset($_POST['codigo'])? "Edição de área" : "Cadastro de área";?></h3>
 </center>
@@ -166,42 +168,42 @@ if(isset($_POST["validar"])){
 		</td>
 	</tr>
 </table>
-		<?php
-		exit;
-	}
+				<?php
+				exit;
+			}
 
 
-	else
-	{
-		if(isset($_POST["codigo"]))
-		{
-			$_GET['codigo'] = $_POST['codigo'];
+			else
+			{
+				if(isset($_POST["codigo"]))
+				{
+					$_GET['codigo'] = $_POST['codigo'];
+				}
+				$vetor['nome'] = $nome;
+					
+
+			}
+			unset($_POST["validar"]);
 		}
-		$vetor['nome'] = $nome;
-			
-
-	}
-	unset($_POST["validar"]);
-}
 
 
-if(isset($_GET["codigo"]))
-{
-	if(!isset($error)) //se nao tem erro
-	{
-		include("./config.php");
-		$sql = "SELECT * FROM area WHERE codigo =".$_GET["codigo"];
-		$con = mysql_connect($host,$log,$senha);
-		$bd = mysql_select_db($bd,$con);
-		$result = mysql_query($sql,$con);
-		$vetor = mysql_fetch_array($result,MYSQL_ASSOC);
-		mysql_close($con);
-	}
-}
+		if(isset($_GET["codigo"]))
+		{
+			if(!isset($error)) //se nao tem erro
+			{
+				include("./config.php");
+				$sql = "SELECT * FROM area WHERE codigo =".$_GET["codigo"];
+				$con = mysql_connect($host,$log,$senha);
+				$bd = mysql_select_db($bd,$con);
+				$result = mysql_query($sql,$con);
+				$vetor = mysql_fetch_array($result,MYSQL_ASSOC);
+				mysql_close($con);
+			}
+		}
 
-if(!isset($vetor['nome']))$vetor['nome'] = '';
+		if(!isset($vetor['nome']))$vetor['nome'] = '';
 
-?>
+		?>
 <center>
 <h3><?php 
 echo isset($_GET["codigo"]) ? " Editar Área":" Cadastrar Área";?></h3>

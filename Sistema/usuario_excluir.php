@@ -52,7 +52,10 @@ if($_SESSION['logado'] == 1)
 </div>
 <div id="navbarAlt">
 <ul>
-	<li><a href="logout.php">SAIR</a></li>
+	<li><a href="senha.php">Alterar Senha</a></li>
+</ul>
+<ul>
+	<li><a href="logout.php">Sair</a></li>
 </ul>
 </div>
 </div>

@@ -38,7 +38,7 @@ else {
 		$con = mysql_connect($host, $log, $senha);
 		mysql_select_db($bd, $con);
 		$login = addslashes($_POST["login"]);
-		$senha = addslashes($_POST["senha"]);
+		$senha = md5(addslashes($_POST["senha"]));
 		$sql = "SELECT * from  usuario WHERE  login = '$login'  AND senha = '$senha'";
 		$rs = mysql_query($sql);
 		if(mysql_num_rows($rs) == 1 )

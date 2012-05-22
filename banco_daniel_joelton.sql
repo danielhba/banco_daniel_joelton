@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 16/05/2012 às 19h44min
+-- Tempo de Geração: 18/05/2012 às 00h59min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `area` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `area`
@@ -50,7 +50,7 @@ INSERT INTO `area` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VAL
 (3, 'danielhba', 'Eng. Elétrica', '2012-05-02', '15:19:30'),
 (4, 'danielhba', 'Eng. Controle e Automação', '2012-04-09', '18:41:28'),
 (5, 'danielhba', 'Eng. Eletronica', '2012-04-11', '08:08:16'),
-(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-05-16', '00:22:12');
+(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-05-17', '05:20:36');
 
 -- --------------------------------------------------------
 
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `assunto` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Extraindo dados da tabela `assunto`
@@ -83,7 +83,7 @@ INSERT INTO `assunto` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) 
 (8, 'danielhba', 'Modelo Logico', '2012-05-16', '19:13:37'),
 (9, 'danielhba', 'Comandos SQL', '2012-05-16', '19:12:38'),
 (10, 'danielhba', 'Projeto de Compensadores', '2012-05-16', '19:13:31'),
-(11, 'danielhba', 'Camada Fisica', '2012-05-16', '19:11:59'),
+(11, 'danielhba', 'Camada Fisica', '2012-05-17', '05:20:43'),
 (14, 'danielhba', 'Energia e Trabalho', '2012-05-16', '19:12:42');
 
 -- --------------------------------------------------------
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
   PRIMARY KEY (`codigo`),
   UNIQUE KEY `nome` (`nome`),
   KEY `login_administrador` (`login_administrador`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Extraindo dados da tabela `disciplina`
@@ -180,14 +180,14 @@ CREATE TABLE IF NOT EXISTS `disciplina` (
 INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
 (0, 'danielhba', 'Fisica 1', '2012-05-16', '18:06:13'),
 (2, 'danielhba', 'Banco de Dados 2', '2012-05-16', '18:53:06'),
-(3, 'danielhba', 'Engenharia de Software 1', '2012-05-16', '19:15:25'),
+(3, 'danielhba', 'Engenharia de Software 1', '2012-05-17', '05:20:49'),
 (4, 'danielhba', 'Sistemas Microprocessados', '2012-05-16', '19:16:01'),
 (5, 'danielhba', 'Redes de Computadores I', '2012-05-16', '19:15:44'),
 (6, 'danielhba', 'Linguagem de Programacao C', '2012-05-16', '19:15:41'),
 (7, 'danielhba', 'Circuitos Eletricos I', '2012-05-16', '19:15:21'),
 (8, 'danielhba', 'Redes de Computadores II', '2012-05-16', '19:37:17'),
 (10, 'danielhba', 'Sistema de Controle I', '2012-05-16', '19:15:56'),
-(12, 'danielhba', 'Física 3', '2012-05-16', '19:11:10'),
+(12, 'danielhba', 'Física 3', '2012-05-16', '20:27:22'),
 (15, 'danielhba', 'Banco de Dados 1', '2012-05-16', '19:15:15');
 
 -- --------------------------------------------------------
@@ -232,7 +232,6 @@ INSERT INTO `disciplina_refere_area` (`cod_disciplina`, `cod_area`) VALUES
 (8, 2),
 (10, 3),
 (10, 4),
-(12, 0),
 (12, 1),
 (12, 2),
 (12, 3),
@@ -320,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `login` varchar(25) NOT NULL,
   `login_administrador` varchar(25) DEFAULT NULL,
   `tipo_usuario` int(1) DEFAULT NULL,
-  `senha` varchar(25) NOT NULL,
+  `senha` varchar(50) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `data_nascimento` date NOT NULL,
   `email` varchar(50) NOT NULL,
@@ -349,14 +348,15 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`login`, `login_administrador`, `tipo_usuario`, `senha`, `nome`, `data_nascimento`, `email`, `telefone_ddd`, `telefone`, `celular_1_ddd`, `celular_1`, `celular_2_ddd`, `celular_2`, `end_rua`, `end_numero`, `end_cep`, `end_bairro`, `end_cidade`, `end_estado`, `end_complemento`, `data_cadastro`, `hora_cadastro`) VALUES
-('danielhba', NULL, 1, 'qwedsaqwe', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-04-20', '12:46:25'),
-('helo', 'danielhba', 3, '123', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-05-10', '01:31:27'),
-('heylera', 'danielhba', 3, 'Heyler', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:13:17'),
-('hfmn.eng', 'danielhba', 3, '123qaz123', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 0, 92301845, NULL, NULL, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-04-09', '18:33:43'),
-('jdsm.eng', 'danielhba', 2, 'casadonacasa', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, NULL, 'Claude Debussy', 92, 69000000, 'Parque 10', 'Manaus', 'AM', 'Número 4', '2012-04-20', '16:42:31'),
-('lucila', 'danielhba', 3, 'lucila', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:20:56'),
-('marciovitor.enga', 'danielhba', 3, 'narutoversusbleach', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, NULL, 'Beto Freitas', 92, 69000000, 'Zumbi II', 'Manaus', 'AM', '', '2012-04-20', '16:13:42'),
-('mateuscarlos.to', 'danielhba', 3, 'palavrasmortas', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, NULL, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', 'Manaus', 'AM', '', '2012-04-20', '16:14:04');
+('danielhba', NULL, 1, '63dfcda7649d4790def22071920806ba', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'RO', 'Número 153-A', '2012-05-18', '00:57:24'),
+('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', 'AM', '', '2012-05-10', '01:31:27'),
+('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:13:17'),
+('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-05-16', '23:55:32'),
+('jdsm.eng', 'danielhba', 2, '157904a4317f8454845ababbe4b91c97', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, 0, 'Claude Debussy', 92, 69000000, 'Parque 10', 'Manaus', 'AM', 'Número 4', '2012-05-16', '23:54:57'),
+('lucila', 'danielhba', 3, '1d8d7866bb67da8cd6fd50e9c9d59241', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-04-20', '16:20:56'),
+('marciovitor.enga', 'danielhba', 3, '33ea6f999ba65f322620c7b44299bed6', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, NULL, 'Beto Freitas', 92, 69000000, 'Zumbi II', 'Manaus', 'AM', '', '2012-04-20', '16:13:42'),
+('mateuscarlos.to', 'danielhba', 3, '442cb777bec707f68803544c0d4b56ec', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, NULL, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', 'Manaus', 'AM', '', '2012-04-20', '16:14:04'),
+('teste', 'danielhba', 2, '698dc19d489c4e4db73e28a713eab07b', 'qwe', '1991-06-27', 'danilu@gmail.com', 92, 32324166, 92, 81580539, 0, 0, 'Constantino Nery', 0, 69010160, 'Centro', 'Manaus', 'RO', '', '2012-05-18', '00:24:22');
 
 --
 -- Restrições para as tabelas dumpadas
