@@ -1,13 +1,24 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
-
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1))
+{
+	if(isset($_POST["excluir"]))
+	{
+		include("./config.php");
+		$con = mysql_connect($host, $log, $senha);
+		mysql_select_db($bd, $con);
+		$sql = "DELETE FROM assunto WHERE codigo = ".$_POST["codigo"];
+		mysql_query($sql,$con);
+		mysql_close($con);
+		header("location: ./assunto_excluir_aviso.php");
+		exit;
+	}
 	?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Home</title>
+<title>Excluir Assunto</title>
 <meta name="keywords" content="keyword1, keyword2, keyword3, etc..." />
 <meta name="description" content="Description of website here..." />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -36,7 +47,6 @@ if($_SESSION['logado'] == 1)
 	echo '<li><a href="area_lista.php">Áreas</a></li>';
 	echo '<li><a href="assunto_lista.php">Asuntos</a></li>';
 	echo '<li><a href="disciplina_lista.php">Disciplinas</a></li>';
-
 }
 ?>
 </ul>
@@ -48,13 +58,15 @@ if($_SESSION['logado'] == 1)
 </div>
 </div>
 <div id="mainphotos">
-<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
-	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
-	height="54" /><img src="images/learning-is-fun.gif"
+<center>
+<img src="images/picture1.jpg" alt="Photo 1"
+	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
+	width="119" height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
+</center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
-<table align="left" width="900px">
+<table width="900px">
 	<tr align="left">
 		<td width="2%"></td>
 		<td align="left"><font size=2><?php 
@@ -68,13 +80,42 @@ if($_SESSION['logado'] == 1)
 		?></font></td>
 	</tr>
 </table>
+<center><?php 
+if(isset($_GET['codigo']))
+{
+	?>
+<h3>Excluir Assunto</h3>
+</center>
+<form name="form1" method="POST" action="assunto_excluir.php">
+<table border="0" align="center" width="900px">
+	<tr>
+		<td colspan="2"><input type="hidden" name="excluir" value="ok"> <input
+			type="hidden" name="codigo" value="<?php  echo $_GET["codigo"]?>">
+		<center><b>Você tem certeza que deseja excluir o assunto?</b></center>
+		</td>
+	</tr>
+</table>
+<br>
+<table align="center" width="900px">
+	<tr>
+		<td align="right" width="50%"><input type="submit" value="sim"></td>
+		<td align="left" width="50%"><input type="button" value="nao"
+			onclick="location.href = 'assunto_lista.php'"></td>
+	</tr>
+</table>
+</form>
 </div>
 </body>
 </html>
-		<?php
+	<?php
+}
+else {
+	header("Location: assunto_lista.php");
+	exit;
+}
 }
 else{
-	header("Location: login.php");
+	header("Location: home.php");
 	exit;
 }
 ?>

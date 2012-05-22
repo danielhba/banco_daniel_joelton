@@ -20,36 +20,34 @@ else {
 <![endif]-->
 </head>
 <body>
-<div id="leftMain"><a href="index.html"><img src="images/logo.png"
+<div id="leftMain"><a href="home.php"><img src="images/logo.png"
 	alt="Estude e Estude" border="0" /></a></div>
-<div id="main">
-<div></div>
-<div id="mainphotos"><img src="images/picture1.jpg" alt="Photo 1"
-	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
-	width="119" height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos">
+<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
+	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
+	height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></div>
-<div id="maintext"><img src="images/welcome.png" alt="Welcome" />
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
+<center><img src="images/welcome.png" alt="Welcome" /></center>
 <center>
 <h2>LOGIN</h2>
 </center>
 <form action="login_autenticar.php" method="Post"><br>
-<table align="center" width="100%">
-	<tr align="center">
-		<td align="right">Login:</td>
-		<td align="left"><input name="login" type="text" /></td>
+<table width="900">
+	<tr>
+		<td align="right" width="47%">Login:</td>
+		<td align="left" width="53%"><input name="login" type="text" /></td>
 	</tr>
-	<tr align="center">
-		<td align="right">Senha:</td>
-		<td align="left"><input name="senha" type="password" /></td>
+	<tr>
+		<td align="right" width="47%">Senha:</td>
+		<td align="left" width="53%"><input name="senha" type="password" /></td>
 	</tr>
-	<tr align="center">
+	<tr>
 		<td></td>
 		<td align="left"><input type="submit" value="Acessar"></td>
 	</tr>
 </table>
 </form>
-</div>
 </div>
 </body>
 </html>

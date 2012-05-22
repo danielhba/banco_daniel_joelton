@@ -1,13 +1,12 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
-
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 	?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Home</title>
+<title>Lista de Áreas</title>
 <meta name="keywords" content="keyword1, keyword2, keyword3, etc..." />
 <meta name="description" content="Description of website here..." />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -47,14 +46,15 @@ if($_SESSION['logado'] == 1)
 </ul>
 </div>
 </div>
-<div id="mainphotos">
-<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
-	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
-	height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos"><center>
+<img src="images/picture1.jpg" alt="Photo 1"
+	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
+	width="119" height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
+</center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
-<table align="left" width="900px">
+<table width="900px">
 	<tr align="left">
 		<td width="2%"></td>
 		<td align="left"><font size=2><?php 
@@ -68,13 +68,78 @@ if($_SESSION['logado'] == 1)
 		?></font></td>
 	</tr>
 </table>
+<center>
+<h3>Lista de Áreas</h3>
+</center>
+<form name="form1" method="POST" action="area_editar.php">
+<table border="0" align="center" width="900px">
+<?php
+include("config.php");
+$sql = "SELECT nome,codigo FROM area ORDER BY nome";
+$tabela = mysql_query($sql);
+if(mysql_num_rows($tabela)== 0)
+{
+	?>
+	<tr>
+		<td align="center">Nao existe nenhuma área cadastrada</td>
+	</tr>
+	<tr>
+		<td align="center">Para cadastrar área clique em Cadastrar Área.</td>
+	</tr>
+	<tr>
+		<td align="center"><input type="submit" value="Cadastrar Área"></td>
+	</tr>
+
+	<?php
+}
+?>
+	<tr>
+		<td width="5%"></td>
+		<td width="50%">
+		<center><b>Nome</b></center>
+		</td>
+		<td width="30%">
+		<center><b>Opções</b></center>
+		</td>
+	</tr>
+	<?php
+
+	while($dados = mysql_fetch_row($tabela)){
+		$codigo = $dados[1];
+		$nome = $dados[0];
+		?>
+	<tr>
+		<td width="5%"></td>
+		<td align="left"><?php echo $nome?></td>
+
+		<td align="center"><input type="button" value="Editar"
+			onclick="location.href ='area_editar.php?codigo=<?php echo $codigo?>'">
+		<input type="button" value="Excluir"
+			onclick="location.href ='area_excluir.php?codigo=<?php echo $codigo?>'">
+		</td>
+	</tr>
+	<?php
+	}
+	?>
+	<tr>
+		<td colspan="3" height="5"></td>
+	</tr>
+	<?php
+	mysql_close($con);
+	?>
+	<tr>
+		<td colspan="3" align="center"><input type="submit"
+			value="Cadastrar Área"></td>
+
+</table>
+</form>
 </div>
 </body>
 </html>
-		<?php
+	<?php
 }
 else{
-	header("Location: login.php");
+	header("Location: home.php");
 	exit;
 }
 ?>

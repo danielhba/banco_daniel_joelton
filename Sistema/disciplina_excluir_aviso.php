@@ -1,13 +1,12 @@
 <?php
 session_start();
 include("config.php");
-if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 0)){
-
+if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1)){
 	?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Home</title>
+<title>Excluir Disciplina</title>
 <meta name="keywords" content="keyword1, keyword2, keyword3, etc..." />
 <meta name="description" content="Description of website here..." />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -47,14 +46,15 @@ if($_SESSION['logado'] == 1)
 </ul>
 </div>
 </div>
-<div id="mainphotos">
-<center><img src="images/picture1.jpg" alt="Photo 1" width="119"
-	height="54" /><img src="images/picture2.jpg" alt="Photo 2" width="119"
-	height="54" /><img src="images/learning-is-fun.gif"
+<div id="mainphotos"><center>
+<img src="images/picture1.jpg" alt="Photo 1"
+	width="119" height="54" /><img src="images/picture2.jpg" alt="Photo 2"
+	width="119" height="54" /><img src="images/learning-is-fun.gif"
 	alt="Learning is Fun" width="119" height="54" /><img
-	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" /></center>
+	src="images/picture3.jpg" alt="Photo 3" width="119" height="54" />
+</center>
 <center><img src="images/welcome.png" alt="Welcome" /></center>
-<table align="left" width="900px">
+<table width="900px">
 	<tr align="left">
 		<td width="2%"></td>
 		<td align="left"><font size=2><?php 
@@ -68,13 +68,30 @@ if($_SESSION['logado'] == 1)
 		?></font></td>
 	</tr>
 </table>
+<center>
+<h2>Exclusão de disciplina</h2>
+</center>
+
+<center><h3>Confirmacão de exclusão</h3></center>
+
+<center>Exclusão realizada com sucesso!</center>
+
+<table border = "0" align = "center" width = "35%">
+		<tr>
+			<td>
+			<center><input type = "button" value = "Voltar para a lista de disciplinas cadastradas"
+							onclick = "location.href = 'disciplina_lista.php'">
+			</center>
+			</td>
+		</tr>
+</table>
 </div>
 </body>
 </html>
-		<?php
+<?php
 }
 else{
-	header("Location: login.php");
+	header("Location: home.php");
 	exit;
 }
 ?>

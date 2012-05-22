@@ -21,20 +21,19 @@ body {
 #main {
 	display:block;
 	float:left;
-	width:492px;
+	width:800px;
 	height:100%;
 	background:#FFFFFF;
 	margin:0 0 11px 11px;
 }
 #mainphotos {
-	width:492px;
-	padding:4px 0 4px 0;
+	width:1200px;
 	border-top:1px solid #D4D4D4;
-	border-bottom:1px solid #D4D4D4;
 }
+
 #login
 {
-display:block;
+	display:block;
 	float:left;
 	width:492px;
 	height:100%;
@@ -56,6 +55,7 @@ display:block;
 	clear:both;
 }
 #maintext {
+	width:800px;
 	line-height:18px;
 }
 
