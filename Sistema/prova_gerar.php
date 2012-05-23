@@ -113,12 +113,13 @@ if($_SESSION['logado'] == 1)
 		<td width="85%"><font size=2><b>- A seleção de área, disciplina e
 		assunto não é obrigatória; é um filtro de geração de questões.</b></font>
 		</td>
-		<tr>
-			<td width="15%"></td>
-			<td width="85%"><font size=2><b>- Não marcar nível de dificuldade,
-			indicará a geração de prova com todos os níveis de dificuldade.</b></font>
-			</td>
-		</tr>
+	</tr>
+	<tr>
+		<td width="15%"></td>
+		<td width="85%"><font size=2><b>- Não marcar nível de dificuldade,
+		indicará a geração de prova com todos os níveis de dificuldade.</b></font>
+		</td>
+	</tr>
 
 </table>
 <br>

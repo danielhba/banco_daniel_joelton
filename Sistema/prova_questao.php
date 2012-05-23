@@ -77,162 +77,202 @@ if($_SESSION['logado'] == 1)
 <center>
 <h3>Prova</h3>
 </center>
-<form name="form1" method="POST" action="prova_resposta.php"><?php
-if(isset($_POST['area'])){
-	$questao_quantidade = $_POST['quantidade'];?> <input type="hidden"
-	name="quantidade" value="<?php echo $questao_quantidade?>"> <?php
-	include("config.php");
+<table align="center" width="900px">
+	<tr>
+		<td>
+		<form name="form1" method="POST" action="prova_resposta.php"><?php
+		if(isset($_POST['area'])){
+			$questao_quantidade = $_POST['quantidade'];?> <input type="hidden"
+			name="quantidade" value="<?php echo $questao_quantidade?>"> <?php
+			include("config.php");
 
-	if($_POST['area'] == '-1')
-	{
-		$sql_area = " ";
-		$sql_disciplina = " ";
-		$sql_assunto = " ";
-	}
-	else
-	{
-		$sql_area = ' AND cod_area = "'.$_POST['area'].'"';
-		if($_POST['disciplina'] == -1)
-		{
-			$sql_disciplina = " ";
-			$sql_assunto = " ";
-		}
-		else
-		{
-			$sql_disciplina = ' AND cod_disciplina = "'.$_POST['disciplina'].'"';
-			if($_POST['assunto'] == -1)
+			if($_POST['area'] == '-1')
 			{
+				$sql_area = " ";
+				$sql_disciplina = " ";
 				$sql_assunto = " ";
 			}
 			else
 			{
-				$sql_assunto = ' AND cod_assunto = "'.$_POST['assunto'].'"';
+				$sql_area = ' AND cod_area = "'.$_POST['area'].'"';
+				if($_POST['disciplina'] == -1)
+				{
+					$sql_disciplina = " ";
+					$sql_assunto = " ";
+				}
+				else
+				{
+					$sql_disciplina = ' AND cod_disciplina = "'.$_POST['disciplina'].'"';
+					if($_POST['assunto'] == -1)
+					{
+						$sql_assunto = " ";
+					}
+					else
+					{
+						$sql_assunto = ' AND cod_assunto = "'.$_POST['assunto'].'"';
+					}
+				}
 			}
-		}
-	}
-	if(isset($_POST['dificuldade']))
-	{
-		$dificuldade = $_POST['dificuldade'];
-	}
-	else
-	{
-		$dificuldade = array('1','2','3','4','5');
-	}
-
-	$sql_dificuldade = "dificuldade IN(";
-	for($i = 0; $i< sizeof($dificuldade); $i++){
-		if($i == sizeof($dificuldade)-1)
-		{
-			$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].')';
-		}
-		else
-		{
-			$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].',';
-		}
-	}
-
-	for($i = 1; $i <= $questao_quantidade; $i++){
-		$con = mysql_connect($host, $log, $senha);
-		$sql = "SELECT * FROM questao WHERE ".$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
-		$tabela = mysql_query($sql);
-		if(mysql_num_rows($tabela) > 0)
-		{
-			$linha = rand(1, mysql_num_rows($tabela)) - 1;
-			$contador = -1;
-			while(($vetor = mysql_fetch_row($tabela, MYSQL_ASSOC)))
+			if(isset($_POST['dificuldade']))
 			{
-				$contador++;
-				if($contador == $linha)
-				break;
+				$dificuldade = $_POST['dificuldade'];
 			}
-			?> <input type="hidden" name="id<?php echo $i?>"
-	value="<?php echo $vetor['id']?>"> <br>
-<br>
-<table border="0" align="center" width="900px">
-	<tr>
-		<td width="80%"><b><font size="2"><?php echo $i. "º) ". $vetor['enunciado']?></font></b></td>
-	</tr>
-</table>
-<br>
-<table border="0" align="center" width="900px">
-	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="1"><font
-			size="2"><b>a)</b> <?php echo $vetor['resposta_1']?></font></td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="2"><font
-			size="2"><b>b)</b> <?php echo $vetor['resposta_2']?></font></td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="3"><font
-			size="2"><b>c)</b> <?php echo $vetor['resposta_3']?></font></td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="4"><font
-			size="2"><b>d)</b> <?php echo $vetor['resposta_4']?></font></td>
-	</tr>
-	<tr>
-		<td><input type="radio" name="resposta<?php echo $i?>" value="5"><font
-			size="2"><b>e)</b> <?php echo $vetor['resposta_5']?></font></td>
-	</tr>
-	<tr>
-	</tr>
-</table>
-			<?php
+			else
+			{
+				$dificuldade = array('1','2','3','4','5');
+			}
+
+			$sql_dificuldade = "dificuldade IN(";
+			for($i = 0; $i< sizeof($dificuldade); $i++){
+				if($i == sizeof($dificuldade)-1)
+				{
+					$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].')';
+				}
+				else
+				{
+					$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].',';
+				}
+			}
+
+			for($i = 1; $i <= $questao_quantidade; $i++){
+				$con = mysql_connect($host, $log, $senha);
+				if(!isset($sql_id)){
+					$sql = 'SELECT * FROM questao WHERE '.$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
+				}
+				else
+				{
+					$sql = 'SELECT * FROM questao WHERE id NOT IN ('.$sql_id.') AND '.$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
+				}
+				$tabela = mysql_query($sql);
+				if(mysql_num_rows($tabela) > 0)
+				{
+					$linha = rand(1, mysql_num_rows($tabela)) - 1;
+					$contador = -1;
+					while(($vetor = mysql_fetch_row($tabela, MYSQL_ASSOC)))
+					{
+						$contador++;
+						if($contador == $linha)
+						break;
+					}
+					if(!isset($sql_id))
+					{
+						$sql_id = $vetor['id'];
+					}
+					else{
+						$sql_id = $sql_id .','.$vetor['id'];
+					}
+					?> <input type="hidden" name="id<?php echo $i?>"
+			value="<?php echo $vetor['id']?>"> <br>
+		<br>
+		<table border="0" align="center" width="900px">
+			<tr>
+				<td width="80%"><b><font size="2"><?php echo $i. "º) ". $vetor['enunciado']?></font></b></td>
+			</tr>
+		</table>
+		<br>
+		<table border="0" align="center" width="900px">
+			<tr>
+				<td><input type="radio" name="resposta<?php echo $i?>" value="1"><font
+					size="2"><b>a)</b> <?php echo $vetor['resposta_1']?></font></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="resposta<?php echo $i?>" value="2"><font
+					size="2"><b>b)</b> <?php echo $vetor['resposta_2']?></font></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="resposta<?php echo $i?>" value="3"><font
+					size="2"><b>c)</b> <?php echo $vetor['resposta_3']?></font></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="resposta<?php echo $i?>" value="4"><font
+					size="2"><b>d)</b> <?php echo $vetor['resposta_4']?></font></td>
+			</tr>
+			<tr>
+				<td><input type="radio" name="resposta<?php echo $i?>" value="5"><font
+					size="2"><b>e)</b> <?php echo $vetor['resposta_5']?></font></td>
+			</tr>
+			<tr>
+			</tr>
+		</table>
+		<?php
+				}
+				else
+				{
+					$not_question = true;
+					break;
+				}
+			}
+			if(isset($not_question) &&($i==1)){
+				?>
+		<table align="center" width="900px">
+			<tr align="center">
+				<td><font size=2>Não foram encontradas questões segundo os critérios
+				de pesquisa.</font></td>
+			</tr>
+			<tr align="center">
+				<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar
+				outra prova</a></b> para gerar outra prova, usando outros critérios
+				de filtro.</font></td>
+			</tr>
+		</table>
+		<?php
+			}
+			else if($i < $questao_quantidade)
+			{
+				?> <br>
+		<br>
+		<input type="hidden" name="quantidade" value="<?php echo $i-1?>">
+		<table align="center" width="900px">
+			<tr align="center">
+				<td><font size=2><b>Não foram encontradas mais questões segundo os
+				critérios de pesquisa.</b></font></td>
+			</tr>
+		</table>
+		<table border="0" align="center" width="900px">
+			<tr>
+				<td align="center"><input type="submit" value="Finalizar Prova"> <input
+					type="button" value="Gerar outra prova"
+					onclick="location.href = 'prova_gerar.php'"></td>
+			</tr>
+		</table>
+
+		<?php
+			}
+			mysql_close();
+			?> <br>
+		<br>
+		<?php
+		if(!isset($not_question)){
+			?>
+		<table border="0" align="center" width="900px">
+			<tr>
+				<td align="center"><input type="submit" value="Finalizar Prova"> <input
+					type="button" value="Gerar outra prova"
+					onclick="location.href = 'prova_gerar.php'"></td>
+			</tr>
+		</table>
+		<?php
+		}
 		}
 		else
-		{
-			$not_question = true;
-			break;
-		}
-	}
-	if(isset($not_question)){
-		?>
-<table align="center" width="900px">
-	<tr align="center">
-		<td><font size=2>Não foram encontradas questões segundo os critérios
-		de pesquisa.</font></td>
-	</tr>
-	<tr align="center">
-		<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar outra
-		prova</a></b> para gerar outra prova, usando outros critérios de
-		filtro.</font></td>
-	</tr>
-</table>
+		{ ?>
+		<table align="center" width="900px">
+			<tr align="center">
+				<td><font size=2>Não foram encontradas questões segundo os critérios
+				de pesquisa.</font></td>
+			</tr>
+			<tr align="center">
+				<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar
+				outra prova</a></b> para gerar outra prova, usando outros critérios
+				de filtro.</font></td>
+			</tr>
+		</table>
 		<?php
-	}
-	mysql_close();
-	?> <br>
-<br>
-	<?php
-	if(!isset($not_question)){
-		?>
-<table border="0" align="center" width="900px">
-	<tr>
-		<td align="center"><input type="submit" value="Finalizar Prova"> <input
-			type="button" value="Gerar outra prova"
-			onclick="location.href = 'prova_gerar.php'"></td>
-	</tr>
-</table>
-		<?php
-	}
-}
-else
-{ ?>
-<table align="center" width="900px">
-	<tr align="center">
-		<td><font size=2>Não foram encontradas questões segundo os critérios
-		de pesquisa.</font></td>
-	</tr>
-	<tr align="center">
-		<td><font size=2>Clique em <b><a href='./prova_gerar.php'>Gerar outra
-		prova</a></b> para gerar outra prova, usando outros critérios de
-		filtro.</font></td>
-	</tr>
-</table>
-<?php
 }
 ?></form>
+		</td>
+	</tr>
+</table>
 </div>
 </body>
 </html>
