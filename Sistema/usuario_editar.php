@@ -377,7 +377,7 @@ if($_SESSION['logado'] == 1)
 			if($cidade == '-1')
 			{
 				$error = true;
-				$error_cidade = '<font size=2 color = "red">Informe a cidade.</font>';
+				$error_cidade = '<font size=2 color = "red">Informe a Cidade.</font>';
 			}
 
 			if($estado == '-1')
@@ -391,6 +391,7 @@ if($_SESSION['logado'] == 1)
 				$data_nascimento = $data_ano ."-".$data_mes."-".$data_dia;
 				$data_sistema = 20 . date("y-m-d");
 				$hora_sistema = date("H:i:s");
+				$usuario = $_SESSION["login_user"];
 
 				include("./config.php");
 				$con = mysql_connect($host, $log, $senha);
@@ -404,6 +405,7 @@ if($_SESSION['logado'] == 1)
 
 					$sql = "UPDATE usuario SET
 					login = '".$login."',
+	 				login_administrador = '".$usuario."',
 					tipo_usuario = '".$tipo_usuario."',
 					nome  = '".$nome."',
 					data_nascimento = '".$data_nascimento."', 
@@ -429,7 +431,7 @@ if($_SESSION['logado'] == 1)
 				else{
 					$sql = "INSERT INTO usuario VALUES(
 				'".$login."',
-				'danielhba',
+				'".$usuario."',
 				'".$tipo_usuario."',
 				'".md5($login)."',
 				'".$nome."',

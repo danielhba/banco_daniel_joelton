@@ -202,7 +202,8 @@ if($_SESSION['logado'] == 1)
 			{
 				$data_sistema = 20 . date("y-m-d");
 				$hora_sistema = date("H:i:s");
-
+				$usuario = $_SESSION["login_user"];
+				
 				include("./config.php");
 				$con = mysql_connect($host, $log, $senha);
 				mysql_select_db($bd, $con);
@@ -216,7 +217,8 @@ if($_SESSION['logado'] == 1)
 					$sql = "UPDATE questao SET
 					cod_area = '".$cod_area."',
 					cod_disciplina  = '".$cod_disciplina."',
-					cod_assunto = '".$cod_assunto."', 
+					cod_assunto = '".$cod_assunto."',
+					login_administrador = '".$usuario."', 
 					dificuldade = '".$dificuldade."',
 					enunciado = '".$enunciado."',
 					resposta_1 = '".$resposta_1."',
@@ -233,7 +235,7 @@ if($_SESSION['logado'] == 1)
 				else{
 					$sql = "INSERT INTO questao VALUES(
 				'',
-				'danielhba',
+				'".$usuario."',
 				'".$cod_area."',
 				'".$cod_disciplina."',
 				'".$cod_assunto."',

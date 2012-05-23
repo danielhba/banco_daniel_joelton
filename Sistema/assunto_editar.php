@@ -40,7 +40,6 @@ if($_SESSION['logado'] == 1)
 	echo '<li><a href="assunto_lista.php">Assuntos</a></li>';
 }
 ?>
-?>
 </ul>
 </div>
 <div id="navbarAlt">
