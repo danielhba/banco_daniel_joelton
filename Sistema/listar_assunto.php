@@ -11,11 +11,11 @@ SELECT cod_assunto FROM assunto_refere_disciplina WHERE (cod_disciplina = $nome_
 
 	if(mysql_num_rows($result) == 0)
 	{
-		echo '<option value = "0">'.htmlentities("Não há disciplinas à área").'</option>';
+		echo '<option value = "0">'.htmlentities("Não há assuntos associados a disciplina").'</option>';
 	}
 	else
 	{
-		echo '<option value="-1">Selecione a Disciplina</option>';
+		echo '<option value="-1">Selecione o Assunto</option>';
 		while($row = mysql_fetch_assoc($result))
 		{
 			echo '<option value="'.$row['codigo'].'">'.htmlentities($row['nome']).'</option>';
