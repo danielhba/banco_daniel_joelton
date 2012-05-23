@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 23/05/2012 às 16h57min
+-- Tempo de Geração: 23/05/2012 às 22h29min
 -- Versão do Servidor: 5.5.20
 -- Versão do PHP: 5.3.10
 
@@ -42,12 +42,12 @@ CREATE TABLE IF NOT EXISTS `area` (
 --
 
 INSERT INTO `area` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
-(1, 'danielhba', 'Eng. Computação', '2012-05-15', '00:01:42'),
+(1, 'danielhba', 'Engenharia da Computação', '2012-05-23', '20:31:58'),
 (2, 'danielhba', 'Física', '2012-05-16', '18:53:52'),
 (3, 'danielhba', 'Eng. Elétrica', '2012-05-02', '15:19:30'),
 (4, 'danielhba', 'Eng. Controle e Automação', '2012-04-09', '18:41:28'),
 (5, 'danielhba', 'Eng. Eletronica', '2012-04-11', '08:08:16'),
-(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-05-17', '05:20:36'),
+(6, 'danielhba', 'Analise e Desenvolvimento de Sistemas', '2012-05-23', '17:14:33'),
 (7, 'danielhba', 'Sistema de Informação', '2012-05-21', '21:49:24');
 
 -- --------------------------------------------------------
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `assunto` (
 INSERT INTO `assunto` (`codigo`, `login_administrador`, `nome`, `data`, `hora`) VALUES
 (1, 'danielhba', 'Termodinâmica', '2012-05-23', '13:09:44'),
 (2, 'danielhba', 'Formas Normais', '2012-05-23', '15:51:01'),
-(3, 'danielhba', 'Instruções de 2 Bytes', '2012-05-22', '17:00:05'),
+(3, 'danielhba', 'Instruções de 2 Bytes', '2012-05-23', '17:14:44'),
 (6, 'danielhba', 'Vetores e Matrizes em C', '2012-05-23', '15:49:26'),
 (7, 'danielhba', 'Modelo Conceitual', '2012-05-16', '19:12:58'),
 (8, 'danielhba', 'Modelo Logico', '2012-05-16', '19:13:37'),
@@ -169,7 +169,7 @@ INSERT INTO `disciplina` (`codigo`, `login_administrador`, `nome`, `data`, `hora
 (4, 'danielhba', 'Sistemas Microprocessados', '2012-05-21', '21:50:17'),
 (5, 'danielhba', 'Redes de Computadores', '2012-05-23', '15:51:48'),
 (6, 'danielhba', 'Linguagem de Programacao C', '2012-05-21', '17:33:42'),
-(7, 'danielhba', 'Circuitos Eletricos I', '2012-05-21', '21:13:39'),
+(7, 'danielhba', 'Circuitos Eletricos I', '2012-05-23', '20:31:30'),
 (10, 'danielhba', 'Sistema de Controle I', '2012-05-21', '17:34:19'),
 (12, 'danielhba', 'Física 3', '2012-05-16', '20:27:22'),
 (15, 'danielhba', 'Banco de Dados 1', '2012-05-23', '12:11:28');
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `questao` (
   KEY `cod_disciplina` (`cod_disciplina`),
   KEY `cod_assunto` (`cod_assunto`),
   KEY `dificuldade` (`dificuldade`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
 
 --
 -- Extraindo dados da tabela `questao`
@@ -349,7 +349,7 @@ INSERT INTO `questao` (`id`, `login_administrador`, `cod_area`, `cod_disciplina`
 (75, 'danielhba', 1, 3, 15, '4', 'A restrição UML aplicada a um conjunto de generalizações, especificando que uma instância pode ter apenas um dos subtipos determinados como tipo daquela instância, é conhecida como', 'Associação.', 'Auto.', 'Global.', 'Local.', 'Disjunção.', '5', '2012-05-23', '14:26:09'),
 (76, 'danielhba', 1, 3, 15, '2', 'O dicionário de dados é', 'uma listagem organizada daqueles elementos de dados de maior pertinência ao sistema.', 'uma listagem organizada de alguns dos dados que devem subsidiar o planejamento do sistema.', 'uma listagem organizada de todos os elementos de dados que são pertinentes ao sistema.', 'uma atividade inerente ao trabalho de operadores de sistemas aplicativos.', 'uma listagem impressa de dados quantitativos definidos na especificação de requisitos do sistema.', '3', '2012-05-23', '14:28:01'),
 (77, 'danielhba', 1, 3, 15, '3', 'As ferramentas de modelagem de análise, que utilizam a notação UML, fornecem capacidade de desenvolver modelos baseados em', 'cenários, fluxos e dados.', 'cenários, classes e dados.', 'cenários, classes e objetos.', 'classes, fluxos e objetos.', 'classes, fluxos e dados.', '3', '2012-05-23', '14:29:50'),
-(78, 'danielhba', 1, 3, 15, '4', 'A análise de uma aplicação web focaliza questões importantes que englobam uma variedade de representações UML. É característica relacionada à análise de configuração:', 'identificação das classes de conteúdo e elementos básicos da interação com o usuário;', 'identificação das classes de conteúdo e suas colaborações;', 'identificação e descrição dos elementos básicos da interação com o usuário;', 'definição das funções da aplicação web realizadas para o usuário;', 'identificação do ambiente operacional onde a aplicação baseada na web reside.', '5', '2012-05-23', '14:32:08'),
+(78, 'danielhba', 1, 3, 15, '4', 'Análise de uma aplicação web focaliza questões importantes que englobam uma variedade de representações UML. É característica relacionada à análise de configuração:', 'identificação das classes de conteúdo e elementos básicos da interação com o usuário;', 'identificação das classes de conteúdo e suas colaborações;', 'identificação e descrição dos elementos básicos da interação com o usuário;', 'definição das funções da aplicação web realizadas para o usuário;', 'identificação do ambiente operacional onde a aplicação baseada na web reside.', '5', '2012-05-23', '20:36:40'),
 (79, 'danielhba', 6, 3, 15, '1', 'A classe de componentes em UML que permite modelar recursos (que incluem gráficos e áudios) e pacotes (que são grupos de classes) que constituem o software é o diagrama de:', 'mapa de estado;', 'classes;', 'componentes;', 'colaborações;', 'casos de uso.', '3', '2012-05-23', '14:33:56'),
 (80, 'danielhba', 1, 3, 15, '4', 'Na UML,', 'o foco da análise de requisitos é o levantamento das necessidades, problemas e desejos do usuário e a realização das abstrações para a identificação de classes que deverão ser apresentadas em um modelo de maneira que visualize a estrutura em que elas deverão interoperar.', 'a análise sistêmica emprega o Diagrama de Classes para modelar classes que pertençam ao domínio principal do problema, tais como: classes que gerenciam banco de dados, interface, comunicação e concorrência.', 'à medida que o levantamento de requisitos é realizado, pode-se fazer uma modelagem das atividades encontradas, empregando-se para isto o diagrama use-case (casos de uso), com a participação de entidades externas ao software, intitulados “atores” que exercem papel fundamental sobre o que deverá existir nesse software.', 'o projeto consiste em extrapolar o domínio principal do problema do software. Nessa fase o diagrama de use-cases é utilizado para descrever o que o novo sistema deverá fazer ou como um sistema existente se comporta em várias situações que podem ocorrer durante sua operação.', 'qualquer entidade externa ou interna ao sistema é representada pelo estereótipo “ator”, que pode operar e interagir ativamente com o sistema ou com outros "atores" externos e internos.', '3', '2012-05-23', '14:35:50'),
 (81, 'danielhba', 1, 3, 15, '4', 'Frequentemente usado para modelagem de sistemas de tempo real. Descreve como um sistema responde aos estímulos internos e externos. Mostra as diferentes situações do sistema e os estímulos que provocam transições de uma para outra situação. Trata-se do modelo de', 'eventos.', 'agregação de objetos.', 'dados.', 'fluxo de dados.', 'máquina de estado.', '5', '2012-05-23', '14:37:20'),
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `tb_cidades` (
   `nome` varchar(50) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `estado` (`estado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9715 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9715 ;
 
 --
 -- Extraindo dados da tabela `tb_cidades`
@@ -10130,7 +10130,7 @@ CREATE TABLE IF NOT EXISTS `tb_estados` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uf` (`uf`),
   UNIQUE KEY `nome` (`nome`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Extraindo dados da tabela `tb_estados`
@@ -10226,14 +10226,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`login`, `login_administrador`, `tipo_usuario`, `senha`, `nome`, `data_nascimento`, `email`, `telefone_ddd`, `telefone`, `celular_1_ddd`, `celular_1`, `celular_2_ddd`, `celular_2`, `end_rua`, `end_numero`, `end_cep`, `end_bairro`, `end_cidade`, `end_estado`, `end_complemento`, `data_cadastro`, `hora_cadastro`) VALUES
-('danielhba', NULL, 1, '4bfb6f45599f0ce781950959fde85e8b', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', '0', 'RO', 'Número 153-A', '2012-05-22', '00:40:06'),
-('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Manaus', '', '', '2012-05-22', '01:04:34'),
-('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', '0', 'AM', '', '2012-04-20', '16:13:17'),
-('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', '0', 'AM', 'Núcleo 15', '2012-05-16', '23:55:32'),
-('jdsm.eng', 'danielhba', 2, '202cb962ac59075b964b07152d234b70', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, 0, 'Claude Debussy', 92, 69000000, 'Parque 10', '0', 'AM', 'Número 4', '2012-05-22', '17:50:13'),
-('lucila', 'danielhba', 3, '1d8d7866bb67da8cd6fd50e9c9d59241', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', '0', 'AM', '', '2012-04-20', '16:20:56'),
-('marciovitor.enga', 'danielhba', 3, '33ea6f999ba65f322620c7b44299bed6', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, NULL, 'Beto Freitas', 92, 69000000, 'Zumbi II', '0', 'AM', '', '2012-04-20', '16:13:42'),
-('mateuscarlos.to', 'danielhba', 3, '442cb777bec707f68803544c0d4b56ec', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, NULL, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', '0', 'AM', '', '2012-04-20', '16:14:04');
+('danielhba', NULL, 1, '4bfb6f45599f0ce781950959fde85e8b', 'Daniel Henrique Braz de Aquino', '1990-06-27', 'dhbaquino@gmail.com', 92, 32324166, 93, 81580539, 0, NULL, 'Constantino Nery', 92, 69010160, 'Centro', 'Manaus', 'AM', 'Número 153-A', '2012-05-22', '00:40:06'),
+('helo', 'danielhba', 3, '202cb962ac59075b964b07152d234b70', 'Heloiza', '1988-08-07', 'smii07@hotmail.com', 92, 32324166, 92, 81816308, 92, 92091355, 'Rua 16', 0, 69010180, 'Parque 10', 'Rio Preto da Eva', 'AM', '', '2012-05-23', '17:14:26'),
+('heylera', 'danielhba', 3, '86ad50e70c349ce7426b547e160b7102', 'Heyler', '1988-12-16', 'teste@gmail.com', 92, 65326596, 92, 32659632, 0, 0, 'Rua Teste', 0, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-05-23', '17:13:03'),
+('hfmn.eng', 'danielhba', 3, '9ce48d8fc4574f10c3c8e72ea65238bb', 'Humberto Neto', '1993-06-12', 'hfmn.eng@gmail.com', 92, 32360215, 92, 92301845, 0, 0, 'Tamandaré', 92, 69034827, 'Cidade Nova', 'Manaus', 'AM', 'Núcleo 15', '2012-05-23', '17:12:49'),
+('jdsm.eng', 'danielhba', 2, '202cb962ac59075b964b07152d234b70', 'Joelton dos Santos Matos', '1991-04-16', 'joelton_matos@hotmail.com', 92, 35332398, 92, 92126039, 0, 0, 'Claude Debussy', 92, 69000000, 'Parque 10', 'Manaus', 'AM', 'Número 4', '2012-05-23', '17:12:40'),
+('lucila', 'danielhba', 3, '1d8d7866bb67da8cd6fd50e9c9d59241', 'Lucila de Souza Braz', '1991-06-27', 'lucila@gmail.com', 92, 32324166, 92, 32324166, 92, 32324166, 'Daniel', 153, 69010160, 'Centro', 'Manaus', 'AM', '', '2012-05-23', '17:12:21'),
+('marciovitor', 'danielhba', 3, '33ea6f999ba65f322620c7b44299bed6', 'Marcio Lira Vitor Junior', '1993-08-12', 'mveng@gmail.com', 92, 36047853, 92, 91125435, 0, 0, 'Beto Freitas', 92, 69000000, 'Zumbi II', 'Manaus', 'AM', '', '2012-05-23', '17:12:00'),
+('mateuscarlos', 'danielhba', 3, '442cb777bec707f68803544c0d4b56ec', 'Mateus Carlos da Silva', '1991-11-14', 'mateus22@gmail.com', 92, 333044589, 93, 91457898, 0, 0, 'Castelo Aguiar', 92, 69000000, 'Parque dos Indus', 'Manaus', 'AM', '', '2012-05-23', '17:11:46');
 
 --
 -- Restrições para as tabelas dumpadas
@@ -10265,6 +10265,12 @@ ALTER TABLE `questao`
   ADD CONSTRAINT `questao_ibfk_2` FOREIGN KEY (`cod_area`) REFERENCES `area` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `questao_ibfk_3` FOREIGN KEY (`cod_disciplina`) REFERENCES `disciplina` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `questao_ibfk_4` FOREIGN KEY (`cod_assunto`) REFERENCES `assunto` (`codigo`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Restrições para a tabela `tb_cidades`
+--
+ALTER TABLE `tb_cidades`
+  ADD CONSTRAINT `tb_cidades_ibfk_3` FOREIGN KEY (`estado`) REFERENCES `tb_estados` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Restrições para a tabela `usuario`
