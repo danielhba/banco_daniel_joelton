@@ -11,7 +11,7 @@ SELECT cod_disciplina FROM disciplina_refere_area WHERE (cod_area = $nome_area))
 
 	if(mysql_num_rows($result) == 0)
 	{
-		echo '<option value = "0">'.htmlentities("Não há disciplinas à área").'</option>';
+		echo '<option value = "-1">'.htmlentities("Não há disciplinas associadas para esta área").'</option>';
 	}
 	else
 	{
