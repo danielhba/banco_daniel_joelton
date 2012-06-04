@@ -89,36 +89,41 @@ if($_SESSION['logado'] == 1)
 				?>
 <form name="form1" method="POST" action="teste_questao.php">
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><b>Parabéns! Resposta correta!</b></td>
 	</tr>
 </table>
 <br>
 <table align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td width="80%"><font size=2><b><?php echo $correto[6]?></b></font></td>
 	</tr>
 </table>
 <table align="center" width="900px">
-	<tr>
-		<td><font size=2><b>a)</b> <?php if($correto[0] == 1) echo "<b> ".$correto[1]."</b>"; else echo $correto[1] ?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>a)</b></td>
+		<td align="left"><font size=2> <?php if($correto[0] == 1) echo "<b> ".$correto[1]."</b>"; else echo $correto[1] ?></font></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>b)</b> <?php if($correto[0] == 2) echo "<b> ".$correto[2]."</b>"; else echo $correto[2] ?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>b)</b></td>
+		<td align="left"><font size=2> <?php if($correto[0] == 2) echo "<b> ".$correto[2]."</b>"; else echo $correto[2] ?></font></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>c)</b> <?php if($correto[0] == 3) echo "<b> ".$correto[3]."</b>"; else echo $correto[3] ?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>c)</b></td>
+		<td align="left"><font size=2> <?php if($correto[0] == 3) echo "<b> ".$correto[3]."</b>"; else echo $correto[3] ?></font></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>d)</b> <?php if($correto[0] == 4) echo "<b> ".$correto[4]."</b>"; else echo $correto[4] ?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>d)</b></td>
+		<td align="left"><font size=2> <?php if($correto[0] == 4) echo "<b> ".$correto[4]."</b>"; else echo $correto[4] ?></font></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>e)</b> <?php if($correto[0] == 5) echo "<b> ".$correto[5]."</b>"; else echo $correto[5] ?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>e)</b></td>
+		<td align="left"><font size=2> <?php if($correto[0] == 5) echo "<b> ".$correto[5]."</b>"; else echo $correto[5] ?></font></td>
 	</tr>
 </table>
 <br>
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><input type="submit"
 			value="Responder outra questão"></td>
 	</tr>
@@ -130,37 +135,42 @@ if($_SESSION['logado'] == 1)
 				?>
 <form name="form1" method="POST" action="teste_questao.php">
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><b>Ops! Resposta errada.</b></td>
 	</tr>
 </table>
 <br>
 <table align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td width="80%"><font size=2><b><?php echo $correto[6]?></b></font></td>
 	</tr>
 </table>
 <br>
 <table align="center" width="900px">
-	<tr>
-		<td><font size=2><b>a)</b></font> <?php if($correto[0] == 1) echo "<font size=2 color=\"red\"><b> ".$correto[1]."</b></font>"; else echo "<font size = 2>". $correto[1] . "</font>" ?></td>
+	<tr valign="top">
+		<td width="2%"><b>a)</b></td>
+		<td align="left"><font size=2></font> <?php if($correto[0] == 1) echo "<font size=2 color=\"red\"><b> ".$correto[1]."</b></font>"; else echo "<font size = 2>". $correto[1] . "</font>" ?></td>
 	</tr>
 	<tr>
-		<td><font size=2><b>b)</b></font> <?php if($correto[0] == 2) echo "<font size=2 color=\"red\"><b> ".$correto[2]."</b></font>"; else echo "<font size = 2>". $correto[2] . "</font>" ?></td>
+		<td width="2%"><b>b)</b></td>
+		<td align="left"><font size=2></font> <?php if($correto[0] == 2) echo "<font size=2 color=\"red\"><b> ".$correto[2]."</b></font>"; else echo "<font size = 2>". $correto[2] . "</font>" ?></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>c)</b></font> <?php if($correto[0] == 3) echo "<font size=2 color=\"red\"><b> ".$correto[3]."</b></font>"; else echo "<font size = 2>". $correto[3] . "</font>" ?></td>
+	<tr valign="top">
+		<td width="2%"><b>c)</b></td>
+		<td align="left"><font size=2></font> <?php if($correto[0] == 3) echo "<font size=2 color=\"red\"><b> ".$correto[3]."</b></font>"; else echo "<font size = 2>". $correto[3] . "</font>" ?></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>d)</b></font> <?php if($correto[0] == 4) echo "<font size=2 color=\"red\"><b> ".$correto[4]."</b></font>"; else echo "<font size = 2>". $correto[4] . "</font>" ?></td>
+	<tr valign="top">
+		<td width="2%"><b>d)</b></td>
+		<td align="left"><font size=2></font> <?php if($correto[0] == 4) echo "<font size=2 color=\"red\"><b> ".$correto[4]."</b></font>"; else echo "<font size = 2>". $correto[4] . "</font>" ?></td>
 	</tr>
-	<tr>
-		<td><font size=2><b>e)</b></font> <?php if($correto[0] == 5) echo "<font size=2 color=\"red\"><b> ".$correto[5]."</b></font>"; else echo "<font size = 2>". $correto[5] . "</font>" ?></td>
+	<tr valign="top">
+		<td width="2%"><b>e)</b></td>
+		<td align="left"><font size=2></font> <?php if($correto[0] == 5) echo "<font size=2 color=\"red\"><b> ".$correto[5]."</b></font>"; else echo "<font size = 2>". $correto[5] . "</font>" ?></td>
 	</tr>
 </table>
 <br>
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><input type="submit"
 			value="Responder outra questão"></td>
 	</tr>
@@ -181,7 +191,7 @@ if($_SESSION['logado'] == 1)
 </table>
 <br>
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><input type="submit" value="Responder questão"></td>
 	</tr>
 </table>
@@ -192,13 +202,13 @@ if($_SESSION['logado'] == 1)
 				?>
 <form name="form1" method="POST" action="teste_questao.php"><br>
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center">Por favor, responda a questão.</td>
 	</tr>
 </table>
 <br>
 <table border="0" align="center" width="900px">
-	<tr>
+	<tr valign="top">
 		<td align="center"><input type="submit" value="Responder questão"></td>
 	</tr>
 </table>

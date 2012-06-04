@@ -136,7 +136,8 @@ if($_SESSION['logado'] == 1)
 
 			for($i = 1; $i <= $questao_quantidade; $i++){
 				$con = mysql_connect($host, $log, $senha);
-				if(!isset($sql_id)){
+				if(!isset($sql_id))
+				{
 					$sql = 'SELECT * FROM questao WHERE '.$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
 				}
 				else
@@ -171,25 +172,35 @@ if($_SESSION['logado'] == 1)
 		</table>
 		<br>
 		<table border="0" align="center" width="900px">
-			<tr>
-				<td><input type="radio" name="resposta<?php echo $i?>" value="1"><font
-					size="2"><b>a)</b> <?php echo $vetor['resposta_1']?></font></td>
+			<tr valign="top">
+				<td width="2%"><b>a)</b></td>
+				<td width="2%"><input type="radio" name="resposta<?php echo $i?>"
+					value="1"></td>
+				<td align="left"><font size="2"> <?php echo $vetor['resposta_1']?></font></td>
 			</tr>
-			<tr>
-				<td><input type="radio" name="resposta<?php echo $i?>" value="2"><font
-					size="2"><b>b)</b> <?php echo $vetor['resposta_2']?></font></td>
+			<tr valign="top">
+				<td width="2%"><b>b)</b></td>
+				<td width="2%"><input type="radio" name="resposta<?php echo $i?>"
+					value="2"></td>
+				<td align="left"><font size="2"> <?php echo $vetor['resposta_2']?></font></td>
 			</tr>
-			<tr>
-				<td><input type="radio" name="resposta<?php echo $i?>" value="3"><font
-					size="2"><b>c)</b> <?php echo $vetor['resposta_3']?></font></td>
+			<tr valign="top">
+				<td width="2%"><b>c)</b></td>
+				<td width="2%"><input type="radio" name="resposta<?php echo $i?>"
+					value="3"></td>
+				<td align="left"><font size="2"> <?php echo $vetor['resposta_3']?></font></td>
 			</tr>
-			<tr>
-				<td><input type="radio" name="resposta<?php echo $i?>" value="4"><font
-					size="2"><b>d)</b> <?php echo $vetor['resposta_4']?></font></td>
+			<tr valign="top">
+				<td width="2%"><b>d)</b></td>
+				<td width="2%"><input type="radio" name="resposta<?php echo $i?>"
+					value="4"></td>
+				<td align="left"><font size="2"> <?php echo $vetor['resposta_4']?></font></td>
 			</tr>
-			<tr>
-				<td><input type="radio" name="resposta<?php echo $i?>" value="5"><font
-					size="2"><b>e)</b> <?php echo $vetor['resposta_5']?></font></td>
+			<tr valign="top">
+				<td width="2%"><b>e)</b></td>
+				<td width="2%"><input type="radio" name="resposta<?php echo $i?>"
+					value="5"></td>
+				<td align="left"><font size="2"> <?php echo $vetor['resposta_5']?></font></td>
 			</tr>
 			<tr>
 			</tr>
@@ -268,15 +279,15 @@ if($_SESSION['logado'] == 1)
 			</tr>
 		</table>
 		<?php
-}
-?></form>
+		}
+		?></form>
 		</td>
 	</tr>
 </table>
 </div>
 </body>
 </html>
-<?php
+		<?php
 }
 else{
 	header("Location: login.php");

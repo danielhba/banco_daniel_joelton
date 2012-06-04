@@ -77,7 +77,9 @@ if($_SESSION['logado'] == 1)
 <center>
 <h3>Prova - Resposta</h3>
 </center>
-		<?php
+<table>
+	<tr>
+		<td><?php
 		$total_acerto = 0;
 		if(isset($_POST["quantidade"])){
 			for($i = 1; $i <= $_POST["quantidade"]; $i++)
@@ -87,93 +89,152 @@ if($_SESSION['logado'] == 1)
 				mysql_select_db($bd, $con);
 				$tabela = mysql_query("SELECT alternativa_correta, resposta_1, resposta_2, resposta_3, resposta_4, resposta_5, enunciado FROM questao WHERE id= '".$_POST["id"."$i"]."'");
 				$correto = mysql_fetch_row($tabela);
-				if (isset($_POST["resposta"."$i"]) && $correto[0] == $_POST["resposta"."$i"])
-				{ $total_acerto++;
-				?> <br>
-<table align="center" width="900px">
-	<tr>
-		<td width="80%"><b><?php echo "Acertado ". $total_acerto ." de " . $_POST["quantidade"] . "."?></b>
-		</td>
-	</tr>
-</table>
-<br>
-<table align="center" width="900px">
-	<tr>
-		<td width="80%"><font size=2><b><?php echo $i."º) ".$correto[6]?></b></font></td>
-	</tr>
-	<tr>
-	</tr>
-	<tr>
-		<td><font size=2><b>a)</b> <?php if($correto[0] == 1) echo "<b> ".$correto[1]."</b>"; else echo $correto[1] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>b)</b> <?php if($correto[0] == 2) echo "<b> ".$correto[2]."</b>"; else echo $correto[2] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>c)</b> <?php if($correto[0] == 3) echo "<b> ".$correto[3]."</b>"; else echo $correto[3] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>d)</b> <?php if($correto[0] == 4) echo "<b> ".$correto[4]."</b>"; else echo $correto[4] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>e)</b> <?php if($correto[0] == 5) echo "<b> ".$correto[5]."</b>"; else echo $correto[5] ?></font></td>
-	</tr>
-</table>
-<br>
-				<?php
+				if (isset($_POST["resposta"."$i"]))
+				{
+					if($correto[0] == $_POST["resposta"."$i"])
+					{
+						$total_acerto++;
+						?> <br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td><b><?php echo "Acertado ". $total_acerto ." de " . $_POST["quantidade"] . "."?></b>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td colspan="2"><font size=2><b><?php echo $i."º) ".$correto[6]?></b></font></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr valign="top">
+				<td width="10px"><b>a)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 1) echo "<b> ".$correto[1]."</b>"; else echo $correto[1] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>b)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 2) echo "<b> ".$correto[2]."</b>"; else echo $correto[2] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>c)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 3) echo "<b> ".$correto[3]."</b>"; else echo $correto[3] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>d)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 4) echo "<b> ".$correto[4]."</b>"; else echo $correto[4] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>e)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 5) echo "<b> ".$correto[5]."</b>"; else echo $correto[5] ?></font></td>
+			</tr>
+		</table>
+		<br>
+		<?php
+					}
+					else{
+						?> <br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td><b><?php echo "Acertado ". $total_acerto ." de " . $_POST["quantidade"] . "."?></b>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td colspan="2"><font size=2><b><?php echo $i."º) ".$correto[6]?></b></font></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>a)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 1) echo "<font color=\"red\"><b> ".$correto[1]."</b></font>"; else echo $correto[1] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>b)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 2) echo "<font color=\"red\"><b> ".$correto[2]."</b></font>"; else echo $correto[2] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>c)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 3) echo "<font color=\"red\"><b> ".$correto[3]."</b></font>"; else echo $correto[3] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>d)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 4) echo "<font color=\"red\"><b> ".$correto[4]."</b></font>"; else echo $correto[4] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>e)</b></td>
+				<td width="98%" align="left"><font size=2> <?php if($correto[0] == 5) echo "<font color=\"red\"><b> ".$correto[5]."</b></font>"; else echo $correto[5] ?></font></td>
+			</tr>
+		</table>
+		<?php
+					}
 				}
-				else{
-					?> <br>
-<table align="center" width="900px">
-	<tr>
-		<td width="80%"><b><?php echo "Acertado ". $total_acerto ." de " . $_POST["quantidade"] . "."?></b>
-		</td>
-	</tr>
-</table>
-<br>
-<table align="center" width="900px">
-	<tr>
-		<td width="80%"><font size=2><b><?php echo $i."º) ".$correto[6]?></b></font></td>
-	</tr>
-	<tr>
-	</tr>
-	<tr>
-		<td><font size=2><b>a)</b> <?php if($correto[0] == 1) echo "<font color=\"red\"><b> ".$correto[1]."</b></font>"; else echo $correto[1] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>b)</b> <?php if($correto[0] == 2) echo "<font color=\"red\"><b> ".$correto[2]."</b></font>"; else echo $correto[2] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>c)</b> <?php if($correto[0] == 3) echo "<font color=\"red\"><b> ".$correto[3]."</b></font>"; else echo $correto[3] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>d)</b> <?php if($correto[0] == 4) echo "<font color=\"red\"><b> ".$correto[4]."</b></font>"; else echo $correto[4] ?></font></td>
-	</tr>
-	<tr>
-		<td><font size=2><b>e)</b> <?php if($correto[0] == 5) echo "<font color=\"red\"><b> ".$correto[5]."</b></font>"; else echo $correto[5] ?></font></td>
-	</tr>
-</table>
-					<?php
+				else
+				{?> <br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td><b><?php echo "Acertado ". $total_acerto ." de " . $_POST["quantidade"] . "."?></b>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td colspan="2"><font size=2 color="red"><b><?php echo "Questão não respondida."?></b></font></td>
+			</tr>
+			<tr valign="top">
+				<td colspan="2"><font size=2><b><?php echo $i."º) ".$correto[6]?></b></font></td>
+			</tr>
+			<tr>
+			</tr>
+			<tr valign="top">
+				<td width="10px"><b>a)</b></td>
+				<td width="98%" align="left"><font size=2> <?php echo $correto[1] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>b)</b></td>
+				<td width="98%" align="left"><font size=2> <?php echo $correto[2] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>c)</b></td>
+				<td width="98%" align="left"><font size=2> <?php echo $correto[3] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>d)</b></td>
+				<td width="98%" align="left"><font size=2> <?php echo $correto[4] ?></font></td>
+			</tr>
+			<tr valign="top">
+				<td width="2%"><b>e)</b></td>
+				<td width="98%" align="left"><font size=2> <?php echo $correto[5] ?></font></td>
+			</tr>
+		</table>
+		<br>
+		<?php
 				}
 			}
 			?> <br>
-<br>
-<table align="center" width="900px">
-	<tr>
-		<td><b><?php echo "Total de acertos: " . $total_acerto . " de " . $_POST["quantidade"]."."?></b>
+		<br>
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td><b><?php echo "Total de acertos: " . $total_acerto . " de " . $_POST["quantidade"]."."?></b>
+				</td>
+			</tr>
+		</table>
+		<?php
+		}
+		?> <br>
+		<form name="form1" method="post" action="prova_gerar.php">
+		<table align="center" width="900px">
+			<tr valign="top">
+				<td align="center"><input type="submit" value="Realizar outra prova"></td>
+			</tr>
+		</table>
+		</form>
 		</td>
 	</tr>
 </table>
-			<?php
-		}
-		?> <br>
-<form name="form1" method="post" action="prova_gerar.php">
-<table align="center" width="900px">
-	<tr>
-		<td align="center"><input type="submit" value="Realizar outra prova"></td>
-	</tr>
-</table>
-</form>
 </div>
 </body>
 </html>

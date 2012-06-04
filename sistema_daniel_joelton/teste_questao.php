@@ -108,25 +108,30 @@ if($_SESSION['logado'] == 1)
 </table>
 <br>
 <table border="0" align="center" width="900px">
-	<tr>
-		<td><input type="radio" name="resposta" value="1"><font size=2><b>a)</b>
-		<?php echo $vetor['resposta_1']?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>a)</b></td>
+		<td width="2%"><input type="radio" name="resposta" value="1"></td>
+		<td align="left"><font size=2> <?php echo $vetor['resposta_1']?></font></td>
 	</tr>
-	<tr>
-		<td><input type="radio" name="resposta" value="2"><font size=2><b>b)</b>
-		<?php echo $vetor['resposta_2']?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>b)</b></td>
+		<td width="2%"><input type="radio" name="resposta" value="2"></td>
+		<td align="left"><font size=2> <?php echo $vetor['resposta_2']?></font></td>
 	</tr>
-	<tr>
-		<td><input type="radio" name="resposta" value="3"><font size=2><b>c)</b>
-		<?php echo $vetor['resposta_3']?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>c)</b></td>
+		<td width="2%"><input type="radio" name="resposta" value="3"></td>
+		<td align="left"><font size=2> <?php echo $vetor['resposta_3']?></font></td>
 	</tr>
-	<tr>
-		<td><input type="radio" name="resposta" value="4"><font size=2><b>d)</b>
-		<?php echo $vetor['resposta_4']?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>d)</b></td>
+		<td width="2%"><input type="radio" name="resposta" value="4"></td>
+		<td align="left"><font size=2> <?php echo $vetor['resposta_4']?></font></td>
 	</tr>
-	<tr>
-		<td><input type="radio" name="resposta" value="5"><font size=2><b>e)</b>
-		<?php echo $vetor['resposta_5']?></font></td>
+	<tr valign="top">
+		<td width="2%"><b>e)</b></td>
+		<td width="2%"><input type="radio" name="resposta" value="5"></td>
+		<td align="left"><font size=2> <?php echo $vetor['resposta_5']?></font></td>
 	</tr>
 	<tr>
 	</tr>
