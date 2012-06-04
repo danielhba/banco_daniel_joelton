@@ -82,7 +82,8 @@ if($_SESSION['logado'] == 1)
 </center>
 
 <center>Exclusão realizada com sucesso!</center>
-
+<br>
+<br>
 <table border="0" align="center" width="900px">
 	<tr>
 

@@ -5,21 +5,21 @@ $con = mysql_connect($host, $log, $senha) or die("Não foi possível estabelecer c
 $banco = mysql_select_db($bd, $con) or die("Não foi possível estabelecer conexão com o banco de Dados");
 if (isset($_SESSION['logado']) &&($_SESSION['logado'] == 1))
 {
-	if(isset($_POST["excluir"])){
+	if(isset($_POST["resetar"])){
 		include("./config.php");
 		$con = mysql_connect($host, $log, $senha);
 		mysql_select_db($bd, $con);
-		$sql = "DELETE FROM usuario WHERE login= '" .$_POST["codigo"]."'";
+		$sql = "UPDATE usuario SET senha = '" .md5($_POST["codigo"])."' WHERE login = '" .$_POST["codigo"]."'";
 		mysql_query($sql, $con);
 		mysql_close($con);
-		header("location: ./usuario_excluir_aviso.php");
+		header("location: ./usuario_resetar_aviso.php");
 		exit;
 	}
 	?>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Excluir Usuário</title>
+<title>Resetar senha de usuário</title>
 <meta name="keywords" content="keyword1, keyword2, keyword3, etc..." />
 <meta name="description" content="Description of website here..." />
 <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -87,15 +87,16 @@ if($_SESSION['logado'] == 1)
 		{
 			?> <br>
 <center>
-<h3>Excluir Usuário</h3>
+<h3>Resetar senha de usuário</h3>
 </center>
-<form name="form1" method="POST" action="usuario_excluir.php">
+<form name="form1" method="POST" action="usuario_resetar.php">
 <table border="0" align="center" width="900px">
 	<tr>
-		<td align="center" width="100%"><input type="hidden" name="excluir"
+		<td align="center" width="100%"><input type="hidden" name="resetar"
 			value="ok"> <input type="hidden" name="codigo"
 			value="<?php echo $_GET["codigo"]?>">
-		<center><b>Você tem certeza que deseja excluir o usuário?</b></center>
+		<center><b>Você tem certeza que deseja resetar a senha de usuário?</b></center>
+		<center><b>A senha será o login de usuário.</b></center>
 		</td>
 	</tr>
 </table>
@@ -113,7 +114,8 @@ if($_SESSION['logado'] == 1)
 </html>
 			<?php
 		}
-		else {
+		else
+		{
 			header("Location: usuario_lista.php");
 			exit;
 		}

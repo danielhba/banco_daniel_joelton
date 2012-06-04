@@ -104,16 +104,16 @@ if(mysql_num_rows($tabela)==0){
 ?>
 	<tr>
 		<td width="5%"></td>
-		<td width="30%">
+		<td width="25%">
 		<center><b>Nome</b></center>
 		</td>
 		<td width="20%">
 		<center><b>Login</b></center>
 		</td>
-		<td width="20%">
+		<td width="10%">
 		<center><b>Tipo</b></center>
 		</td>
-		<td width="60%">
+		<td width="80%">
 		<center><b>Opções</b></center>
 		</td>
 	</tr>
@@ -147,6 +147,8 @@ if(mysql_num_rows($tabela)==0){
 			onclick="location.href = 'usuario_editar.php?codigo=<?php echo $login?>'">
 		<input type="button" value="Excluir"
 			onclick="location.href = 'usuario_excluir.php?codigo=<?php echo $login?>'">
+		<input type="button" value="Resetar senha"
+			onclick="location.href = 'usuario_resetar.php?codigo=<?php echo $login?>'">
 		</td>
 	</tr>
 	<?php
