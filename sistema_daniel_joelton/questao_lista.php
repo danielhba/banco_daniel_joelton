@@ -15,6 +15,35 @@ if (isset($_SESSION['logado']) &&($_SESSION['logado'] != 3)){
 <!--[if IE ]>
 <link href="css/ie.css" rel="stylesheet" type="text/css" />
 <![endif]-->
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("select[name=area]").change(function(){
+		$("select[name=disciplina]").html('<option value="-1" disabled="disabled">Selecione a área primeiro</option>');
+		$.post("listar_disciplina.php",
+			{nome_area:$(this).val()},
+			function(valor)
+			{
+				$("select[name=disciplina]").html(valor);
+			}
+		);
+		$("select[name=assunto]").html('<option value="-1" disabled="disabled">Selecione a disciplina primeiro</option>');
+		$.post("listar_assunto.php",
+			{nome_disciplina:$(this).val()}
+		);
+	});
+	$("select[name=disciplina]").change(function(){
+		$("select[name=assunto]").html('<option value="-1" disabled="disabled">Selecione a disciplina primeiro</option>');
+		$.post("listar_assunto.php",
+			{nome_disciplina:$(this).val()},
+			function(valor)
+			{
+				$("select[name=assunto]").html(valor);
+			}
+		);
+		});
+	});
+</script>
 </head>
 <body>
 <div id="leftMain"><a href="home.php"><img src="images/logo.png"
@@ -76,18 +105,172 @@ if($_SESSION['logado'] == 1)
 <center>
 <h3>Lista de Questões</h3>
 </center>
-<form name="form1" method="POST" action="questao_editar.php">
-<table border="0" align="center" width="900px">
-<?php
-include("config.php");
-$con = mysql_connect($host, $log, $senha);
-mysql_select_db($bd, $con);
-$sql = "SELECT id, enunciado, dificuldade, cod_area FROM questao ORDER BY enunciado";
-$tabela = mysql_query($sql);
-if(mysql_num_rows($tabela)==0){
-	?>
+<form name="form1" method="POST" action="questao_lista.php">
+<table align="center" width="900px">
 	<tr>
-		<td align="center">Não há questões cadastradas.</td>
+		<td width="15%"></td>
+		<td width="85%"><font size=2><b>- A seleção de área, disciplina e
+		assunto não é obrigatória; é um filtro de questões.</b></font>
+		</td>
+	</tr>
+	<tr>
+		<td width="15%"></td>
+		<td width="85%"><font size=2><b>- Não marcar nível de dificuldade,
+		indicará a geração de prova com todos os níveis de dificuldade.</b></font>
+		</td>
+	</tr>
+
+</table>
+<br>
+<br>
+<table align="center" width="900px">
+	<tr>
+		<td align="right" width="40%">Área:</td>
+		<td width="60%"><select name="area">
+
+			<option value="-1" selected="selected">Escolha uma area</option>
+			<?php
+			include("config.php");
+			$result = "SELECT * FROM area ORDER BY nome";
+			$ql = mysql_query($result);
+			if(!$ql)
+			{
+				echo "Nao foi possivel executar a query ($sql):	".mysql_error();
+			}
+			if(mysql_num_rows($ql) == 0)
+			{
+				echo "Não há áreas cadastradas";
+				exit;
+			}
+			while($ln = mysql_fetch_assoc($ql))
+			{
+				echo '<option value = "'.$ln['codigo'].'">'.$ln['nome'].'</option>';
+			}
+			?>
+		</select></td>
+	</tr>
+	<tr>
+		<td align="right">Disciplina:</td>
+		<td><select name="disciplina">
+			<option value="0" disabled="disabled">Escolha uma área primeiro</option>
+		</select></td>
+	</tr>
+	<tr>
+		<td align="right">Assunto:</td>
+		<td><select name="assunto">
+			<option value="0" disabled="disabled">Escolha uma disciplina primeiro</option>
+		</select></td>
+	</tr>
+	<tr>
+		<td align="right">Dificuldade:</td>
+		<td><input type="checkbox" name="dificuldade[]" value=1> 1 <input
+			type="checkbox" name="dificuldade[]" value=2> 2<input type="checkbox"
+			name="dificuldade[]" value=3> 3<input type="checkbox"
+			name="dificuldade[]" value=4> 4<input type="checkbox"
+			name="dificuldade[]" value=5> 5</td>
+	</tr>
+</table>
+<table align="center" width="900px">
+	<tr>
+		<td align="center" colspan="2"><input type="submit"
+			value="Buscar questão"></td>
+	</tr>
+</table>
+</form>
+			<?php
+			if(isset($_POST['area'])){
+				include("config.php");
+
+				if($_POST['area'] == '-1')
+				{
+					$sql_area = " ";
+					$sql_disciplina = " ";
+					$sql_assunto = " ";
+				}
+				else
+				{
+					$sql_area = ' AND cod_area = "'.$_POST['area'].'"';
+					if($_POST['disciplina'] == -1)
+					{
+						$sql_disciplina = " ";
+						$sql_assunto = " ";
+					}
+					else
+					{
+						$sql_disciplina = ' AND cod_disciplina = "'.$_POST['disciplina'].'"';
+						if($_POST['assunto'] == -1)
+						{
+							$sql_assunto = " ";
+						}
+						else
+						{
+							$sql_assunto = ' AND cod_assunto = "'.$_POST['assunto'].'"';
+						}
+					}
+				}
+				if(isset($_POST['dificuldade']))
+				{
+					$dificuldade = $_POST['dificuldade'];
+				}
+				else
+				{
+					$dificuldade = array('1','2','3','4','5');
+				}
+
+				$sql_dificuldade = "dificuldade IN(";
+				for($i = 0; $i< sizeof($dificuldade); $i++){
+					if($i == sizeof($dificuldade)-1)
+					{
+						$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].')';
+					}
+					else
+					{
+						$sql_dificuldade = $sql_dificuldade . $dificuldade[$i].',';
+					}
+				}
+				$sql = 'SELECT id, enunciado, dificuldade, cod_area FROM questao WHERE '.$sql_dificuldade.$sql_area.$sql_disciplina.$sql_assunto;
+			}
+			?>
+<form name="form2" method="POST" action="questao_editar.php"><?php
+if(!isset($sql)){ ?> <br>
+<br>
+<br>
+<br>
+<br>
+<table align="center" width="900px">
+	<tr>
+		<td align="center">Para cadastrar questões.</td>
+	</tr>
+	<tr>
+		<td colspan="5" align="center"><input type="submit"
+			value="Cadastrar Questão"></td>
+	</tr>
+</table>
+<?php
+}
+?> <?php
+if(isset($sql)){
+
+	include("config.php");
+	$con = mysql_connect($host, $log, $senha);
+	mysql_select_db($bd, $con);
+	$tabela = mysql_query($sql);
+	if(mysql_num_rows($tabela)==0){
+		?> <br>
+<br>
+<br>
+<br>
+<table border="0" align="center" width="900px">
+	<tr>
+		<td align="center">Não há questões cadastradas segundo os critérios de
+		busca.</td>
+	</tr>
+	<tr>
+		<td align="center">Tente outro critério de busca.<br>
+		<br>
+		<br>
+		<br>
+		</td>
 	</tr>
 	<tr>
 		<td align="center">Para cadastrar questão clique em Cadastrar Questão.</td>
@@ -95,10 +278,23 @@ if(mysql_num_rows($tabela)==0){
 	<tr>
 		<td align="center"><input type="submit" value="Cadastrar Questão"></td>
 	</tr>
-	<?php
-	exit;
-}
-?>
+</table>
+		<?php
+		exit;
+	}
+	?>
+<table border="0" align="center" width="900px">
+	<tr>
+		<td colspan="5" align="right">Para cadastrar questões.</td>
+	</tr>
+	<tr>
+		<td colspan="5" align="right"><input type="submit"
+			value="Cadastrar Questão"></td>
+	</tr>
+</table>
+<br>
+<br>
+<table border="0" align="center" width="900px">
 	<tr>
 		<td width="2%"></td>
 		<td width="40%">
@@ -166,6 +362,7 @@ if(mysql_num_rows($tabela)==0){
 </body>
 </html>
 	<?php
+}
 }
 else{
 	header("Location: login.php");

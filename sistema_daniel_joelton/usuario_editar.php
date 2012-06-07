@@ -836,7 +836,6 @@ if(isset($error_login)){
 			while($ln = mysql_fetch_assoc($qr)){
 				if($vetor['end_cidade'] == $ln['nome']){
 					echo '<option selected="selected" value="'.$ln['nome'].'">'.$ln['nome'].'</option>';
-
 				}
 				else
 				{
