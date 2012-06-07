@@ -79,16 +79,43 @@ if($_SESSION['logado'] == 1)
 </center>
 <center>Para realizar a edição ou exclusão de administradores do
 sistema, contacte o administrador do Banco de Dados.</center>
-<form name="form1" method="POST" action="usuario_editar.php"><br>
+<form name="form1" method="POST" action="usuario_lista.php"><br>
+<table border="0" align="center" width="900px">
+	<tr>
+		<td width="15%"></td>
+		<td width="85%"><font size=2><b>A busca por nome e login de usuário
+		não é obrigatória.</b></font></td>
+	</tr>
+	<tr>
+		<td width="40%" align="right">Nome:</td>
+		<td width="60%" align="left"><input type="text" size="50" name="nome"
+			value="<?php if(isset($_POST['nome'])) echo $_POST['nome']; else echo "";?>">
+		</td>
+	</tr>
+	<tr>
+		<td width="40%" align="right">Login:</td>
+		<td width="60%" align="left"><input type="text" size="50" name="login"
+			value="<?php if(isset($_POST['login'])) echo $_POST['login']; else echo "";?>">
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td align="left"><input type="submit" value="Buscar"></td>
+	</tr>
+</table>
+</form>
+<form name="form2" method="POST" action="usuario_editar.php"><br>
 <table border="0" align="center" width="900px">
 <?php
-include("config.php");
-$con = mysql_connect($host, $log, $senha);
-mysql_select_db($bd, $con);
-$sql = "SELECT login, tipo_usuario, nome FROM usuario WHERE tipo_usuario <> '1' ORDER BY nome";
-$tabela = mysql_query($sql);
-if(mysql_num_rows($tabela)==0){
-	?>
+if(isset($_POST['nome']))
+{
+	include("config.php");
+	$con = mysql_connect($host, $log, $senha);
+	mysql_select_db($bd, $con);
+	$sql = "SELECT login, tipo_usuario, nome FROM usuario WHERE tipo_usuario <> '1' ORDER BY nome";
+	$tabela = mysql_query($sql);
+	if(mysql_num_rows($tabela)==0){
+		?>
 	<tr>
 		<td align="center">Não há usuários cadastrados.</td>
 	</tr>
@@ -100,8 +127,8 @@ if(mysql_num_rows($tabela)==0){
 	</tr>
 	<?php
 	exit;
-}
-?>
+	}
+	?>
 	<tr>
 		<td width="5%"></td>
 		<td width="25%">
@@ -120,22 +147,56 @@ if(mysql_num_rows($tabela)==0){
 	<?php
 	$color = '#FFFFF';
 	$count = 0;
+	$resultado = 0;
 	while($dados = mysql_fetch_row($tabela)){
 		$nome = $dados[2];
 		$login = $dados[0];
-		if($dados[1] == 1) $tipo = "Administrador";
-		if($dados[1] == 2) $tipo = "Professor";
-		if($dados[1] == 3) $tipo = "Aluno";
-		$count++;
-		if (strcmp($color,'#FFFFF') != 0)
+		$passou = true;
+		if(strcmp($_POST['nome'], ""))
 		{
-			$color = '#FFFFF';
+			$nome1 = strtolower($nome);
+			$nome2 = strtolower($_POST['nome']);
+			if((strpos($nome1,$nome2) === 0)||(strpos($nome1,$nome2) > 0)){
+				$passou = true;
+			}
+			else
+			{
+				$passou = false;
+			}
+
 		}
-		else
+		if($passou == true)
 		{
-			$color = '#FFFAA';
+			if(strcmp($_POST['login'], ""))
+			{
+				$login1 = strtolower($login);
+				$login2 = strtolower($_POST['login']);
+				if((strpos($login1,$login2) === 0)||(strpos($login1,$login2) > 0)){
+					$passou = true;
+				}
+				else
+				{
+					$passou = false;
+				}
+
+			}
 		}
-		?>
+		if($passou == true)
+		{
+			$resultado++;
+			if($dados[1] == 1) $tipo = "Administrador";
+			if($dados[1] == 2) $tipo = "Professor";
+			if($dados[1] == 3) $tipo = "Aluno";
+			$count++;
+			if (strcmp($color,'#FFFFF') != 0)
+			{
+				$color = '#FFFFF';
+			}
+			else
+			{
+				$color = '#FFFAA';
+			}
+			?>
 	<tr bgcolor="<?php echo $color?>">
 		<td width="5%" align="center"><?php echo $count?></td>
 		<td align="left"><?php echo $nome?></td>
@@ -151,6 +212,20 @@ if(mysql_num_rows($tabela)==0){
 			onclick="location.href = 'usuario_resetar.php?codigo=<?php echo $login?>'">
 		</td>
 	</tr>
+	<?php
+		}
+	}
+	if($resultado == 0)
+	{
+		?>
+	<tr>
+		<td colspan="5" align="center"><br><br>Não há usuários cadastrados segundo os critérios de
+		busca.</td>
+	</tr>
+	<tr>
+		<td colspan="5" align="center"><br>Para cadastrar usuário clique em Cadastrar Usuário.<br></td>
+	</tr>
+
 	<?php
 	}
 	?>
@@ -170,6 +245,7 @@ if(mysql_num_rows($tabela)==0){
 </body>
 </html>
 	<?php
+}
 }
 else{
 	header("Location: login.php");
